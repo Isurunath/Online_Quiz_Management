@@ -9,17 +9,24 @@
 class question_model extends CI_Model
 {
     function getquestions($questionType) {
+        $data1=array();
         $this->db->select('*');
         $this->db->where('questiontype_id', $questionType);
         $query = $this->db->get('questionbank');
-        return $query->result_array();//<---- returns you an array
+
+        foreach($query->result() as $row) {
+            $data1['question'][] = $row->question;
+            $data1['answer'] [] = $row->answer;
+        }
+
+        return $data1;//<---- returns you an array
     }
 
-    function getpaperLayout() {
-        $this->db->select('top 1 *');
-       // $this->db->where('questiontype_id', $questionType);
+    function getpaperLayout($no) {
+        $this->db->select('*');
+        $this->db->where('paper_id', $no);
         $query = $this->db->get('assignment_layout');
-        return $query->result_array();//<---- returns you an array
+        return $query->row();//<---- returns you an array
     }
 
 }

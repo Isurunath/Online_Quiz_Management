@@ -11,6 +11,13 @@ class Paper extends CI_Controller
 {
     public function paperlayout()
     {
+
+        $this->load->model('question_model');
+        $resPaperLayout = $this->question_model->getpaperLayout(1);
+        if($resPaperLayout){
+            $data['single_choice']=$resPaperLayout->single_choice;
+        }
+
         $this->load->helper('url');
         $this->load->model('question_model');
         $data['qestiontype_id'] = $this->question_model->getquestions(1);//result of your query is stored in this ($data['progcategoryid']) variable
@@ -31,8 +38,7 @@ class Paper extends CI_Controller
     }
 
     public function getpaperLayout() {
-        $this->load->model('question_model');
-        $data['layout'] = $this->question_model->getpaperLayout();//result of your query is stored in this ($data['progcategoryid']) variable
+        //result of your query is stored in this ($data['progcategoryid']) variable
         //  $this->load->view('paper/paper', $data);
     }
 
