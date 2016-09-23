@@ -2,7 +2,7 @@
 
 /**
  * Created by PhpStorm.
- * User: Chameera_Intern
+ * User: Chameera/'
  * Date: 9/21/2016
  * Time: 1:00 PM
  */
@@ -12,6 +12,7 @@ class question_model extends CI_Model
         $data1=array();
         $this->db->select('*');
         $this->db->where('questiontype_id', $questionType);
+        $this->db->order_by('rand()');
         $query = $this->db->get('questionbank');
 
         foreach($query->result() as $row) {

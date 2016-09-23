@@ -16,17 +16,20 @@ class Paper extends CI_Controller
         $resPaperLayout = $this->question_model->getpaperLayout(1);
         if($resPaperLayout){
             $data['single_choice']=$resPaperLayout->single_choice;
+            $data['true_false']=$resPaperLayout->true_false;
+            $data['multiple_choice']=$resPaperLayout->multiple_choice;
         }
 
         $this->load->helper('url');
         $this->load->model('question_model');
         $data['qestiontype_id'] = $this->question_model->getquestions(1);//result of your query is stored in this ($data['progcategoryid']) variable
-       // $data['gettruefalse']= $this->question_model->getquestions(2);
-        //  $this->load->view('paper/paper', $data);
+        $data['gettruefalse']= $this->question_model->getquestions(2);
+        $data['getmultiple']= $this->question_model->getquestions(3);
+        //$this->load->view('paper/paper', $data);
+
+       //convert to pdf
         $pdfFilePath = FCPATH."/downloads/reports/aaaa.pdf";
-
         $html = $this->load->view('paper/paper', $data, true); // render the view into HTML
-
         $this->load->library('pdf');
         $pdf = $this->pdf->load();
         $pdf->useActiveForms = true;
