@@ -9,16 +9,16 @@ echo "<b>Choose the most suitable answer for next 1 - ".$single_choice." questio
     <tr>
         <td><?php echo ($i+1).") ".$qestiontype_id["question"][$i]; ?></td>
     </tr>
-        <tr><td><input type="radio" name=<?php echo $qestiontype_id["id"][$i]; ?> value=<?php echo $qestiontype_id["mcq1"][$i]; ?>>  <?php echo $qestiontype_id["mcq1"][$i]; ?></td>
+        <tr><td><input type="radio" name=<?php echo $qestiontype_id["id"][$i]; ?> value=<?php echo "1".$getmultiple["id"][$i]; ?>>  <?php echo $qestiontype_id["mcq1"][$i]; ?></td>
 
         </tr>
-        <tr><td><input type="radio" name=<?php echo $qestiontype_id["id"][$i]; ?> value=<?php echo $qestiontype_id["mcq1"][$i]; ?>>  <?php echo $qestiontype_id["mcq2"][$i]; ?></td>
+        <tr><td><input type="radio" name=<?php echo $qestiontype_id["id"][$i]; ?> value=<?php echo "2".$getmultiple["id"][$i]; ?>>  <?php echo $qestiontype_id["mcq2"][$i]; ?></td>
 
         </tr>
-        <tr><td><input type="radio" name=<?php echo $qestiontype_id["id"][$i]; ?> value=<?php echo $qestiontype_id["mcq1"][$i]; ?>>  <?php echo $qestiontype_id["mcq3"][$i]; ?></td>
+        <tr><td><input type="radio" name=<?php echo $qestiontype_id["id"][$i]; ?> value=<?php echo "3".$getmultiple["id"][$i]; ?>>  <?php echo $qestiontype_id["mcq3"][$i]; ?></td>
 
         </tr>
-        <tr><td><input type="radio" name=<?php echo $qestiontype_id["id"][$i]; ?> value=<?php echo $qestiontype_id["mcq1"][$i]; ?>>  <?php echo $qestiontype_id["mcq4"][$i]; ?></td>
+        <tr><td><input type="radio" name=<?php echo $qestiontype_id["id"][$i]; ?> value=<?php echo "4".$getmultiple["id"][$i]; ?>>  <?php echo $qestiontype_id["mcq4"][$i]; ?></td>
 
         </tr>
 
@@ -36,10 +36,10 @@ echo "<table style='padding-left: 30px';>" ;
         <tr>
             <td><?php echo ($single_choice+$i+1).") ".$gettruefalse["question"][$i]; ?></td>
         </tr>
-        <tr><td><input type="radio" name=<?php echo $gettruefalse["id"][$i]; ?> value=<?php echo $gettruefalse["mcq1"][$i]; ?>>  true</td>
+        <tr><td><input type="radio" name=<?php echo $gettruefalse["id"][$i]; ?> value="true">  true</td>
 
         </tr>
-        <tr><td><input type="radio" name=<?php echo $gettruefalse["id"][$i]; ?> value=<?php echo $gettruefalse["mcq1"][$i]; ?>>  false</td>
+        <tr><td><input type="radio" name=<?php echo $gettruefalse["id"][$i]; ?> value="false">  false</td>
 
         </tr>
 
@@ -55,16 +55,16 @@ echo"<table style='padding-left: 30px';>" ;
         <tr>
             <td><?php echo ($true_false+$single_choice+$i+1).") ".$getmultiple["question"][$i]; ?></td>
         </tr>
-        <tr><td><input type="checkbox" name=<?php echo "1".$getmultiple["id"][$i]; ?> value=<?php echo $getmultiple["mcq1"][$i]; ?>>  <?php echo $getmultiple["mcq1"][$i]; ?></td>
+        <tr><td><input type="checkbox" name=<?php echo "1".$getmultiple["id"][$i]; ?> value=<?php echo "1".$getmultiple["id"][$i]; ?>>  <?php echo $getmultiple["mcq1"][$i]; ?></td>
 
         </tr>
-        <tr><td><input type="checkbox" name=<?php echo "2".$getmultiple["id"][$i]; ?> value=<?php echo $getmultiple["mcq1"][$i]; ?>>  <?php echo $getmultiple["mcq2"][$i]; ?></td>
+        <tr><td><input type="checkbox" name=<?php echo "2".$getmultiple["id"][$i]; ?> value=<?php echo "2".$getmultiple["id"][$i]; ?>>  <?php echo $getmultiple["mcq2"][$i]; ?></td>
 
         </tr>
-        <tr><td><input type="checkbox" name=<?php echo "3".$getmultiple["id"][$i]; ?> value=<?php echo $getmultiple["mcq1"][$i]; ?>>  <?php echo $getmultiple["mcq3"][$i]; ?></td>
+        <tr><td><input type="checkbox" name=<?php echo "3".$getmultiple["id"][$i]; ?> value=<?php echo "3".$getmultiple["id"][$i]; ?>>  <?php echo $getmultiple["mcq3"][$i]; ?></td>
 
         </tr>
-        <tr><td><input type="checkbox" name=<?php echo "4".$getmultiple["id"][$i]; ?> value=<?php echo $getmultiple["mcq1"][$i]; ?>>  <?php echo $getmultiple["mcq4"][$i]; ?></td>
+        <tr><td><input type="checkbox" name=<?php echo "4".$getmultiple["id"][$i]; ?> value=<?php echo "4".$getmultiple["id"][$i]; ?>>  <?php echo $getmultiple["mcq4"][$i]; ?></td>
 
         </tr>
 
