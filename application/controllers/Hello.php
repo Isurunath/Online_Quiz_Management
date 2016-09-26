@@ -17,6 +17,18 @@ class Hello extends CI_Controller {
     public function login()
     {
         $this->load->helper('url');
-        $this->load->view('login/login');
+        $this->load->view('login/new_login');
+    }
+
+    public function admin()
+    {
+        $this->load->helper('url');
+        $this->load->view('admin/home');
+    }
+
+    public function load_layout()
+    {
+        $this->load->helper('url');
+        $this->load->view('admin/paper_layout');
     }
 }

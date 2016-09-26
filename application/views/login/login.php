@@ -11,7 +11,9 @@
     <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'>
 
     <link rel="stylesheet" href="<?php echo base_url(); ?>login_css/style.css">
-<!--    <link rel="stylesheet" href="--><?php //echo base_url(); ?><!--css/bootstrap.css">-->
+
+    <!--<link rel="stylesheet" href="<?php /*echo base_url(); */?>css/bootstrap.css">-->
+
 </head>
 
 <body>
@@ -45,16 +47,17 @@
         ?>
     </div>
 
-    <form class="register-form" action="<?php echo base_url(); ?>logincontroller/register" method="post">
+    <form class="register-form" action="<?php echo base_url(); ?>LoginController/register" method="post">
+
         <input type="text" placeholder="name" name="name" id="name" value="<?php echo set_value("name")?>"/>
         <input type="password" placeholder="password" name="password" id="password"/>
         <input type="password" placeholder="Confirm password" name="con_password" id="con_password"/>
         <input type="text" placeholder="email address" name="email" id="email" value="<?php echo set_value("email")?>"/>
         <button type="submit" name="submit" id="submit">create</button>
-        <p class="message">Already registered? <a href="#">Sign In</a></p>
+        <p class="message">Already registered? <a href="<?php echo base_url(); ?>#">Sign In</a></p>
     </form>
 
-    <form class="login-form" action="<?php echo base_url(); ?>logincontroller/login" method="post">
+    <form class="login-form" action="<?php echo base_url(); ?>LoginController/login" method="post">
         <input type="text" placeholder="username" name="email_login" id="email_login" value="<?php echo set_value("email_login")?>"/>
         <input type="password" placeholder="password" name="password_login" id="password_login"/>
         <button type="submit" name="submit_login" id="submit_login">login</button>
@@ -62,14 +65,12 @@
     </form>
 </div>
 
-
 <video id="video" autoplay="autoplay" loop="loop" poster="polina.jpg">
     <source src="http://andytran.me/A%20peaceful%20nature%20timelapse%20video.mp4" type="video/mp4"/>
 </video>
 <script src='<?php echo base_url(); ?>js/jquery.min.js'></script>
 
 <script src="<?php echo base_url(); ?>login_js/index.js"></script>
-
 
 </body>
 </html>
