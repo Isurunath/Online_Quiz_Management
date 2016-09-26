@@ -3,7 +3,7 @@
     <div class="container">
         <h3 class="tittle">FEATURES</h3>
         <div class="col-md-5 features-left">
-            <img src="images/f1.jpg" alt=""/>
+            <img src="<?php echo base_url(); ?>images/f1.jpg" alt=""/>
         </div>
         <div class="col-md-7 features-right">
             <h4>Download Question papers & Assignments</h4>
