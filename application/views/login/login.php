@@ -11,7 +11,9 @@
     <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'>
 
     <link rel="stylesheet" href="<?php echo base_url(); ?>login_css/style.css">
+
     <!--<link rel="stylesheet" href="<?php /*echo base_url(); */?>css/bootstrap.css">-->
+
 </head>
 
 <body>
@@ -46,6 +48,7 @@
     </div>
 
     <form class="register-form" action="<?php echo base_url(); ?>LoginController/register" method="post">
+
         <input type="text" placeholder="name" name="name" id="name" value="<?php echo set_value("name")?>"/>
         <input type="password" placeholder="password" name="password" id="password"/>
         <input type="password" placeholder="Confirm password" name="con_password" id="con_password"/>
