@@ -31,4 +31,10 @@ class Hello extends CI_Controller {
         $this->load->helper('url');
         $this->load->view('admin/paper_layout');
     }
+
+    public function load_qbank()
+    {
+        $this->load->helper('url');
+        $this->load->view('admin/qbank');
+    }
 }
