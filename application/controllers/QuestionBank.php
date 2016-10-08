@@ -25,7 +25,7 @@ class QuestionBank extends CI_controller{
             $result = $this->QuestionBank_Model->insert($data);
             if($result)
             {
-                echo "done";
+                redirect('hello/load_qbank?r=sucess');
             }
             else
             {
