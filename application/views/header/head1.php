@@ -13,6 +13,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         $this->load->view('links/ref');
     ?>
 
+    <script>
+        $(".nav a").on("click", function(){
+            $(".nav").find(".active").removeClass("active");
+            $(this).parent().addClass("active");
+        });
+    </script>
+
 </head>
 <body>
 <!-- header -->
@@ -33,13 +40,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse nav-wil" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        <li><a class="hvr-overline-from-center button2 active" href="index.html">Home</a></li>
+                        <li><a class="hvr-overline-from-center button2<?php if($_SERVER['REQUEST_URI']=="/Online_Quiz_Management/Hello") { ?>  active   <?php   }  ?>" href="<?php echo site_url('Hello'); ?>">Home</a></li>
                         <li><a class="hvr-overline-from-center button2" href="about.html">About</a></li>
                         <li><a class="hvr-overline-from-center button2" href="">Academics</a></li>
-                        <li><a class="hvr-overline-from-center button2" href="<?php echo site_url('Paper/paperlayout'); ?>">Paper</a></li>
+                        <li><a class="hvr-overline-from-center button2<?php if($_SERVER['REQUEST_URI']=="/Online_Quiz_Management/Paper/downloadPage") { ?>  active   <?php   }  ?>"" href="<?php echo site_url('Paper/downloadPage'); ?>">My Paper</a></li>
                         <li><a class="hvr-overline-from-center button2" href="<?php echo site_url('hello/admin'); ?>">Admin</a></li>
                         <li><a class="hvr-overline-from-center button2" href="<?php echo site_url('hello/login'); ?>">Login</a></li>
-                        <li><a class="hvr-overline-from-center button2" href="<?php echo site_url('QuestionBank/index'); ?>">QuestionBank</a></li>
+<!--                        <li><a class="hvr-overline-from-center button2" href="--><?php //echo site_url('QuestionBank/index'); ?><!--">QuestionBank</a></li>-->
                     </ul>
             </nav>
         </div>

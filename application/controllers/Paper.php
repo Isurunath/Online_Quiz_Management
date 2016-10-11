@@ -36,14 +36,20 @@ class Paper extends CI_Controller
         $pdf->SetFooter($_SERVER['HTTP_HOST'].'|{PAGENO}|'.date(DATE_RFC822)); // Add a footer for good measure 😉
         $pdf->WriteHTML($html); // write the HTML into the PDF
         $pdf->Output(); // save to file because we can
-
+        chmod($pdfFilePath,0777);
 
 
     }
 
-    public function getpaperLayout() {
+    public function downloadPage() {
         //result of your query is stored in this ($data['progcategoryid']) variable
         //  $this->load->view('paper/paper', $data);
+        $this->load->helper('url');
+        $this->load->view('header/head1');
+        //$this->load->view('login/login');
+        //$this->load->view('banner/banner1');
+        $this->load->view('paper/downloadPage');
+        $this->load->view('footer/footer1');
     }
 
 }
