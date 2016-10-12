@@ -14,4 +14,3 @@
 
 <!-- //fonts -->
 
-<script src="<?php echo base_url(); ?>js/navigationbar.js"></script>
