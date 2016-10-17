@@ -19,7 +19,7 @@ class Users_Model extends CI_Model
     {
         $this -> db -> select('*');
         $this -> db -> from('users');
-        $this -> db -> where('user_name', $email);
+        $this -> db -> where('email', $email);
         $this -> db -> where('password', $password);
         $this -> db -> limit(1);
         $query = $this -> db -> get();

@@ -2,6 +2,54 @@
 <html>
 <head>
     <title>Try it</title>
+    <style>
+        .dropbtn {
+            /*background-color: #4CAF50;*/
+            background-color: transparent;
+            color: white;
+            padding: 16px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 99;
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {background-color: #f1f1f1}
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown:hover .dropbtn {
+            border-bottom: 4px solid red;
+            color:  #2FD828;
+        }
+
+        .img-circle {
+            border-radius: 50%;
+        }
+    </style>
 
     <!-- for-mobile-apps -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -31,15 +79,94 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 </div>
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse nav-wil" id="bs-example-navbar-collapse-1">
-                    <ul class="nav navbar-nav">
-                        <li><a class="hvr-overline-from-center button2<?php if($_SERVER['REQUEST_URI']=="/Online_Quiz_Management/Hello") { ?>  active   <?php   }  ?>" href="<?php echo site_url('Hello'); ?>">Home</a></li>
-                        <li><a class="hvr-overline-from-center button2" href="about.html">About</a></li>
-                        <li><a class="hvr-overline-from-center button2<?php if($_SERVER['REQUEST_URI']=="/Online_Quiz_Management/Upload/index") { ?>  active   <?php   }  ?>"" href="<?php echo site_url('Upload/index'); ?>">Upload</a></li>
-                        <li><a class="hvr-overline-from-center button2<?php if($_SERVER['REQUEST_URI']=="/Online_Quiz_Management/Paper/downloadPage") { ?>  active   <?php   }  ?>" href="<?php echo site_url('Paper/downloadPage'); ?>">My Paper</a></li>
-                        <li><a class="hvr-overline-from-center button2" href="<?php echo site_url('hello/admin'); ?>">Admin</a></li>
-                        <li><a class="hvr-overline-from-center button2" href="<?php echo site_url('hello/login'); ?>">Login</a></li>
-<!--                        <li><a class="hvr-overline-from-center button2" href="--><?php //echo site_url('QuestionBank/index'); ?><!--">QuestionBank</a></li>-->
-                    </ul>
+                    <?php
+
+                    if(isset($this->session->userdata['logged_in']))
+                    {
+                    $email = ($this->session->userdata['logged_in']['email']);
+                    $username = ($this->session->userdata['logged_in']['username']);
+                    $type = ($this->session->userdata['logged_in']['user_type']);
+
+                    if($type == 'STUDENT')
+                    {
+                    ?>
+                        <ul class="nav navbar-nav">
+                            <li><a class="hvr-overline-from-center button2<?php if($_SERVER['REQUEST_URI']=="/Online_Quiz_Management/Hello") { ?>  active   <?php   }  ?>" href="<?php echo site_url('Hello'); ?>">Home</a></li>
+                            <li><a class="hvr-overline-from-center button2" href="about.html">About</a></li>
+                            <li><a class="hvr-overline-from-center button2<?php if($_SERVER['REQUEST_URI']=="/Online_Quiz_Management/Upload/index") { ?>  active   <?php   }  ?>"" href="<?php echo site_url('Upload/index'); ?>">Upload</a></li>
+                            <li><a class="hvr-overline-from-center button2<?php if($_SERVER['REQUEST_URI']=="/Online_Quiz_Management/Paper/downloadPage") { ?>  active   <?php   }  ?>" href="<?php echo site_url('Paper/downloadPage'); ?>">My Paper</a></li>
+                            <li><a class="hvr-overline-from-center button2" href="<?php echo site_url('hello/admin'); ?>">Admin</a></li>
+                            <li>
+                                <div class="dropdown">
+                                    <img class="img-circle" src="../images/vph.jpg" width="45px" height="45px">
+                                    <button class="dropbtn"><?php echo $username ?></button>
+                                    <div class="dropdown-content">
+                                        <a href="#">View Profile</a>
+                                        <a href="<?php echo site_url('hello/index'); ?>">Logout</a>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    <?php
+                    }
+                    else if($type == 'ADMIN')
+                    {
+                    ?>
+                        <ul class="nav navbar-nav">
+                            <li><a class="hvr-overline-from-center button2<?php if($_SERVER['REQUEST_URI']=="/Online_Quiz_Management/Hello") { ?>  active   <?php   }  ?>" href="<?php echo site_url('Hello'); ?>">Home</a></li>
+                            <li><a class="hvr-overline-from-center button2" href="about.html">About</a></li>
+                            <li><a class="hvr-overline-from-center button2<?php if($_SERVER['REQUEST_URI']=="/Online_Quiz_Management/Upload/index") { ?>  active   <?php   }  ?>"" href="<?php echo site_url('Upload/index'); ?>">Upload</a></li>
+                            <li><a class="hvr-overline-from-center button2<?php if($_SERVER['REQUEST_URI']=="/Online_Quiz_Management/Paper/downloadPage") { ?>  active   <?php   }  ?>" href="<?php echo site_url('Paper/downloadPage'); ?>">My Paper</a></li>
+                            <li><a class="hvr-overline-from-center button2" href="<?php echo site_url('hello/admin'); ?>">Admin</a></li>
+                            <li>
+                                <div class="dropdown">
+                                    <button class="dropbtn"><?php echo $username ?></button>
+                                    <div class="dropdown-content">
+                                        <a href="#">View Profile</a>
+                                        <a href="<?php echo site_url('hello/index'); ?>">Logout</a>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    <?php
+                    }
+                    else if($type == 'LECTURER')
+                    {
+                    ?>
+                        <ul class="nav navbar-nav">
+                            <li><a class="hvr-overline-from-center button2<?php if($_SERVER['REQUEST_URI']=="/Online_Quiz_Management/Hello") { ?>  active   <?php   }  ?>" href="<?php echo site_url('Hello'); ?>">Home</a></li>
+                            <li><a class="hvr-overline-from-center button2" href="about.html">About</a></li>
+                            <li><a class="hvr-overline-from-center button2<?php if($_SERVER['REQUEST_URI']=="/Online_Quiz_Management/Upload/index") { ?>  active   <?php   }  ?>"" href="<?php echo site_url('Upload/index'); ?>">Upload</a></li>
+                            <li><a class="hvr-overline-from-center button2<?php if($_SERVER['REQUEST_URI']=="/Online_Quiz_Management/Paper/downloadPage") { ?>  active   <?php   }  ?>" href="<?php echo site_url('Paper/downloadPage'); ?>">My Paper</a></li>
+                            <li><a class="hvr-overline-from-center button2" href="<?php echo site_url('hello/admin'); ?>">Admin</a></li>
+                            <li>
+                                <div class="dropdown">
+                                    <img class="img-circle" src="../images/vph.jpg" width="45px" height="45px">
+                                    <button class="dropbtn"><?php echo $username ?></button>
+                                    <div class="dropdown-content">
+                                        <a href="#">View Profile</a>
+                                        <a href="<?php echo site_url('hello/index'); ?>">Logout</a>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    <?php
+                    }
+                    }
+                    else
+                    {
+                    ?>
+                        <ul class="nav navbar-nav">
+                            <li><a class="hvr-overline-from-center button2<?php if($_SERVER['REQUEST_URI']=="/Online_Quiz_Management/Hello") { ?>  active   <?php   }  ?>" href="<?php echo site_url('Hello'); ?>">Home</a></li>
+                            <li><a class="hvr-overline-from-center button2" href="about.html">About</a></li>
+                            <li><a class="hvr-overline-from-center button2<?php if($_SERVER['REQUEST_URI']=="/Online_Quiz_Management/Upload/index") { ?>  active   <?php   }  ?>"" href="<?php echo site_url('Upload/index'); ?>">Upload</a></li>
+                            <li><a class="hvr-overline-from-center button2<?php if($_SERVER['REQUEST_URI']=="/Online_Quiz_Management/Paper/downloadPage") { ?>  active   <?php   }  ?>" href="<?php echo site_url('Paper/downloadPage'); ?>">My Paper</a></li>
+                            <li><a class="hvr-overline-from-center button2" href="<?php echo site_url('hello/admin'); ?>">Admin</a></li>
+                            <li><a class="hvr-overline-from-center button2" href="<?php echo site_url('hello/login'); ?>">Login</a></li>
+                        </ul>
+                        <?php
+                    }
+                    ?>
             </nav>
         </div>
     </div>
