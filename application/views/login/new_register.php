@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head>
-    <title>Tryit Login form</title>
+    <title>Tryit Registration form</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="keywords" content="Unique Login Form Widget Responsive, Login form web template,Flat Pricing tables,Flat Drop downs  Sign up Web Templates, Flat Web Templates, Login signup Responsive web template, Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
@@ -38,27 +38,32 @@
     <section>
         <div id="container_demo" >
             <div id="wrapper">
-
                 <div id="login">
-                    <form name="login" autocomplete="on" action="<?php echo base_url(); ?>LoginController/login" method="post">
-                        <h2>Login</h2>
-                        <p>
-                            <input id="email_login" name="email_login" type="text" placeholder="Email" value="<?php echo set_value("email_login")?>"/>
-                        </p>
-                        <p>
-                            <input id="password_login" name="password_login" type="password" placeholder="Password" />
-                        </p>
 
-                        <p class="login button">
-                            <input type="submit" value="Login" />
+                    <form name="register" action="<?php echo base_url(); ?>LoginController/register" autocomplete="off" method="post">
+                        <h2>Sign up</h2>
+                        <p>
+                            <input id="name" name="name" type="text" placeholder="Username"/>
+                        </p>
+                        <p>
+                            <input id="email" name="email" type="email" placeholder="Email"/>
+                        </p>
+                        <p>
+                            <input type="password" id="password" name="password" placeholder="Password"/>
+                        </p>
+                        <p>
+                            <input id="con_password" name="con_password" type="password" placeholder="Confirm Password"/>
+                        </p>
+                        <p class="signin button">
+                            <input type="submit" value="Sign up"/>
                         </p>
                         <p class="change_link">
-                            Not a member yet ?
-                            <a href="<?php echo site_url('hello/load_register'); ?>">Join us</a>
+                            Already a member ?
+                            <a href="<?php echo site_url('hello/login'); ?>">Log in</a>
                         </p>
                     </form>
                 </div>
-                <div style="color:red; font-size: small; padding-top: 90%">
+                <div style="color:red; font-size: small; padding-top: 120%"">
                     <?php
                     if(isset($message))
                     {
@@ -84,7 +89,6 @@
                     ?>
                 </div>
             </div>
-
         </div>
     </section>
 </div>

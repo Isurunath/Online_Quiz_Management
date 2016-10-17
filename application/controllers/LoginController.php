@@ -23,7 +23,7 @@ class LoginController extends CI_Controller{
 
         if ($this->form_validation->run() == FALSE)
         {
-            $this->load->view('login/new_login');
+            $this->load->view('login/new_register');
         }
 
         else
@@ -47,7 +47,7 @@ class LoginController extends CI_Controller{
             else
             {
                 $message = 'Something went Wrong!';
-                $this->load->view('login/new_login',$message);
+                $this->load->view('login/new_register',$message);
                 //echo ":(";
             }
         }
@@ -81,10 +81,9 @@ class LoginController extends CI_Controller{
             {
                 $session_data=array(
                         'email'=>$result[0]->email,
-                        'username'=>$result[0]->user_name
+                        'username'=>$result[0]->user_name,
+                        'user_type' =>$result[0]->user_type,
                    );
-
-                //echo $result[0]->email;
 
                 $this->session->set_userdata('logged_in',$session_data);
 
@@ -94,16 +93,17 @@ class LoginController extends CI_Controller{
                 $this->load->view('details/details');
                 $this->load->view('footer/footer1');
 
-                //echo "successful";
-                //echo '<pre>'; print_r($result); echo '</pre>';;
-                /*echo $email_l;
+                /*echo "successful";
+                echo '<pre>'; print_r($result); echo '</pre>';;
+                echo $email_l;
                 echo $password_l;*/
             }
             else
             {
                 $data['message'] = 'Invalid username password combination';
                 $this->load->view('login/new_login',$data);
-               /* echo "Fail";
+
+                /*echo "Fail";
                 echo $result;
                 echo $email_l;
                 echo $password_l;*/

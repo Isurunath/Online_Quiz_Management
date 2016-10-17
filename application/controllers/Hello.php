@@ -20,6 +20,12 @@ class Hello extends CI_Controller {
         $this->load->view('login/new_login');
     }
 
+    public function load_register()
+    {
+        $this->load->helper('url');
+        $this->load->view('login/new_register');
+    }
+
     public function admin()
     {
         $this->load->helper('url');
