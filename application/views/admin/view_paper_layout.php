@@ -101,6 +101,12 @@
                 </div>
                 <!--/sub-heard-part-->
 
+                <div>
+                    <p style="color:red">Note: </p>
+                    <p style="color:red">A question paper should include 30 questions</p>
+                    <p style="color:red">An assignment should include 20 questions</p>
+                </div>
+
                 <table class="table table-hover" id="thisTable">
                     <thead>
                         <tr>
@@ -151,6 +157,17 @@
                                             <div style="margin-left: 20px;margin-top: 10px" class="container">
                                                 <form method="post" onSubmit="window.location.reload()" name="form_layout" action="<?php echo site_url ('Layout_Controller/editLayout'); ?>" class="form-horizontal">
 
+                                                    <div style="color:blue; font-size:20px;">
+                                                        <?php
+
+                                                        if(isset($message2))
+                                                        {
+                                                            echo $message2;
+                                                        }
+
+                                                        ?>
+                                                    </div>
+
                                                     <div id="type">
                                                         <label style="width: 150px" class="col-sm-2 control-label label-input-lg">Paper Id</label>
                                                         <input style="width: 300px" type="text" class="form-control1 input-lg" name="paper_id" id="paper_id" readonly required>
@@ -194,6 +211,16 @@
                                                             <option>8</option>
                                                             <option>9</option>
                                                             <option>10</option>
+                                                            <option>11</option>
+                                                            <option>12</option>
+                                                            <option>13</option>
+                                                            <option>14</option>
+                                                            <option>15</option>
+                                                            <option>16</option>
+                                                            <option>17</option>
+                                                            <option>18</option>
+                                                            <option>19</option>
+                                                            <option>20</option>
                                                         </select>
                                                     </div>
 

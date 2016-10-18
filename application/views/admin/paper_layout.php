@@ -73,29 +73,6 @@
                             <div class="graph-2 general">
                                 <h3 class="inner-tittle two">Create Paper layout</h3>
 
-                                <!-- Modal1 -->
-                                <div class="modal fade" id="myModal" role="dialog">
-                                    <div class="modal-dialog">
-
-                                        <!-- Modal content-->
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                                <h4 style="color:blue;font-size:25px"><span class="glyphicon glyphicon-pencil"></span> Update Layouts</h4>
-                                            </div>
-
-                                            <div class="modal-body">
-                                                <p style="font-size:15px">Are you sure you want to update this layout?</p>
-                                            </div>
-
-                                            <div class="modal-footer">
-                                                <button onclick="javascript:window.location.href='<?php echo site_url('hello/login'); ?>';" type="submit" class="btn btn-info btn-lg" data-toggle="modal">Yes</button>
-                                                <button type="submit" class="btn btn-info btn-lg" data-dismiss="modal">No</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
                                 <div style="color:red; font-size:20px;">
                                     <?php
                                     if(isset($message))
@@ -168,6 +145,16 @@
                                                         <option>8</option>
                                                         <option>9</option>
                                                         <option>10</option>
+                                                        <option>11</option>
+                                                        <option>12</option>
+                                                        <option>13</option>
+                                                        <option>14</option>
+                                                        <option>15</option>
+                                                        <option>16</option>
+                                                        <option>17</option>
+                                                        <option>18</option>
+                                                        <option>19</option>
+                                                        <option>20</option>
                                                     </select></div>
                                             </div>
 
