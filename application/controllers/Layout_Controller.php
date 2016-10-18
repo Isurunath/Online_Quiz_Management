@@ -123,31 +123,63 @@ class Layout_Controller extends CI_Controller
         $this->load->helper('url');
         $this->load->model('Paper_layout_model');
 
-        $id=$_POST['paper_id'];
+        $type=$_POST['paperType'];
+        $single=$_POST['single'];
+        $multiple=$_POST['multiple'];
+        $short=$_POST['short'];
+        $tf=$_POST['true'];
+        $fromdate=$_POST['datepicker1'];
+        $todate=$_POST['datepicker2'];
+        $CurDate=Date('Y/m/d');
 
-        $data=array(
-            'batch_no'=>$_POST['batchNo'],
-            'paper_type' => $_POST['paperType'],
-            'single_choice' => $_POST['single'],
-            'multiple_choice' => $_POST['multiple'],
-            'short_answer' => $_POST['short'],
-            'true_false' => $_POST['true'],
-            'from_date' => $_POST['datepicker1'],
-            'to_date' => $_POST['datepicker2']
-        );
+        $tot=$single+$multiple+$short+$tf;
 
-        $result = $this->Paper_layout_model->editLayout($id,$data);
-
-        if ($result)
+        if($type == 'Assignment' && ($tot<20 || $tot>20))
         {
-            //$this->load->View('login/new_login');
-            //$this->load->View('admin/home');
+            //$data['message'] = 'Number of questions should be exactly 20 for an assignment';
+            redirect('Layout_Controller/View_layout');
+        }
+
+        elseif($type == 'Question Paper' && ($tot<30 || $tot>30))
+        {
+            redirect('Layout_Controller/View_layout');
+        }
+
+        elseif($fromdate > $todate)
+        {
+            redirect('Layout_Controller/View_layout');
+        }
+
+        //check whether the from date is smaller than the current date
+        elseif($fromdate < $CurDate)
+        {
             redirect('Layout_Controller/View_layout');
         }
 
         else
         {
-            redirect('Layout_Controller/View_layout');
+            $id = $_POST['paper_id'];
+
+            $data = array(
+                'batch_no' => $_POST['batchNo'],
+                'paper_type' => $_POST['paperType'],
+                'single_choice' => $_POST['single'],
+                'multiple_choice' => $_POST['multiple'],
+                'short_answer' => $_POST['short'],
+                'true_false' => $_POST['true'],
+                'from_date' => $_POST['datepicker1'],
+                'to_date' => $_POST['datepicker2']
+            );
+
+            $result = $this->Paper_layout_model->editLayout($id, $data);
+
+            if ($result) {
+                //$this->load->View('login/new_login');
+                //$this->load->View('admin/home');
+                redirect('Layout_Controller/View_layout');
+            } else {
+                redirect('Layout_Controller/View_layout');
+            }
         }
     }
 	
