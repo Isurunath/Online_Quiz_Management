@@ -24,7 +24,7 @@ class Layout_Controller extends CI_Controller
         $multiple=$_POST['multiple'];
         $short=$_POST['shortAnswer'];
         $tf=$_POST['trueFalse'];
-        $CurDate=Date('Y/m/d');
+        $CurDate=Date('Y-m-d');
         $fromdate=$_POST['datepicker1'];
         $todate=$_POST['datepicker2'];
 
@@ -111,12 +111,6 @@ class Layout_Controller extends CI_Controller
         $this->data['posts'] = $this->Paper_layout_model->get_layout();
         $this->load->view('admin/view_paper_layout', $this->data);
     }
-	
-	public function edit_profile()
-	{
-		$this->load->helper('url');
-		$this->load->View('admin/admin_profile');
-	}
 
     public function editLayout()
     {
@@ -130,17 +124,17 @@ class Layout_Controller extends CI_Controller
         $tf=$_POST['true'];
         $fromdate=$_POST['datepicker1'];
         $todate=$_POST['datepicker2'];
-        $CurDate=Date('Y/m/d');
+        $CurDate=Date('Y-m-d');
 
         $tot=$single+$multiple+$short+$tf;
 
-        if($type == 'Assignment' && ($tot<20 || $tot>20))
+        if($type == 'Assignment' && $tot != 20)
         {
             //$data['message'] = 'Number of questions should be exactly 20 for an assignment';
             redirect('Layout_Controller/View_layout');
         }
 
-        elseif($type == 'Question Paper' && ($tot<30 || $tot>30))
+        elseif($type == 'Question Paper' && $tot != 30)
         {
             redirect('Layout_Controller/View_layout');
         }
@@ -181,6 +175,7 @@ class Layout_Controller extends CI_Controller
                 redirect('Layout_Controller/View_layout');
             }
         }
+
     }
 	
 	

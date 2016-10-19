@@ -30,7 +30,7 @@
                     changeMonth: true,//this option for allowing user to select month
                     changeYear: true //this option for allowing user to select from year range
                 });
-                $( "#datepicker1" ).datepicker( "option", "dateFormat", "yy/mm/dd");
+                $( "#datepicker1" ).datepicker( "option", "dateFormat", "yy-mm-dd");
             }
 
         );
@@ -43,7 +43,7 @@
                     changeMonth: true,//this option for allowing user to select month
                     changeYear: true //this option for allowing user to select from year range
                 });
-                $( "#datepicker2" ).datepicker( "option", "dateFormat", "yy/mm/dd");
+                $( "#datepicker2" ).datepicker( "option", "dateFormat", "yy-mm-dd");
             }
 
         );
@@ -156,17 +156,6 @@
 
                                             <div style="margin-left: 20px;margin-top: 10px" class="container">
                                                 <form method="post" onSubmit="window.location.reload()" name="form_layout" action="<?php echo site_url ('Layout_Controller/editLayout'); ?>" class="form-horizontal">
-
-                                                    <div style="color:blue; font-size:20px;">
-                                                        <?php
-
-                                                        if(isset($message2))
-                                                        {
-                                                            echo $message2;
-                                                        }
-
-                                                        ?>
-                                                    </div>
 
                                                     <div id="type">
                                                         <label style="width: 150px" class="col-sm-2 control-label label-input-lg">Paper Id</label>
@@ -284,6 +273,10 @@
 
                                                     <button style="margin-left: 150px" type="submit" class="btn btn-info btn-lg">
                                                         <span class="glyphicon glyphicon-pencil"></span> Edit
+                                                    </button>
+
+                                                    <button style="background-color: red"  data-dismiss="modal" type="button" class="btn btn-info btn-lg">
+                                                        <span class="glyphicon glyphicon-off"></span> Exit
                                                     </button>
 
                                                     </br>
