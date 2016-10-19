@@ -25,7 +25,7 @@
                     changeMonth: true,//this option for allowing user to select month
                     changeYear: true //this option for allowing user to select from year range
                 });
-                $( "#datepicker1" ).datepicker( "option", "dateFormat", "yy/mm/dd");
+                $( "#datepicker1" ).datepicker( "option", "dateFormat", "yy-mm-dd");
             }
 
         );
@@ -38,7 +38,7 @@
                     changeMonth: true,//this option for allowing user to select month
                     changeYear: true //this option for allowing user to select from year range
                 });
-                $( "#datepicker2" ).datepicker( "option", "dateFormat", "yy/mm/dd");
+                $( "#datepicker2" ).datepicker( "option", "dateFormat", "yy-mm-dd");
             }
 
         );

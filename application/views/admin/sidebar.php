@@ -20,7 +20,7 @@
     <!--//down-->
     <div class="menu">
         <ul id="menu" >
-            <li><a href="index.html" style="text-decoration:none"><i class="fa fa-tachometer"></i> <span>Dashboard</span></a></li>
+            <li><a href="#" style="text-decoration:none"><i class="fa fa-tachometer"></i> <span>Dashboard</span></a></li>
             <li id="menu-academico" ><a href="#" style="text-decoration:none"><i class="fa fa-table"></i> <span> Tabs &amp; Panels</span> <span class="fa fa-angle-right" style="float: right"></span></a>
                 <ul id="menu-academico-sub" >
                     <li id="menu-academico-avaliacoes" ><a href="tabs.html"> Tabs &amp; Panels</a></li>
