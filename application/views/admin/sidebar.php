@@ -36,13 +36,10 @@
                 </ul>
             </li>
 
-            <li id="menu-academico" ><a href="#" style="text-decoration:none"><i class="lnr lnr-layers"></i> <span>Components</span> <span class="fa fa-angle-right" style="float: right"></span></a>
-                <ul id="menu-academico-sub" >
-                    <li id="menu-academico-avaliacoes" ><a href="grids.html">Grids</a></li>
-                    <li id="menu-academico-boletim" ><a href="media.html">Media Objects</a></li>
-
-                </ul>
+            <li id="menu-academico" ><a href="<?php echo site_url('QuestionBank'); ?>" style="text-decoration:none"><i class="lnr lnr-layers"></i> <span>Add Questions</span> <span class="fa fa-angle-right" style="float: right"></span></a>
             </li>
+
+
             <li><a href="chart.html" style="text-decoration:none"><i class="lnr lnr-chart-bars"></i> <span>Charts</span> <span class="fa fa-angle-right" style="float: right"></span></a>
                 <ul>
                     <li><a href="map.html"><i class="lnr lnr-map"></i> Maps</a></li>
