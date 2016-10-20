@@ -182,7 +182,6 @@
                                                         <input type="hidden" name="mcq2" value="" >
                                                         <input type="hidden" name="mcq3" value="" >
                                                         <input type="hidden" name="mcq4" value="" >
-                                                        <input type="hidden" name="answer" value="">
 
 
                                                         <button onclick="return doconfirm()" type="submit" class="btn btn-default" style="margin-left: 175px">Submit</button>
