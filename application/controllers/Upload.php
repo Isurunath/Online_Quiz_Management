@@ -10,6 +10,7 @@ class Upload extends CI_Controller {
 
     public function index()
     {
+        $this->load->library('session');
         $this->load->helper('url');
         $this->load->view('header/head1');
         $this->load->view('paper/upload_form', array('error' => ' ' ));
@@ -18,6 +19,7 @@ class Upload extends CI_Controller {
 
     public function do_upload()
     {
+        $this->load->library('session');
         $config['upload_path']          = './upload/';
         $config['allowed_types']        = 'pdf';
         $config['max_size']             = 10000;
