@@ -36,7 +36,7 @@
                 </ul>
             </li>
 
-            <li id="menu-academico" ><a href="<?php echo site_url('QuestionBank'); ?>" style="text-decoration:none"><i class="lnr lnr-layers"></i> <span>Add Questions</span> <span class="fa fa-angle-right" style="float: right"></span></a>
+            <li id="menu-academico" ><a href="<?php echo site_url('Hello/load_qbank'); ?>" style="text-decoration:none"><i class="lnr lnr-layers"></i> <span>Add Questions</span> <span class="fa fa-angle-right" style="float: right"></span></a>
             </li>
 
 
