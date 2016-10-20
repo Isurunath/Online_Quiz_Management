@@ -42,14 +42,22 @@ class Paper extends CI_Controller
     }
 
     public function downloadPage() {
-        //result of your query is stored in this ($data['progcategoryid']) variable
-        //  $this->load->view('paper/paper', $data);
-        $this->load->helper('url');
-        $this->load->view('header/head1');
-        //$this->load->view('login/login');
-        //$this->load->view('banner/banner1');
-        $this->load->view('paper/downloadPage');
-        $this->load->view('footer/footer1');
+        $this->load->library('session');
+       // if(isset($this->session->userdata['logged_in'])) {
+          //  $data['$email'] = ($this->session->userdata['logged_in']['email']);
+         //   $data['$username'] = ($this->session->userdata['logged_in']['username']);
+         //   $data['$type'] = ($this->session->userdata['logged_in']['user_type']);
+        $data1['dd'] =($this->session->userdata['logged_in']['username']);
+
+            //result of your query is stored in this ($data['progcategoryid']) variable
+            //  $this->load->view('paper/paper', $data);
+            $this->load->helper('url');
+            $this->load->view('header/head1');
+            //$this->load->view('login/login');
+            //$this->load->view('banner/banner1');
+            $this->load->view('paper/downloadPage', $data1);
+            $this->load->view('footer/footer1');
+       // }
     }
 
 }
