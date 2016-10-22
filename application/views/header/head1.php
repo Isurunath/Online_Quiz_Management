@@ -101,8 +101,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                     <img class="img-circle" src="../images/vph.jpg" width="45px" height="45px">
                                     <button class="dropbtn"><?php echo $username ?></button>
                                     <div class="dropdown-content">
-                                        <a href="#">View Profile</a>
-                                        <a href="<?php echo site_url('hello/index'); ?>">Logout</a>
+                                        <a href="<?php echo site_url('hello/load_profile'); ?>"> <i class="glyphicon glyphicon-user"></i>  My Profile</a>
+                                        <a href="<?php echo site_url('loginController/logout'); ?>"> <i class="glyphicon glyphicon-log-out"></i>  Log Out</a>
                                     </div>
                                 </div>
                             </li>
@@ -121,8 +121,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                 <div class="dropdown">
                                     <button class="dropbtn"><?php echo $username ?></button>
                                     <div class="dropdown-content">
-                                        <a href="#">View Profile</a>
-                                        <a href="<?php echo site_url('hello/index'); ?>">Logout</a>
+                                        <a href="#">My Profile</a>
+                                        <a href="<?php echo site_url('LoginController/logout'); ?>">Logout</a>
                                     </div>
                                 </div>
                             </li>
@@ -143,8 +143,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                     <img class="img-circle" src="../images/vph.jpg" width="45px" height="45px">
                                     <button class="dropbtn"><?php echo $username ?></button>
                                     <div class="dropdown-content">
-                                        <a href="#">View Profile</a>
-                                        <a href="<?php echo site_url('hello/index'); ?>">Logout</a>
+                                        <a href="#">My Profile</a>
+                                        <a href="<?php echo site_url('LoginController/logout'); ?>">Logout</a>
                                     </div>
                                 </div>
                             </li>
