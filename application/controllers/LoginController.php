@@ -117,5 +117,15 @@ class LoginController extends CI_Controller{
         $this->load->model('Users_Model');
         return !($this->Users_Model->email_exists($value));
     }
+
+    public function logout()
+    {
+        $this->load->helper('url');
+        $this->load->view('header/head1');
+        $this->load->view('banner/banner1');
+        $this->load->view('details/details');
+        $this->load->view('footer/footer1');
+    }
+
 }
 
