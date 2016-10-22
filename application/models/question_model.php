@@ -28,9 +28,10 @@ class question_model extends CI_Model
         return $data1;//<---- returns you an array
     }
 
-    function getpaperLayout($no) {
+    function getpaperLayout($curDate) {
         $this->db->select('*');
-        $this->db->where('paper_id', $no);
+        $this->db->where('from_date <=', $curDate);
+        $this->db->where('to_date >=', $curDate);
         $query = $this->db->get('assignment_layout');
         return $query->row();//<---- returns you an array
     }
