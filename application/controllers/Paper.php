@@ -35,7 +35,7 @@ class Paper extends CI_Controller
             $pdf->useActiveForms = true;
             $pdf->SetFooter($_SERVER['HTTP_HOST'] . '|{PAGENO}|' . date(DATE_RFC822)); // Add a footer for good measure 😉
             $pdf->WriteHTML($html); // write the HTML into the PDF
-            $pdf->Output(); // save to file because we can
+            $pdf->Output('output.pdf','I'); // save to file because we can
             chmod($pdfFilePath, 0777);
         }
         else{
