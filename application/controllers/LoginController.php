@@ -84,19 +84,43 @@ class LoginController extends CI_Controller{
                         'username'=>$result[0]->user_name,
                         'user_type' =>$result[0]->user_type,
                    );
-
                 $this->session->set_userdata('logged_in',$session_data);
 
-                $this->load->helper('url');
-                $this->load->view('header/head1');
-                $this->load->view('banner/banner1');
-                $this->load->view('details/details');
-                $this->load->view('footer/footer1');
+                if($result[0]->user_type == "ADMIN")
+                {
+                    $this->load->helper('url');
+                    $this->load->view('admin/home');
+                }
+                else {
+                    $profileDetails = $this->Users_Model->getProfileDetails($result[0]->user_id);
+                    if ($profileDetails) {
+                        $session_data_profile = array(
+                            'fname' => $profileDetails[0]->fname,
+                            'lname' => $profileDetails[0]->lname,
+                            'dob' => $profileDetails[0]->dob,
+                            'add1' => $profileDetails[0]->address_l1,
+                            'add2' => $profileDetails[0]->address_l2,
+                            'city' => $profileDetails[0]->city,
+                            'gender' => $profileDetails[0]->gender,
+                            'phone' => $profileDetails[0]->phone,
+                            'sYear' => $profileDetails[0]->graduating_yr,
+                            'eYear' => $profileDetails[0]->started_yr,
+                            'course' => $profileDetails[0]->course,
+                            'batch' => $profileDetails[0]->batch,
+                        );
+
+                        $this->session->set_userdata('profile_data', $session_data_profile);
+                    }
+
+                    $this->load->helper('url');
+                    $this->load->view('header/head1');
+                    $this->load->view('profile/profile');
+                }
 
                 /*echo "successful";
-                echo '<pre>'; print_r($result); echo '</pre>';;
-                echo $email_l;
-                echo $password_l;*/
+                  echo '<pre>'; print_r($profileDetails); echo '</pre>';;
+                  echo $email_l;
+                  echo $password_l;*/
             }
             else
             {
