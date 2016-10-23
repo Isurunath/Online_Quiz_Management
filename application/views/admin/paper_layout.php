@@ -208,6 +208,20 @@
                                                 </div>
                                             </div>
 
+                                            <div class="form-group mb-n">
+                                                <label for="largeinput" class="col-sm-2 control-label label-input-lg">Quiz Password</label>
+                                                <div class="col-sm-8">
+                                                    <input type="password" class="form-control1 input-lg" name="qpwd" id="qpwd" placeholder="Password" required>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group mb-n">
+                                                <label for="largeinput" class="col-sm-2 control-label label-input-lg">Confirm Password</label>
+                                                <div class="col-sm-8">
+                                                    <input type="password" class="form-control1 input-lg" name="cpwd" id="cpwd" placeholder="Confirm Password" required>
+                                                </div>
+                                            </div>
+
                                             <button type="submit" class="btn btn-default" style="margin-left: 175px">Submit</button>
                                         </form>
                                     </div>

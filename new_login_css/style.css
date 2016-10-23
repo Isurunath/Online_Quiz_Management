@@ -335,7 +335,7 @@ p.change_link{
 #register, 
 #login{
 	position: absolute;
-    top: 0px;
+    top: 50px;
     width: 88%;
     padding: 18px 6% 80px 6%;
     margin: 0 0 35px 0;

@@ -17,7 +17,7 @@ class Paper_layout_model extends CI_Model
 
     function get_layout()
     {
-        $this->db->select("paper_id,batch_no,paper_type,added_date,single_choice,multiple_choice,short_answer,true_false,from_date,to_date");
+        $this->db->select("paper_id,batch_no,paper_type,single_choice,multiple_choice,short_answer,true_false,from_date,to_date,quiz_password");
         $this->db->from('assignment_layout');
         $query = $this->db->get();
         return $query->result();
