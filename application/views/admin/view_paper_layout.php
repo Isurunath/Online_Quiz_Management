@@ -66,6 +66,8 @@
              var $true = $(this).parent().parent().find(".true").text();
              var $from = $(this).parent().parent().find(".from").text();
              var $to = $(this).parent().parent().find(".to").text();
+             var $pwd=$(this).parent().parent().find(".qpass").text();
+             var $cpwd=$(this).parent().parent().find(".qpass").text();
 
              $('#paper_id', myModal).val($id);
              $('#batchNo', myModal).val($batch);
@@ -76,6 +78,8 @@
              $('#true', myModal).val($true);
              $('#datepicker1', myModal).val($from);
              $('#datepicker2', myModal).val($to);
+             $('#qpwd', myModal).val($pwd);
+             $('#conpwd', myModal).val($cpwd);
 
              $('#myModal').modal('show');
 
@@ -113,13 +117,14 @@
                             <th>Paper Id</th>
                             <th>Batch No</th>
                             <th>Paper Type</th>
-                            <th>Added Date</th>
+                           <!-- <th>Added Date</th>-->
                             <th>Single choice</th>
                             <th>Multiple choice</th>
                             <th>Short answer</th>
                             <th>True or False</th>
                             <th>From date</th>
                             <th>To date</th>
+                            <th>Quiz password</th>
 							<th>Option</th>
                         </tr>
                     </thead>
@@ -130,13 +135,14 @@
                                 <td class="id"><?php echo $post->paper_id;?></td>
                                 <td class="batch"><?php echo $post->batch_no;?></td>
                                 <td class="type"><?php echo $post->paper_type;?></td>
-                                <td><?php echo $post->added_date;?></td>
+                               <!-- <td><?php /*echo $post->added_date;*/?></td>-->
                                 <td class="single"><?php echo $post->single_choice;?></td>
                                 <td class="multiple"><?php echo $post->multiple_choice;?></td>
                                 <td class="short"><?php echo $post->short_answer;?></td>
                                 <td class="true"><?php echo $post->true_false;?></td>
                                 <td class="from"><?php echo $post->from_date;?></td>
                                 <td class="to"><?php echo $post->to_date;?></td>
+                                <td class="qpass"><?php echo $post->quiz_password;?></td>
 								<td>
 									 <button data-toggle="modal" data-target="#myModal"  id="update" type="button" style="font-size:15px;color:black" >
 										<span class="glyphicon glyphicon-pencil"></span> Edit
@@ -267,6 +273,20 @@
                                                     <div id="type">
                                                         <label style="width: 150px" class="col-sm-2 control-label label-input-lg">Downloadable date</label>
                                                         <input style="width: 300px" type="text" class="form-control1 input-lg" name="datepicker2" id="datepicker2" placeholder="To date" required>
+                                                    </div>
+
+                                                    </br>
+
+                                                    <div id="type">
+                                                        <label style="width: 150px" class="col-sm-2 control-label label-input-lg">New Password</label>
+                                                        <input style="width: 300px" type="password" class="form-control1 input-lg" name="qpwd" id="qpwd" placeholder="Password" required>
+                                                    </div>
+
+                                                    </br>
+
+                                                    <div id="type">
+                                                        <label style="width: 150px" class="col-sm-2 control-label label-input-lg">Confirm Password</label>
+                                                        <input style="width: 300px" type="password" class="form-control1 input-lg" name="conpwd" id="conpwd" placeholder="Confirm Password" required>
                                                     </div>
 
                                                     </br>
