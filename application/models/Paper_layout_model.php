@@ -33,4 +33,13 @@ class Paper_layout_model extends CI_Model
         else
             return false;
     }
+
+    function get_exams()
+    {
+        $this->db->select("batch_no,paper_type,from_date,to_date");
+        $this->db->from('assignment_layout');
+        $query = $this->db->get();
+        return $query->result();
+    }
+
 }
