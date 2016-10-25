@@ -105,10 +105,10 @@
                 </div>
                 <!--/sub-heard-part-->
 
-                <div>
+                <div style="margin-left: 10px">
                     <p style="color:red">Note: </p>
-                    <p style="color:red">A question paper should include 30 questions</p>
-                    <p style="color:red">An assignment should include 20 questions</p>
+                    <p style="color:blueviolet">A question paper should include 30 questions</p>
+                    <p style="color:blueviolet">An assignment should include 20 questions</p>
                 </div>
 
                 <table class="table table-hover" id="thisTable">
@@ -131,7 +131,7 @@
 
                     <tbody>
                         <?php foreach($posts as $post){?>
-                            <tr>
+                            <tr class="warning">
                                 <td class="id"><?php echo $post->paper_id;?></td>
                                 <td class="batch"><?php echo $post->batch_no;?></td>
                                 <td class="type"><?php echo $post->paper_type;?></td>
