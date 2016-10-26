@@ -112,10 +112,15 @@ class LoginController extends CI_Controller{
                         $this->session->set_userdata('profile_data', $session_data_profile);
                     }
 
-                    $this->load->helper('url');
+                    /*$this->load->helper('url');
                     $this->load->view('header/head1');
-                    $this->load->view('profile/profile');
+                    $this->load->view('profile/profile');*/
                 }
+
+                $this->load->view('header/head1');
+                $this->load->view('banner/banner1');
+                $this->load->view('details/details');
+                $this->load->view('footer/footer1');
 
                 /*echo "successful";
                   echo '<pre>'; print_r($profileDetails); echo '</pre>';;
