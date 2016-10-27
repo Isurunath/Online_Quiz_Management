@@ -87,6 +87,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     $username = ($this->session->userdata['logged_in']['username']);
                     $type = ($this->session->userdata['logged_in']['user_type']);
 
+                        if(isset($this->session->userdata['profile_data']))
+                        {
+                            $Pic = ($this->session->userdata['profile_data']['isProPic']);
+                            $id = ($this->session->userdata['profile_data']['prof_user_id']);
+                        }
+
                     if($type == 'STUDENT')
                     {
                     ?>
@@ -99,7 +105,19 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!--                            <li><a class="hvr-overline-from-center button2" href="--><?php //echo site_url('hello/admin'); ?><!--">Admin</a></li>-->
                             <li>
                                 <div class="dropdown">
-                                    <img class="img-circle" src="../images/vph.jpg" width="45px" height="45px">
+                                    <?php if($Pic == 0)
+                                          {
+                                    ?>
+                                                <img class="img-circle" src="../Profile_Picture/default.png" width="45px" height="45px">
+                                    <?php
+                                          }
+                                          else if($Pic == 1)
+                                          {
+                                    ?>
+                                                <img class="img-circle" src="../Profile_Picture/<?php echo $id ?>.jpg" width="45px" height="45px">
+                                    <?php
+                                          }
+                                    ?>
                                     <button class="dropbtn"><?php echo $username ?></button>
                                     <div class="dropdown-content">
                                         <a href="<?php echo site_url('hello/load_profile'); ?>"> <i class="glyphicon glyphicon-user"></i>  My Profile</a>

@@ -95,6 +95,7 @@ class LoginController extends CI_Controller{
                     $profileDetails = $this->Users_Model->getProfileDetails($result[0]->user_id);
                     if ($profileDetails) {
                         $session_data_profile = array(
+                            'prof_user_id' => $profileDetails[0]->prof_user_id,
                             'fname' => $profileDetails[0]->fname,
                             'lname' => $profileDetails[0]->lname,
                             'dob' => $profileDetails[0]->dob,
@@ -107,6 +108,7 @@ class LoginController extends CI_Controller{
                             'eYear' => $profileDetails[0]->started_yr,
                             'course' => $profileDetails[0]->course,
                             'batch' => $profileDetails[0]->batch,
+                            'isProPic' => $profileDetails[0]->isProPic,
                         );
 
                         $this->session->set_userdata('profile_data', $session_data_profile);
