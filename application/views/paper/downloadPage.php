@@ -13,7 +13,7 @@
                     echo "<br/>";
                     echo "<br/>";
                 }
-?>
+            ?>
 <h4>Submit the Quiz Password and Download Question paper</h4>
 <!--            <a href="--><?php //echo base_url(); ?><!--paper/paperlayout"> <h4>Download Question paper</h4></a>-->
             <form id="qpwd_form" action="<?php echo base_url(); ?>paper/paperlayout" method="post">

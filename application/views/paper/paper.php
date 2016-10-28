@@ -1,4 +1,4 @@
-<h1 style="text-align:center";> Sample Paper</h1>G
+<h1 style="text-align:center";> Sample Paper</h1>
 <?php
 
 

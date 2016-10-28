@@ -27,22 +27,10 @@ class Layout_Controller extends CI_Controller
         $CurDate=Date('Y-m-d');
         $fromdate=$_POST['datepicker1'];
         $todate=$_POST['datepicker2'];
-
+        $pwd=$_POST['qpwd'];
+        $cpwd=$_POST['cpwd'];
 
         $tot=$single+$multiple+$short+$tf;
-
-        /*$this->form_validation->set_rules('paperType','Paper type','trim|required',array('required' => 'You must provide a %s.'));
-        $this->form_validation->set_rules('single','Single Choice','trim|required');
-        $this->form_validation->set_rules('multiple','Multiple Choice','trim|required');
-        $this->form_validation->set_rules('shortAnswer','Short Answer','trim|required');
-        $this->form_validation->set_rules('trueFalse','True/false','trim|required');
-        $this->form_validation->set_rules('datepicker1','Downloadable(from date)','trim|required');
-        $this->form_validation->set_rules('datepicker2','Downloadable(to date)','trim|required');*/
-
-       /* if ($this->form_validation->run() == FALSE)
-        {
-            $this->load->view('admin/paper_layout');
-        }*/
 
         //Check paper type is assignment and total no. of questions is 20
         if($type == 'Assignment' && ($tot<20 || $tot>20))
@@ -72,6 +60,12 @@ class Layout_Controller extends CI_Controller
             $this->load->view('admin/paper_layout', $data);
         }
 
+        elseif($pwd != $cpwd)
+        {
+            $data['message'] = 'Passwords do not match';
+            $this->load->view('admin/paper_layout', $data);
+        }
+
         else
         {
             $data=array(
@@ -83,7 +77,8 @@ class Layout_Controller extends CI_Controller
                 'short_answer' => $_POST['shortAnswer'],
                 'true_false' => $_POST['trueFalse'],
                 'from_date' => $_POST['datepicker1'],
-                'to_date' => $_POST['datepicker2']
+                'to_date' => $_POST['datepicker2'],
+                'quiz_password'=> $_POST['qpwd']
             );
 
             $result = $this->Paper_layout_model->insert($data);
@@ -125,6 +120,8 @@ class Layout_Controller extends CI_Controller
         $fromdate=$_POST['datepicker1'];
         $todate=$_POST['datepicker2'];
         $CurDate=Date('Y-m-d');
+        $pwd=$_POST['qpwd'];
+        $cpwd=$_POST['conpwd'];
 
         $tot=$single+$multiple+$short+$tf;
 
@@ -150,6 +147,11 @@ class Layout_Controller extends CI_Controller
             redirect('Layout_Controller/View_layout');
         }
 
+        elseif($pwd != $cpwd)
+        {
+            redirect('Layout_Controller/View_layout');
+        }
+
         else
         {
             $id = $_POST['paper_id'];
@@ -162,7 +164,8 @@ class Layout_Controller extends CI_Controller
                 'short_answer' => $_POST['short'],
                 'true_false' => $_POST['true'],
                 'from_date' => $_POST['datepicker1'],
-                'to_date' => $_POST['datepicker2']
+                'to_date' => $_POST['datepicker2'],
+                'quiz_password'=>$_POST['qpwd']
             );
 
             $result = $this->Paper_layout_model->editLayout($id, $data);

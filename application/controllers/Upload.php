@@ -14,7 +14,6 @@ class Upload extends CI_Controller {
         $this->load->helper('url');
         $this->load->view('header/head1');
         $this->load->view('paper/upload_form', array('error' => ' ' ));
-        $this->load->view('footer/footer1');
     }
 
     public function do_upload()

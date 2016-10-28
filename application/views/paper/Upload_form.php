@@ -23,6 +23,12 @@
         </form></div>
 </div>
 
+<div style="margin-top:305px ">
+    <?php
+    $this->load->view('footer/footer1');
+    ?>
+</div>
+
 
 </body>
 

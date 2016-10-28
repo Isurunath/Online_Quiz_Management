@@ -21,14 +21,7 @@
     <div class="menu">
         <ul id="menu" >
             <li><a href="#" style="text-decoration:none"><i class="fa fa-tachometer"></i> <span>Dashboard</span></a></li>
-            <li id="menu-academico" ><a href="#" style="text-decoration:none"><i class="fa fa-table"></i> <span> Tabs &amp; Panels</span> <span class="fa fa-angle-right" style="float: right"></span></a>
-                <ul id="menu-academico-sub" >
-                    <li id="menu-academico-avaliacoes" ><a href="tabs.html"> Tabs &amp; Panels</a></li>
-                    <li id="menu-academico-boletim" ><a href="widget.html">Widgets</a></li>
-                    <li id="menu-academico-avaliacoes" ><a href="calender.html">Calendar</a></li>
 
-                </ul>
-            </li>
             <li id="menu-academico" ><a href="#" style="text-decoration:none"><i class="fa fa-file-text-o"></i> <span>Layouts</span> <span class="fa fa-angle-right" style="float: right"></span></a>
                 <ul id="menu-academico-sub" >
                     <li id="menu-academico-avaliacoes" ><a href="<?php echo site_url('hello/load_layout'); ?>" style="text-decoration:none">Create Layout</a></li>
@@ -37,14 +30,6 @@
             </li>
 
             <li id="menu-academico" ><a href="<?php echo site_url('Hello/load_qbank'); ?>" style="text-decoration:none"><i class="lnr lnr-layers"></i> <span>Add Questions</span> <span class="fa fa-angle-right" style="float: right"></span></a>
-            </li>
-
-
-            <li><a href="chart.html" style="text-decoration:none"><i class="lnr lnr-chart-bars"></i> <span>Charts</span> <span class="fa fa-angle-right" style="float: right"></span></a>
-                <ul>
-                    <li><a href="map.html"><i class="lnr lnr-map"></i> Maps</a></li>
-                    <li><a href="graph.html"><i class="lnr lnr-apartment"></i> Graph Visualization</a></li>
-                </ul>
             </li>
 
         </ul>

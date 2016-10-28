@@ -42,11 +42,38 @@
                 <div id="login">
                     <form name="login" autocomplete="on" action="<?php echo base_url(); ?>LoginController/login" method="post">
                         <h2>Login</h2>
+
+                        <div style="color:red; font-size: large;margin-left: 50px;font-family: 'Arial Black'">
+                            <?php
+                            if(isset($message))
+                            {
+                                echo $message;
+                                echo "<br/>";
+                                echo "<br/>";
+                            }
+
+                            $CI =& get_instance();
+                            $CI->load->library('form_validation');
+
+                            if (validation_errors())
+                            {
+                                echo '<div id="validation_errors" title="Error:" align="left">';
+                                echo '<div class="response-msgs errors ui-corner-all"><span>Errors:</span><br /><ul><li>';
+                                echo validation_errors();
+                                echo '</li></ul></div>';
+                                echo '</div>';
+                                echo "<br/>";
+                                echo "<br/>";
+                            }
+
+                            ?>
+                        </div>
+
                         <p>
-                            <input id="email_login" name="email_login" type="text" placeholder="Email" value="<?php echo set_value("email_login")?>"/>
+                            <input id="email_login" name="email_login" type="text" placeholder="Email" value="<?php echo set_value("email_login")?>" required/>
                         </p>
                         <p>
-                            <input id="password_login" name="password_login" type="password" placeholder="Password" />
+                            <input id="password_login" name="password_login" type="password" placeholder="Password" required/>
                         </p>
 
                         <p class="login button">
@@ -58,32 +85,9 @@
                         </p>
                     </form>
                 </div>
-                <div style="color:red; font-size: small; padding-top: 90%">
-                    <?php
-                    if(isset($message))
-                    {
-                        echo $message;
-                        echo "<br/>";
-                        echo "<br/>";
-                    }
 
-                    $CI =& get_instance();
-                    $CI->load->library('form_validation');
-
-                    if (validation_errors())
-                    {
-                        echo '<div id="validation_errors" title="Error:" align="left">';
-                        echo '<div class="response-msgs errors ui-corner-all"><span>Errors:</span><br /><ul><li>';
-                        echo validation_errors();
-                        echo '</li></ul></div>';
-                        echo '</div>';
-                        echo "<br/>";
-                        echo "<br/>";
-                    }
-
-                    ?>
-                </div>
             </div>
+
 
         </div>
     </section>
