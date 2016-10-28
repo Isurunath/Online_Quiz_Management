@@ -50,6 +50,7 @@ class Paper extends CI_Controller
                 $this->load->view('footer/footer1');
             }
 
+
         }
         else{
             $this->load->library('session');
