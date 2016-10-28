@@ -151,6 +151,9 @@ class LoginController extends CI_Controller{
 
     public function logout()
     {
+        $this->load->library('session');
+        $this->session->unset_userdata('profile_data');
+        $this->session->unset_userdata('logged_in');
         $this->load->helper('url');
         $this->load->view('header/head1');
         $this->load->view('banner/banner1');
