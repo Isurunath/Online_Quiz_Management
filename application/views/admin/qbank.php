@@ -96,6 +96,8 @@
                                                             <option>--Choose paper type--</option>
                                                             <option value="option1">MCQ</option>
                                                             <option value="option2">True/False</option>
+                                                            <option value="option3">Multiple Answer Questions</option>
+                                                            <option value="option4">Single Answer Questions</option>
                                                         </select></div>
 
                                     </div>  
@@ -117,31 +119,31 @@
                                                     </div>
 
                                                     <div class="form-group">
-                                                        <label for="selector1" class="col-sm-2 control-label">Answer</label>
+                                                        <label for="selector1" class="col-sm-2 control-label">Correct Answer</label>
                                                         <div class="col-sm-8">
                                                         <textarea name="answer" id="single" class="form-control1" required></textarea></div>
                                                     </div>
 
                                                     <div class="form-group">
-                                                        <label for="selector1" class="col-sm-2 control-label">mcq1</label>
+                                                        <label for="selector1" class="col-sm-2 control-label">Answer 1</label>
                                                         <div class="col-sm-8">
                                                         <textarea name="mcq1" id="single" class="form-control1" required></textarea></div>
                                                     </div>
 
                                                     <div class="form-group">
-                                                        <label for="selector1" class="col-sm-2 control-label">mcq2</label>
+                                                        <label for="selector1" class="col-sm-2 control-label">Answer 2</label>
                                                         <div class="col-sm-8">
                                                         <textarea name="mcq2" id="single" class="form-control1" required></textarea></div>
                                                     </div>
 
                                                     <div class="form-group">
-                                                        <label for="selector1" class="col-sm-2 control-label">mcq3</label>
+                                                        <label for="selector1" class="col-sm-2 control-label">Answer 3</label>
                                                         <div class="col-sm-8">
                                                         <textarea name="mcq3" id="single" class="form-control1" required></textarea></div>
                                                     </div>
 
                                                     <div class="form-group">
-                                                        <label for="selector1" class="col-sm-2 control-label">mcq4</label>
+                                                        <label for="selector1" class="col-sm-2 control-label">Answer 4</label>
                                                         <div class="col-sm-8">
                                                         <textarea name="mcq4" id="single" class="form-control1" required></textarea></div>
                                                     </div>
@@ -177,7 +179,86 @@
 
                                                     </div>
 
-                                                        <input type="hidden" name="qtype" value="1" >
+                                                        <input type="hidden" name="qtype" value="2" >
+                                                        <input type="hidden" name="mcq1" value="" >
+                                                        <input type="hidden" name="mcq2" value="" >
+                                                        <input type="hidden" name="mcq3" value="" >
+                                                        <input type="hidden" name="mcq4" value="" >
+
+
+                                                        <button onclick="return doconfirm()" type="submit" class="btn btn-default" style="margin-left: 175px">Submit</button>
+
+                                                </form>
+                                            </div>
+                                            <div id="option3" class="group">
+
+                                                <form method="post" name="form_layout" action="<?php echo site_url ('QuestionBank/AddMultiQuestion'); ?>" class="form-horizontal">
+
+                                                    <div class="form-group">
+                                                        <label for="selector1" class="col-sm-2 control-label">Question</label>
+                                                        <div class="col-sm-8">
+                                                        <textarea name="question" id="single" class="form-control1" required></textarea></div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label for="selector1" class="col-sm-2 control-label">Answer 1</label>
+                                                        <div class="col-sm-8">
+                                                        <textarea name="answer" id="single" class="form-control1" required></textarea></div><input type="checkbox" name="chk1">
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label for="selector1" class="col-sm-2 control-label">Answer 2</label>
+                                                        <div class="col-sm-8">
+                                                        <textarea name="mcq1" id="single" class="form-control1" required></textarea></div><input type="checkbox" name="chk2">
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label for="selector1" class="col-sm-2 control-label">Answer 3</label>
+                                                        <div class="col-sm-8">
+                                                        <textarea name="mcq2" id="single" class="form-control1" required></textarea></div><input type="checkbox" name="chk3">
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label for="selector1" class="col-sm-2 control-label">Answer 4</label>
+                                                        <div class="col-sm-8">
+                                                        <textarea name="mcq3" id="single" class="form-control1" required></textarea></div>
+                                                        <input type="checkbox" name="chk4">
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label for="selector1" class="col-sm-2 control-label">Answer 5</label>
+                                                        <div class="col-sm-8">
+                                                        <textarea name="mcq4" id="single" class="form-control1" required></textarea></div>
+                                                        <input type="checkbox" name="chk5">
+                                                    </div>
+
+                                                    
+                                                    <input type="hidden" name="qtype" value="3" >
+
+                                                    <button onclick="return doconfirm()" type="submit" class="btn btn-default" style="margin-left: 175px">Submit</button>
+                                                </form>
+
+                                            </div>
+                                            <div id="option4" class="group">
+
+                                                    <form method="post" name="form_layout" action="<?php echo site_url ('QuestionBank/AddQuestion'); ?>" class="form-horizontal">
+
+                                                    <div class="form-group">
+                                                        <label for="selector1" class="col-sm-2 control-label">Question</label>
+                                                        <div class="col-sm-8">
+                                                        <textarea name="question" id="single" class="form-control1" required></textarea></div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label for="selector1" class="col-sm-2 control-label">Answer</label>
+                                                        <div class="col-sm-8">
+
+                                                        <textarea name="answer" id="single" class="form-control1" required></textarea></div>
+
+
+                                                    </div>
+
+                                                        <input type="hidden" name="qtype" value="4" >
                                                         <input type="hidden" name="mcq1" value="" >
                                                         <input type="hidden" name="mcq2" value="" >
                                                         <input type="hidden" name="mcq3" value="" >
@@ -223,15 +304,23 @@
 
 <?php
     if(isset($_GET['r'])){
+
+        if($_GET['r']=='success'){
     ?>
     <script type="text/javascript">
         alert("Question added successfully");
     </script>
     <?php
-    
+        }
+        else{
+            ?>
+                <script type="text/javascript">
+                    alert("Fail to add questions");
+                </script>
+            <?php
+
+        }
     }
-
-
 ?>
 
     
