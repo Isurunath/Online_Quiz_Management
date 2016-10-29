@@ -22,7 +22,7 @@ class Paper extends CI_Controller
             $data['true_false'] = $resPaperLayout->true_false;
             $data['multiple_choice'] = $resPaperLayout->multiple_choice;
             $qpwd = $resPaperLayout->quiz_password;
-            $pwd_frompage = $this->input->post('quiz_pwd');
+            $pwd_frompage = $this->input->get('quiz_pwd');
 
             if($qpwd == $pwd_frompage) {
                 $this->load->helper('url');

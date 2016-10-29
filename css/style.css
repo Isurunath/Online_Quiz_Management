@@ -102,6 +102,10 @@ a.navbar-brand span {
     color:#2FD828;
 	}
 
+.errormsg {
+	color: red;
+	font-size: large;
+}
 /*--search--*/
 .search-box{
 	float:right;
