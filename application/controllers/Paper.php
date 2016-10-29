@@ -14,8 +14,9 @@ class Paper extends CI_Controller
         $this->load->library('session');
         if(isset($this->session->userdata['logged_in']))
         {
+            $batch = $this->session->userdata['profile_data']['batch'];
         $this->load->model('question_model');
-        $resPaperLayout = $this->question_model->getpaperLayout(date("Y-m-d"));
+        $resPaperLayout = $this->question_model->getpaperLayout(date("Y-m-d"),$batch);
         if($resPaperLayout) {
             $data['single_choice'] = $resPaperLayout->single_choice;
             $data['true_false'] = $resPaperLayout->true_false;

@@ -28,10 +28,11 @@ class question_model extends CI_Model
         return $data1;//<---- returns you an array
     }
 
-    function getpaperLayout($curDate) {
+    function getpaperLayout($curDate,$batch) {
         $this->db->select('*');
         $this->db->where('from_date <=', $curDate);
         $this->db->where('to_date >=', $curDate);
+        $this->db->where('batch_no', $batch);
         $query = $this->db->get('assignment_layout');
         return $query->row();//<---- returns you an array
     }
