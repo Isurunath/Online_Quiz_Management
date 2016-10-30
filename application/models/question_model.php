@@ -37,6 +37,20 @@ class question_model extends CI_Model
         return $query->row();//<---- returns you an array
     }
 
+    function insert_paperDownload($data){
+        $this->db->insert('paper_download', $data);
+        if($this->db->affected_rows() > 0)
+            return true; // to the controller
+        else
+            return false;
+    }
 
+    function getpaperDownload($layout,$student) {
+        $this->db->select('*');
+        $this->db->where('layout_id', $layout);
+        $this->db->where('student_id', $student);
+        $query = $this->db->get('paper_download');
+        return $query->row();//<---- returns you an array
+    }
 
 }
