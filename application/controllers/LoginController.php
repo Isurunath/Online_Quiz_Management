@@ -9,6 +9,7 @@ class LoginController extends CI_Controller{
         $this->load->helper(array('form','url'));
     }
 
+    //
     public function register()
     {
         $this->load->helper('url');
@@ -64,7 +65,7 @@ class LoginController extends CI_Controller{
         $this->form_validation->set_rules('email_login', 'Email', 'trim|required',
                                             array
                                             (
-                                                'required'      => 'You have not provided %s.'
+                                                'required' => 'You have not provided %s.'
                                             ));
         $this->form_validation->set_rules('password_login','Password','trim|required',array('required'=> 'Enter your %s.'));
 
