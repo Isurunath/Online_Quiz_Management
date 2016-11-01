@@ -56,7 +56,6 @@ class Hello extends CI_Controller {
     public function load_about()
     {
         $this->load->helper('url');
-        $this->load->view('header/head1');
         $this->load->view('about_us/about');
     }
 }
