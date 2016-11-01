@@ -8,11 +8,9 @@ class Hello extends CI_Controller {
         $this->load->library('session');
         $this->load->helper('url');
         $this->load->view('header/head1');
-        //$this->load->view('login/login');
         $this->load->view('banner/banner1');
         $this->load->view('details/details');
         $this->load->view('footer/footer1');
-        //$this->load->view('home/home');
     }
 
     public function login()
