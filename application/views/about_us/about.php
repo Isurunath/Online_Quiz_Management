@@ -3,9 +3,12 @@
 <head>
 
 
-
 </head>
 <body>
+
+<?php
+    $this->load->view('header/head1');
+?>
 
 <div class="sub-heard-part">
     <ol class="breadcrumb m-b-0">
@@ -88,6 +91,12 @@
        </div>
 
    </div>
+
+    <div>
+        <?php
+            $this->load->view('footer/footer1');
+        ?>
+    </div>
 
 </body>
 </html>
