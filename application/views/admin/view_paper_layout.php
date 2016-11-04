@@ -53,7 +53,7 @@
     <script>
 
         $(document).ready(function(){
-         $("#thisTable button").click(function(){
+         $("#thisTable #button1").click(function(){
 
              var myModal = $('#myModal');
 
@@ -85,6 +85,20 @@
 
          });
          });
+
+        $(document).ready(function(){
+            $("#thisTable #button2").click(function(){
+
+                var Modal = $('#Modal');
+
+                var $id = $(this).parent().parent().find(".id").text();
+
+                $('#test', Modal).val($id);
+
+                $('#Modal').modal('show');
+
+            });
+        });
 
     </script>
 
@@ -118,14 +132,15 @@
                             <th>Batch No</th>
                             <th>Paper Type</th>
                            <!-- <th>Added Date</th>-->
-                            <th>Single choice</th>
-                            <th>Multiple choice</th>
+                            <th style="width: 1%">Single choice</th>
+                            <th style="width: 2%">Multiple choice</th>
                             <th>Short answer</th>
                             <th>True or False</th>
                             <th>From date</th>
                             <th>To date</th>
                             <th>Quiz password</th>
-							<th>Option</th>
+							<th>Option1</th>
+                            <th>Option2</th>
                         </tr>
                     </thead>
 
@@ -144,10 +159,46 @@
                                 <td class="to"><?php echo $post->to_date;?></td>
                                 <td class="qpass"><?php echo $post->quiz_password;?></td>
 								<td>
-									 <button data-toggle="modal" data-target="#myModal"  id="update" type="button" style="font-size:15px;color:black" >
+									 <button data-toggle="modal" data-target="#myModal" type="button" id="button1" style="font-size:15px;color:black" >
 										<span class="glyphicon glyphicon-pencil"></span> Edit
 									 </button>
 								</td>
+                                <td>
+                                    <button data-toggle="modal" data-target="#Modal" id="button2" type="button" style="font-size:15px;color:red" >
+                                        <span class="glyphicon glyphicon-trash"></span> Delete
+                                    </button>
+                                </td>
+
+                                <!-- Modal2 -->
+                                <div class="modal fade" id="Modal" role="dialog">
+                                    <div class="modal-dialog">
+
+                                        <!-- Modal content-->
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                <h4 style="color:red;"><span class="glyphicon glyphicon-trash"></span> Delete Layout</h4>
+                                            </div>
+                                            <form method="post" onSubmit="window.location.reload()" name="form_layout" action="<?php echo site_url ('Layout_Controller/deleteLayout'); ?>" class="form-horizontal">
+
+                                                <div class="modal-body">
+                                                    <p style="font-size: large">Are you sure you want to remove this layout?</p>
+                                                    <input style="width: 300px" type="hidden" class="form-control1 input-lg" name="test" id="test">
+                                                </div>
+
+                                                <div class="modal-footer">
+
+                                                        <button style="margin-left: 150px" type="submit" class="btn btn-info btn-lg">Yes
+                                                        </button>
+
+                                                        <button style="background-color: red"  data-dismiss="modal" type="button" class="btn btn-info btn-lg">No
+                                                        </button>
+
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
 
 								<!-- Modal1 -->
 								<div class="modal fade" id="myModal" role="dialog">
@@ -157,7 +208,7 @@
 										<div class="modal-content">
 											<div class="modal-header">
 												<button type="button" class="close" data-dismiss="modal">&times;</button>
-												<h4 style="color:blue;font-size:25px"><span class="glyphicon glyphicon-pencil"></span> Update Layouts</h4>
+												<h4 style="color:blue;font-size:25px"><span class="glyphicon glyphicon-pencil"></span> Update Layout</h4>
 											</div>
 
                                             <div style="margin-left: 20px;margin-top: 10px" class="container">

@@ -35,7 +35,7 @@
            </div>
        </div>
 
-       <h1 style="color: blue;margin-left: 20px;margin-top: 10px">Our Team</h1>
+       <h1 style="color: yellowgreen;margin-left: 20px;margin-top: 10px">Meet the team</h1>
         <div style="width:350px;margin-top: 20px;margin-left: 10px" class="container">
             <div class="panel panel-default">
                 <div style="height: 300px" class="panel-body">
