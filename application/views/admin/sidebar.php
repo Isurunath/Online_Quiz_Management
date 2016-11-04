@@ -14,7 +14,7 @@
         <ul>
             <li><a class="tooltips" href="index.html"><span>Profile</span><i class="lnr lnr-user"></i></a></li>
             <li><a class="tooltips" href="index.html"><span>Settings</span><i class="lnr lnr-cog"></i></a></li>
-            <li><a class="tooltips" href="<?php echo site_url('hello/index'); ?>"><span>Log out</span><i class="lnr lnr-power-switch"></i></a></li>
+            <li><a class="tooltips" href="<?php echo site_url('LoginController/logout'); ?>"><span>Log out</span><i class="lnr lnr-power-switch"></i></a></li>
         </ul>
     </div>
     <!--//down-->

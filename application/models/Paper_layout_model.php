@@ -42,4 +42,22 @@ class Paper_layout_model extends CI_Model
         return $query->result();
     }
 
+    function check_date_availability($batch,$fromdate)
+    {
+        $this -> db -> select('*');
+        $this -> db -> from('assignment_layout');
+        $this -> db -> where('batch_no', $batch);
+        $this -> db -> where('from_date', $fromdate);
+        $this -> db -> limit(1);
+        $query = $this -> db -> get();
+        if($query -> num_rows() == 1)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
 }
