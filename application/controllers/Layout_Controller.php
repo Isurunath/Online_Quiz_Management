@@ -18,7 +18,7 @@ class Layout_Controller extends CI_Controller
         $this->load->library('form_validation');
         $this->load->model('Paper_layout_model');
 
-        //$batch=$_POST['batchNo'];
+        $batch=$_POST['batchNo'];
         $type=$_POST['paperType'];
         $single=$_POST['single'];
         $multiple=$_POST['multiple'];
@@ -31,6 +31,8 @@ class Layout_Controller extends CI_Controller
         $cpwd=$_POST['cpwd'];
 
         $tot=$single+$multiple+$short+$tf;
+
+        $result1=$this->Paper_layout_model->check_date_availability($batch,$fromdate);
 
         //Check paper type is assignment and total no. of questions is 20
         if($type == 'Assignment' && ($tot<20 || $tot>20))
@@ -63,6 +65,12 @@ class Layout_Controller extends CI_Controller
         elseif($pwd != $cpwd)
         {
             $data['message'] = 'Passwords do not match';
+            $this->load->view('admin/paper_layout', $data);
+        }
+
+        elseif($result1)
+        {
+            $data['message'] = $batch.' already got a paper on '.$fromdate;
             $this->load->view('admin/paper_layout', $data);
         }
 

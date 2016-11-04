@@ -1,7 +1,7 @@
 <!-- features -->
 
 <?php
-$this->load->view('links/ref');
+    $this->load->view('header/head1');
 ?>
 <div class="features">
     <div class="container">
@@ -62,6 +62,10 @@ $this->load->view('links/ref');
     </div>
 </div>
 
-
-
 <?php echo $_SERVER['REQUEST_URI']; ?>
+
+<div style="margin-top:12px">
+    <?php
+        $this->load->view('footer/footer1');
+    ?>
+</div>
