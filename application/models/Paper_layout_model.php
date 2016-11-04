@@ -34,6 +34,17 @@ class Paper_layout_model extends CI_Model
             return false;
     }
 
+    function delete_Layout($id)
+    {
+        $this->db->where('paper_id', $id);
+        $this->db->delete('assignment_layout');
+
+        if($this->db->affected_rows() > 0)
+            return true; // to the controller
+        else
+            return false;
+    }
+
     function get_exams()
     {
         $this->db->select("batch_no,paper_type,from_date,to_date");

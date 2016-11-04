@@ -188,6 +188,22 @@ class Layout_Controller extends CI_Controller
         }
 
     }
+
+    public function deleteLayout()
+    {
+        $this->load->helper('url');
+        $this->load->model('Paper_layout_model');
+
+        $id=$_POST['test'];
+
+        $result = $this->Paper_layout_model->delete_Layout($id);
+
+        if ($result) {
+            redirect('Layout_Controller/View_layout');
+        } else {
+            redirect('Layout_Controller/View_layout');
+        }
+    }
 	
 	
 }
