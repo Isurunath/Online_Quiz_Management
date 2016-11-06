@@ -14,3 +14,7 @@
 <!-- //fonts -->
 <script src="<?php echo base_url(); ?>js/jquery.min.js"></script>
 <script src="<?php echo base_url(); ?>js/bootstrap.min.js"></script>
+
+<!-- drag and drop -->
+<link href="<?php echo base_url(); ?>css/dropzone.css" rel="stylesheet" type="text/css" media="all" />
+<script src="<?php echo base_url(); ?>js/dropzone.js"></script>
