@@ -19,7 +19,7 @@ class Upload extends CI_Controller {
     public function do_upload()
     {
         $this->load->library('session');
-        $config['upload_path']          = './upload/';
+        $config['upload_path']          = './css/';
         $config['allowed_types']        = 'pdf';
         $config['max_size']             = 10000;
         $config['max_width']            = 1024;
@@ -44,5 +44,39 @@ class Upload extends CI_Controller {
             $this->load->view('footer/footer1');
         }
     }
+
+    public function upload() {
+
+        $this->load->library('session');
+        if(isset($this->session->userdata['logged_in']))
+        {
+
+            if (!empty($_FILES)) {
+            $tempFile = $_FILES['file']['tmp_name'];
+            $fileName = $_FILES['file']['name'];
+            $targetPath = getcwd() . './answer_upload/';
+            $targetFile = $targetPath . $fileName ;
+            move_uploaded_file($tempFile, $targetFile);
+            // if you want to save in db,where here
+            // with out model just for example
+            // $this->load->database(); // load database
+            // $this->db->insert('file_table',array('file_name' => $fileName));
+             $this->load->helper('url');
+                $this->load->view('header/head1');
+                $this->load->view('paper/upload_success', $data);
+                $this->load->view('footer/footer1');
+            }
+        }
+        else{
+            $this->load->helper('url');
+            //$this->load->view('header/head1');
+            $this->load->view('login/new_login');
+        }
+    }
+
+
+
+
+
 }
 ?>
