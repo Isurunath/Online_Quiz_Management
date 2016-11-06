@@ -34,12 +34,41 @@ class Paper_layout_model extends CI_Model
             return false;
     }
 
+    function delete_Layout($id)
+    {
+        $this->db->where('paper_id', $id);
+        $this->db->delete('assignment_layout');
+
+        if($this->db->affected_rows() > 0)
+            return true; // to the controller
+        else
+            return false;
+    }
+
     function get_exams()
     {
         $this->db->select("batch_no,paper_type,from_date,to_date");
         $this->db->from('assignment_layout');
         $query = $this->db->get();
         return $query->result();
+    }
+
+    function check_date_availability($batch,$fromdate)
+    {
+        $this -> db -> select('*');
+        $this -> db -> from('assignment_layout');
+        $this -> db -> where('batch_no', $batch);
+        $this -> db -> where('from_date', $fromdate);
+        $this -> db -> limit(1);
+        $query = $this -> db -> get();
+        if($query -> num_rows() == 1)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
 }

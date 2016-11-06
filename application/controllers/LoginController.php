@@ -9,6 +9,7 @@ class LoginController extends CI_Controller{
         $this->load->helper(array('form','url'));
     }
 
+    //
     public function register()
     {
         $this->load->helper('url');
@@ -32,6 +33,7 @@ class LoginController extends CI_Controller{
                 'user_name' => $_POST['name'],
                 'email' => $_POST['email'],
                 'password' => MD5($_POST['password']),
+                'user_type' => 'STUDENT'
             );
 
             //Transferring data to Model
@@ -63,7 +65,7 @@ class LoginController extends CI_Controller{
         $this->form_validation->set_rules('email_login', 'Email', 'trim|required',
                                             array
                                             (
-                                                'required'      => 'You have not provided %s.'
+                                                'required' => 'You have not provided %s.'
                                             ));
         $this->form_validation->set_rules('password_login','Password','trim|required',array('required'=> 'Enter your %s.'));
 
@@ -86,7 +88,7 @@ class LoginController extends CI_Controller{
                    );
                 $this->session->set_userdata('logged_in',$session_data);
 
-                if($result[0]->user_type == "ADMIN")
+                if($result[0]->user_type == "LECTURER")
                 {
                     $this->load->helper('url');
                     $this->load->view('admin/home');
@@ -117,12 +119,14 @@ class LoginController extends CI_Controller{
                     /*$this->load->helper('url');
                     $this->load->view('header/head1');
                     $this->load->view('profile/profile');*/
+
+                    $this->load->view('header/head1');
+                    $this->load->view('banner/banner1');
+                    $this->load->view('details/details');
+                    $this->load->view('footer/footer1');
                 }
 
-                $this->load->view('header/head1');
-                $this->load->view('banner/banner1');
-                $this->load->view('details/details');
-                $this->load->view('footer/footer1');
+
 
                 /*echo "successful";
                   echo '<pre>'; print_r($profileDetails); echo '</pre>';;

@@ -1,7 +1,7 @@
 <!--/sidebar-menu-->
 <div class="sidebar-menu">
     <header class="logo">
-        <a href="#" class="sidebar-icon"> <span class="fa fa-bars"></span> </a> <a href="index.html"> <span id="logo"> <h1>Tryit</h1></span>
+        <a href="#" class="sidebar-icon"> <span class="fa fa-bars"></span> </a> <a href="<?php echo site_url('hello/index'); ?>"> <span id="logo"> <h1>Tryit</h1></span>
             <!--<img id="logo" src="" alt="Logo"/>-->
         </a>
     </header>
@@ -14,7 +14,7 @@
         <ul>
             <li><a class="tooltips" href="index.html"><span>Profile</span><i class="lnr lnr-user"></i></a></li>
             <li><a class="tooltips" href="index.html"><span>Settings</span><i class="lnr lnr-cog"></i></a></li>
-            <li><a class="tooltips" href="<?php echo site_url('hello/index'); ?>"><span>Log out</span><i class="lnr lnr-power-switch"></i></a></li>
+            <li><a class="tooltips" href="<?php echo site_url('LoginController/logout'); ?>"><span>Log out</span><i class="lnr lnr-power-switch"></i></a></li>
         </ul>
     </div>
     <!--//down-->
