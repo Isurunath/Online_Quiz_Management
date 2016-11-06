@@ -85,28 +85,25 @@
                             <div class="graph-2 general">
                                 <h3 class="inner-tittle two">Add Questions</h3>
 
-                                
+                                <div class="col-sm-12" style="padding-top:20px;">
+                                    <label for="selector1" class="col-sm-2 control-label" style="padding-left:80px;">Question Type</label>
+                                        <div class="col-sm-8"><select id="selectMe" name="qtype" class="form-control1">
+                                        <option>--Choose paper type--</option>
+                                        <option value="option1">MCQ</option>
+                                        <option value="option2">True/False</option>
+                                        <option value="option3">Multiple Answer Questions</option>
+                                        <option value="option4">Single Answer Questions</option>
+                                    </select></div> 
+                                </div>   
 
                                 <div class="grid-1">
 
-                                    <div class="col-sm-12">  
-
-                                        <label for="selector1" class="col-sm-3 control-label">Question Type</label>
-                                                    <div class="col-sm-8"><select id="selectMe" name="qtype" class="form-control1">
-                                                            <option>--Choose paper type--</option>
-                                                            <option value="option1">MCQ</option>
-                                                            <option value="option2">True/False</option>
-                                                            <option value="option3">Multiple Answer Questions</option>
-                                                            <option value="option4">Single Answer Questions</option>
-                                                        </select></div>
-
-                                    </div>  
                                     <div class="form-body">
 
 
                                            <!--<?php echo validation_errors(); ?> -->
 
-                                                
+                                            
 
                                             <div id="option1" class="group">
 
@@ -151,7 +148,7 @@
                                                     
                                                     <input type="hidden" name="qtype" value="1" >
 
-                                                    <button onclick="return doconfirm()" type="submit" class="btn btn-default" style="margin-left: 175px">Submit</button>
+                                                    <button onclick="return doconfirm()" type="submit" class="btn btn-default" style="margin-left: 200px">Submit</button>
                                                 </form>
 
                                             </div>
@@ -186,7 +183,7 @@
                                                         <input type="hidden" name="mcq4" value="" >
 
 
-                                                        <button onclick="return doconfirm()" type="submit" class="btn btn-default" style="margin-left: 175px">Submit</button>
+                                                        <button onclick="return doconfirm()" type="submit" class="btn btn-default" style="margin-left: 200px">Submit</button>
 
                                                 </form>
                                             </div>
@@ -235,7 +232,7 @@
                                                     
                                                     <input type="hidden" name="qtype" value="3" >
 
-                                                    <button onclick="return doconfirm()" type="submit" class="btn btn-default" style="margin-left: 175px">Submit</button>
+                                                    <button onclick="return doconfirm()" type="submit" class="btn btn-default" style="margin-left: 200px">Submit</button>
                                                 </form>
 
                                             </div>
@@ -265,7 +262,7 @@
                                                         <input type="hidden" name="mcq4" value="" >
 
 
-                                                        <button onclick="return doconfirm()" type="submit" class="btn btn-default" style="margin-left: 175px">Submit</button>
+                                                        <button onclick="return doconfirm()" type="submit" class="btn btn-default" style="margin-left: 200px">Submit</button>
 
                                                 </form>
                                             </div>

@@ -59,4 +59,8 @@ class Hello extends CI_Controller {
         $this->load->view('header/head1');
         $this->load->view('about_us/about');
     }
+    public function load_addlecturers(){
+        $this->load->helper('url');
+        $this->load->view('admin/addlecturers');
+    }
 }
