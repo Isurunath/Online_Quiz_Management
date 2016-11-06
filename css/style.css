@@ -48,7 +48,7 @@ body a:hover{
 }
 .navbar-nav {
   float: right;
-  width: 60%;
+  width: 70%;
 }
 .navbar-default {
   background:none;
@@ -102,6 +102,10 @@ a.navbar-brand span {
     color:#2FD828;
 	}
 
+.errormsg {
+	color: red;
+	font-size: large;
+}
 /*--search--*/
 .search-box{
 	float:right;

@@ -73,7 +73,7 @@
                         <h5 class="profile-designation"><?php echo $course ?></h5>
 
                         <ul class="list-group">
-                            <li class="list-group-item">Posts <a href="timeline.html">1,333</a></li>
+                            <li class="list-group-item"> <a href="timeline.html"></a></li>
                             <li class="list-group-item">Following <a href="people-directory.html">541</a></li>
                             <li class="list-group-item">Followers <a href="people-directory-grid.html">32,434</a></li>
                         </ul>

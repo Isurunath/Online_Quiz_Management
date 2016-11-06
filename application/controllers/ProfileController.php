@@ -37,10 +37,10 @@ class ProfileController extends CI_Controller{
             $this->load->library('upload', $config);
             if($this->upload->do_upload())
             {
-               // echo "test2";
+                //echo "test2";
                 $result  = $this->Profile_Model->updateProPic($id);
                 if($result) {
-                   // echo "test3";
+                    //echo "test3";
                     //unset the previous profile data session
                     $this->session->unset_userdata('profile_data');
 
@@ -67,6 +67,8 @@ class ProfileController extends CI_Controller{
 
                         //loading the view
                         $data = array('upload_data' => $this->upload->data());
+
+                        //echo '<pre>'; print_r($data); echo '</pre>';
                         $this->load->view('header/head1');
                         $this->load->view('profile/profile', $data);
                     }
