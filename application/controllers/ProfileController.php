@@ -25,6 +25,7 @@ class ProfileController extends CI_Controller{
         if(isset($this->session->userdata['profile_data']))
         {
             $id = $this->session->userdata['profile_data']['prof_user_id'];
+
             $config = array(
                 'upload_path' => "./Profile_Picture/",
                 'allowed_types' => "jpg|png|jpeg",
@@ -34,6 +35,7 @@ class ProfileController extends CI_Controller{
                 'max_width' => "1024",
                 'file_name' => $id.".jpg"
             );
+
             $this->load->library('upload', $config);
             if($this->upload->do_upload())
             {
@@ -84,8 +86,8 @@ class ProfileController extends CI_Controller{
                 $this->load->view('profile/profile', $error);
 
 
-                /*echo "fails";
-                echo '<pre>'; print_r($error); echo '</pre>';*/
+                //echo "fails";
+                //echo '<pre>'; print_r($error); echo '</pre>';
             }
         }
         else

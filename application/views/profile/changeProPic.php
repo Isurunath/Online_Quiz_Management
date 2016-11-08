@@ -30,8 +30,8 @@
     ?>
     <div class="form-group">
     <?php echo form_open_multipart('ProfileController/do_upload');?>
-    <?php /*echo "<input type='file' name='userfile' size='20' class='file' style='left: 200px;'/>"; */?>
-    <?php echo "<input id='input-2' name='input2[]' type='file' class='file' multiple data-show-upload='false' data-show-caption='true'>"; ?>
+    <?php echo "<input type='file' name='userfile' size='20' class='file' style='left: 200px;'/>"; ?>
+    <?php /*echo "<input id='input-2' name='input2[]' type='file' class='file' multiple data-show-upload='false' data-show-caption='true'>"; */?>
     <?php echo "<input type='submit' name='submit' class='btn btn-danger' value='Change' style='padding:10px; float: right;'/> ";?>
     <?php echo "</form>"?>
     </div>
