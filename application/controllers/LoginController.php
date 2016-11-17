@@ -88,13 +88,7 @@ class LoginController extends CI_Controller{
                    );
                 $this->session->set_userdata('logged_in',$session_data);
 
-                if($result[0]->user_type == "LECTURER")
-                {
-                    $this->load->helper('url');
-                    $this->load->view('admin/home');
-                }
-                else {
-                    $profileDetails = $this->Users_Model->getProfileDetails($result[0]->user_id);
+                $profileDetails = $this->Users_Model->getProfileDetails($result[0]->user_id);
                     if ($profileDetails) {
                         $session_data_profile = array(
                             'prof_user_id' => $profileDetails[0]->prof_user_id,
@@ -132,7 +126,7 @@ class LoginController extends CI_Controller{
                   echo '<pre>'; print_r($profileDetails); echo '</pre>';;
                   echo $email_l;
                   echo $password_l;*/
-            }
+
             else
             {
                 $data['message'] = 'Invalid username password combination';
