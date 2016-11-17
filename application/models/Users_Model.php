@@ -73,6 +73,17 @@ class Users_Model extends CI_Model
         return $query->result();
     }
 
+    function delete_lecturer($id)
+    {
+        $this->db->where('user_id', $id);
+        $this->db->delete('users');
+
+        if($this->db->affected_rows() > 0)
+            return true; // to the controller
+        else
+            return false;
+    }
+
     public function get_students()
     {
         $this->db->select("user_id,user_name,email");
@@ -80,5 +91,16 @@ class Users_Model extends CI_Model
         $this->db->where('user_type', 'STUDENT');
         $query = $this->db->get();
         return $query->result();
+    }
+
+    function delete_student($id)
+    {
+        $this->db->where('user_id', $id);
+        $this->db->delete('users');
+
+        if($this->db->affected_rows() > 0)
+            return true; // to the controller
+        else
+            return false;
     }
 }
