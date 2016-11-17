@@ -80,8 +80,8 @@
                             <input type="submit" value="Login" />
                         </p>
                         <p class="change_link">
-                            Not a member yet ?
-                            <a href="<?php echo site_url('hello/load_register'); ?>">Join us</a>
+                            Don't have an account yet ?
+                            <a href="<?php echo site_url('hello/load_register'); ?>">Join</a>
                         </p>
                     </form>
                 </div>
