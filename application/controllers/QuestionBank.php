@@ -104,10 +104,25 @@ class QuestionBank extends CI_controller{
     }
 
     public function viewQuestions(){
+
         $this->load->helper('url');
-        $this->load->model('QuestionBank_Model');
-        $data['questions'] = $this->QuestionBank_Model->getQuestions();
-        $this->load->view('admin/manageQbank',$data);
+        $this->load->database();
+        $this->load->library('session');
+
+        if(isset($this->session->userdata['logged_in'])) {
+
+            $lecturer = ($this->session->userdata['logged_in']['username']);
+            $this->load->model('QuestionBank_Model');
+
+            /*$this->data['posts'] = $this->Paper_layout_model->get_layout();
+            $this->load->view('admin/view_paper_layout', $this->data);*/
+
+            $data = array(
+                'questions' => $this->QuestionBank_Model->getQuestions(),
+                'lecname' => $lecturer
+            );
+            $this->load->view('admin/manageQbank',$data);
+        }
 
     }
 

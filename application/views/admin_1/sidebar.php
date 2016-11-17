@@ -27,17 +27,9 @@
     <div class="menu">
         <ul id="menu" >
 
-                <li id="menu-academico" ><a href="#" style="text-decoration:none"><i class="fa fa-file-text-o"></i> <span>Layouts</span> <span class="fa fa-angle-right" style="float: right"></span></a>
-                <ul id="menu-academico-sub" >
-                    <li id="menu-academico-avaliacoes" ><a href="<?php echo site_url('hello/load_layout'); ?>" style="text-decoration:none">Create Layout</a></li>
-                    <li id="menu-academico-boletim" ><a href="<?php echo site_url('Layout_Controller/View_layout'); ?>" style="text-decoration:none">View added layouts</a></li>
-                </ul>
-                </li>
-
-                <li id="menu-academico" ><a href="#" style="text-decoration:none"><i class="glyphicon glyphicon-exclamation-sign"></i> <span>Question Bank</span> <span class="fa fa-angle-right" style="float: right"></span></a>
+                <li id="menu-academico" ><a href="#" style="text-decoration:none"><i class="glyphicon glyphicon-user"></i> <span>Add Lecturers</span> <span class="fa fa-angle-right" style="float: right"></span></a>
                     <ul id="menu-academico-sub" >
-                        <li id="menu-academico-avaliacoes" ><a href="<?php echo site_url('hello/load_qbank'); ?>" style="text-decoration:none">Add Questions</a></li>
-                        <li id="menu-academico-boletim" ><a href="<?php echo site_url('QuestionBank/viewQuestions'); ?>" style="text-decoration:none">View Questions</a></li>
+                        <li id="menu-academico-avaliacoes"><a href="<?php echo site_url('hello/load_addlecturers'); ?>" style="text-decoration:none">Add Lecturers</a></li>
                     </ul>
                 </li>
 
