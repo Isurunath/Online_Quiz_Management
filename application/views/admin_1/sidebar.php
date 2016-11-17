@@ -33,6 +33,13 @@
                     </ul>
                 </li>
 
+                <li id="menu-academico" ><a href="#" style="text-decoration:none"><i class="glyphicon glyphicon-user"></i> <span>View Users</span> <span class="fa fa-angle-right" style="float: right"></span></a>
+                    <ul id="menu-academico-sub" >
+                        <li id="menu-academico-avaliacoes"><a href="<?php echo site_url('View_Lecturers/view_lecturers'); ?>" style="text-decoration:none">View Lecturers</a></li>
+                        <li id="menu-academico-avaliacoes"><a href="<?php echo site_url('View_Students/view_students'); ?>" style="text-decoration:none">View Students</a></li>
+                    </ul>
+                </li>
+
         </ul>
     </div>
 </div>

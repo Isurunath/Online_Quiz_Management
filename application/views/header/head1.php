@@ -135,7 +135,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <ul class="nav navbar-nav">
                                 <li style="margin-left: 350px"><a class="hvr-overline-from-center button2<?php if($_SERVER['REQUEST_URI']=="/Online_Quiz_Management/Hello") { ?>  active   <?php   }  ?>" href="<?php echo site_url('hello/index'); ?>">Home</a></li>
                                 <li><a class="hvr-overline-from-center button2<?php if($_SERVER['REQUEST_URI']=="/Online_Quiz_Management/hello/load_about") { ?>  active   <?php   }  ?>" href="<?php echo site_url('hello/load_about'); ?>">About Us</a></li>
-                                <li><a class="hvr-overline-from-center button2" href="<?php echo site_url('hello/load_admin_panel'); ?>">Admin Panel</a></li>
+                                <li><a class="hvr-overline-from-center button2" href="<?php echo site_url('View_Lecturers/view_lecturers'); ?>">Admin Panel</a></li>
                                 <li>
                                     <div class="dropdown">
                                         <img class="img-circle" src="../Profile_Picture/default.png" width="45px" height="45px">
