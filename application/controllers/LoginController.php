@@ -118,7 +118,7 @@ class LoginController extends CI_Controller{
                     $this->load->view('banner/banner1');
                     $this->load->view('details/details');
                     $this->load->view('footer/footer1');
-                }
+            }
 
 
 

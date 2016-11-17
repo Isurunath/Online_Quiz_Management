@@ -15,10 +15,11 @@ class Paper_layout_model extends CI_Model
             return false;
     }
 
-    function get_layout()
+    function get_layout($lecturer)
     {
         $this->db->select("paper_id,batch_no,paper_type,single_choice,multiple_choice,short_answer,true_false,from_date,to_date,quiz_password");
         $this->db->from('assignment_layout');
+        $this->db->where('lec_name', $lecturer);
         $query = $this->db->get();
         return $query->result();
     }

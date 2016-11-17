@@ -119,6 +119,13 @@
                 </div>
                 <!--/sub-heard-part-->
 
+              <!--  --><?php
+/*                    if(isset($lecname))
+                    {
+                        echo $lecname;
+                    }
+                */?>
+
                 <div style="margin-left: 10px">
                     <p style="color:red">Note: </p>
                     <p style="color:blueviolet">A question paper should include 30 questions</p>
