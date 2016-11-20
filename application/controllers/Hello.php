@@ -98,4 +98,9 @@ class Hello extends CI_Controller {
             $this->load->view('admin_1/home',$data);
         }
     }
+
+    public function load_viewusers(){
+        $this->load->helper('url');
+        $this->load->view('admin/viewusers');
+    }
 }

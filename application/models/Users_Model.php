@@ -64,6 +64,12 @@ class Users_Model extends CI_Model
         }
     }
 
+    function getusers(){
+        $query = $this->db->get('users');
+        $q_result = $query->result();
+        return $q_result;
+    }
+    
     public function get_lecturers()
     {
         $this->db->select("user_id,user_name,email");
