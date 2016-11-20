@@ -63,4 +63,11 @@ class Users_Model extends CI_Model
             return true;
         }
     }
+
+    function getusers(){
+        $query = $this->db->get('users');
+        $q_result = $query->result();
+        return $q_result;
+    }
+
 }

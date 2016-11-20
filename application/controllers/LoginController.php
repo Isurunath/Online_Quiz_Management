@@ -165,5 +165,13 @@ class LoginController extends CI_Controller{
         $this->load->view('footer/footer1');
     }
 
+    public function viewusers(){
+        $this->load->helper('url');
+        $this->load->model('Users_Model');
+        $data['users'] = $this->Users_Model->getusers();
+        $this->load->view('admin/viewusers',$data);
+
+    }
+
 }
 
