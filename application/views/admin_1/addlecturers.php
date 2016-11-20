@@ -4,7 +4,7 @@
     <title>Tryit</title>
 
     <?php
-        $this->load->view("admin/references");
+        $this->load->view("admin_1/references");
     ?>
 </head>
 <body>
@@ -12,7 +12,7 @@
 	    <!--/sidebar-menu-->
 	    <div class="sidebar-menu">
 	        <?php
-	            $this->load->view("admin/sidebar");
+	            $this->load->view("admin_1/sidebar");
 	        ?>
 	    </div>
 	    <div class="left-content">
