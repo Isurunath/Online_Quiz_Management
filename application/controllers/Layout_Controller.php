@@ -16,95 +16,98 @@ class Layout_Controller extends CI_Controller
         $this->load->helper('url');
         $this->load->helper('date');
         $this->load->library('form_validation');
-        $this->load->model('Paper_layout_model');
+        $this->load->library('session');
 
-        //$batch=$_POST['batchNo'];
-        $type=$_POST['paperType'];
-        $single=$_POST['single'];
-        $multiple=$_POST['multiple'];
-        $short=$_POST['shortAnswer'];
-        $tf=$_POST['trueFalse'];
-        $CurDate=Date('Y-m-d');
-        $fromdate=$_POST['datepicker1'];
-        $todate=$_POST['datepicker2'];
-        $pwd=$_POST['qpwd'];
-        $cpwd=$_POST['cpwd'];
+        if(isset($this->session->userdata['logged_in'])) {
+            $lecturer = ($this->session->userdata['logged_in']['username']);
 
-        $tot=$single+$multiple+$short+$tf;
+            $this->load->model('Paper_layout_model');
 
-        //Check paper type is assignment and total no. of questions is 20
-        if($type == 'Assignment' && ($tot<20 || $tot>20))
-        {
+            $batch = $_POST['batchNo'];
+            $type = $_POST['paperType'];
+            $single = $_POST['single'];
+            $multiple = $_POST['multiple'];
+            $short = $_POST['shortAnswer'];
+            $tf = $_POST['trueFalse'];
+            $CurDate = Date('Y-m-d');
+            $fromdate = $_POST['datepicker1'];
+            $todate = $_POST['datepicker2'];
+            $pwd = $_POST['qpwd'];
+            $cpwd = $_POST['cpwd'];
+
+            $tot = $single + $multiple + $short + $tf;
+
+            $result1 = $this->Paper_layout_model->check_date_availability($batch, $fromdate);
+
+            //Check paper type is assignment and total no. of questions is 20
+            if ($type == 'Assignment' && ($tot < 20 || $tot > 20)) {
                 $data['message'] = 'Number of questions should be exactly 20 for an assignment';
                 $this->load->view('admin/paper_layout', $data);
-        }
-
-        //Check paper type is question paper and total no.of questions is 30
-        elseif($type == 'Question Paper' && ($tot<30 || $tot>30))
-        {
+            } //Check paper type is question paper and total no.of questions is 30
+            elseif ($type == 'Question Paper' && ($tot < 30 || $tot > 30)) {
                 $data['message'] = 'Number of questions should be exactly 30 for a question paper';
                 $this->load->view('admin/paper_layout', $data);
-        }
+            } //check from date is greater than than the to date
+            elseif ($fromdate > $todate) {
+                $data['message'] = 'Dates should be compatible with each other';
+                $this->load->view('admin/paper_layout', $data);
+            } //check whether the from date is smaller than the current date
+            elseif ($fromdate < $CurDate) {
+                $data['message'] = 'From date must exceed the current date';
+                $this->load->view('admin/paper_layout', $data);
+            } elseif ($pwd != $cpwd) {
+                $data['message'] = 'Passwords do not match';
+                $this->load->view('admin/paper_layout', $data);
+            } elseif ($result1) {
+                $data['message'] = $batch . ' already got a paper on ' . $fromdate;
+                $this->load->view('admin/paper_layout', $data);
+            } else {
+                $data = array(
+                    'lec_name' => $lecturer,
+                    'batch_no' => $_POST['batchNo'],
+                    'paper_type' => $_POST['paperType'],
+                    'added_date' => date('Y-m-d H:i:s', now()),
+                    'single_choice' => $_POST['single'],
+                    'multiple_choice' => $_POST['multiple'],
+                    'short_answer' => $_POST['shortAnswer'],
+                    'true_false' => $_POST['trueFalse'],
+                    'from_date' => $_POST['datepicker1'],
+                    'to_date' => $_POST['datepicker2'],
+                    'quiz_password' => $_POST['qpwd']
+                );
 
-        //check from date is greater than than the to date
-        elseif($fromdate > $todate)
-        {
-            $data['message'] = 'Dates should be compatible with each other';
-            $this->load->view('admin/paper_layout', $data);
-        }
+                $result = $this->Paper_layout_model->insert($data);
 
-        //check whether the from date is smaller than the current date
-        elseif($fromdate < $CurDate)
-        {
-            $data['message'] = 'From date must exceed the current date';
-            $this->load->view('admin/paper_layout', $data);
-        }
-
-        elseif($pwd != $cpwd)
-        {
-            $data['message'] = 'Passwords do not match';
-            $this->load->view('admin/paper_layout', $data);
-        }
-
-        else
-        {
-            $data=array(
-                'batch_no'=>$_POST['batchNo'],
-                'paper_type' => $_POST['paperType'],
-                'added_date' => date('Y-m-d H:i:s', now()),
-                'single_choice' => $_POST['single'],
-                'multiple_choice' => $_POST['multiple'],
-                'short_answer' => $_POST['shortAnswer'],
-                'true_false' => $_POST['trueFalse'],
-                'from_date' => $_POST['datepicker1'],
-                'to_date' => $_POST['datepicker2'],
-                'quiz_password'=> $_POST['qpwd']
-            );
-
-            $result = $this->Paper_layout_model->insert($data);
-
-            if($result)
-            {
-                $data['message1']='Data successfully inserted';
-                $this->load->View('admin/paper_layout',$data);
-            }
-
-            else
-            {
-                $this->load->View('admin/paper_layout');
+                if ($result) {
+                    $data['message1'] = 'Data successfully inserted';
+                    $this->load->View('admin/paper_layout', $data);
+                } else {
+                    $this->load->View('admin/paper_layout');
+                }
             }
         }
-
     }
 
     public function View_layout()
     {
         $this->load->helper('url');
         $this->load->database();
-        $this->load->model('Paper_layout_model');
+        $this->load->library('session');
 
-        $this->data['posts'] = $this->Paper_layout_model->get_layout();
-        $this->load->view('admin/view_paper_layout', $this->data);
+        if(isset($this->session->userdata['logged_in'])) {
+
+            $lecturer = ($this->session->userdata['logged_in']['username']);
+            $this->load->model('Paper_layout_model');
+
+            /*$this->data['posts'] = $this->Paper_layout_model->get_layout();
+            $this->load->view('admin/view_paper_layout', $this->data);*/
+
+            $data = array(
+                'posts' => $this->Paper_layout_model->get_layout($lecturer),
+                'lecname' => $lecturer
+            );
+            $this->load->view('admin/view_paper_layout', $data);
+        }
     }
 
     public function editLayout()
@@ -179,6 +182,22 @@ class Layout_Controller extends CI_Controller
             }
         }
 
+    }
+
+    public function deleteLayout()
+    {
+        $this->load->helper('url');
+        $this->load->model('Paper_layout_model');
+
+        $id=$_POST['test'];
+
+        $result = $this->Paper_layout_model->delete_Layout($id);
+
+        if ($result) {
+            redirect('Layout_Controller/View_layout');
+        } else {
+            redirect('Layout_Controller/View_layout');
+        }
     }
 	
 	

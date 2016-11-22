@@ -46,6 +46,8 @@
                             $fname = ($this->session->userdata['profile_data']['fname']);
                             $lname = ($this->session->userdata['profile_data']['lname']);
                             $course = ($this->session->userdata['profile_data']['course']);
+                            $user_id = ($this->session->userdata['profile_data']['prof_user_id']);
+                            $pic = ($this->session->userdata['profile_data']['isProPic']);
                         }
 
                         ?>
@@ -53,19 +55,32 @@
                         <ul class="panel-options">
                             <li><a><i class="glyphicon glyphicon-option-vertical"></i></a></li>
                         </ul>
-                        <a href="" class="profile-photo"><img class="img-circle img-responsive" src="../images/vph.jpg" alt=""></a>
-                        <h2 class="profile-name"><?php echo $fname ?> <?php echo $lname ?></h2>
-                        <h4 class="profile-designation"><?php echo $course ?></h4>
+                        <?php if($pic == 0)
+                            {
+                        ?>
+                            <a href="" class="profile-photo"><img class="img-circle img-responsive" src="../Profile_Picture/default.png" alt=""></a>
+                        <?php
+                            }
+                            else if($pic == 1)
+                            {
+                        ?>
+                            <a href="" class="profile-photo"><img class="img-circle img-responsive" src="../Profile_Picture/<?php echo $user_id ?>.jpg" alt="">
+                        <?php
+                        }
+                        ?>
+
+                        <h3 class="profile-name"><?php echo $fname ?> <?php echo $lname ?></h3>
+                        <h5 class="profile-designation"><?php echo $course ?></h5>
 
                         <ul class="list-group">
-                            <li class="list-group-item">Posts <a href="timeline.html">1,333</a></li>
+                            <li class="list-group-item"> <a href="timeline.html"></a></li>
                             <li class="list-group-item">Following <a href="people-directory.html">541</a></li>
                             <li class="list-group-item">Followers <a href="people-directory-grid.html">32,434</a></li>
                         </ul>
 
 
                         <button class="btn btn-danger btn-quirk btn-block profile-btn-follow">Edit Profile</button>
-                        <button class="btn btn-danger btn-quirk btn-block profile-btn-follow">Change Profile Picture</button>
+                        <button class="btn btn-danger btn-quirk btn-block profile-btn-follow" onclick="changeProfilePicture(<?php echo $user_id ?>)">Change Profile Picture</button>
                     </div>
                     <div class="profile-left-body">
                         <h4 class="panel-title">About Me</h4>
@@ -314,6 +329,30 @@
 <script src="<?php echo base_url(); ?>lib/jquery-toggles/toggles.js"></script>
 
 <script src="<?php echo base_url(); ?>js/quirk.js"></script>
+
+<script type="text/javascript">
+    /*Change the profile picture*/
+    function changeProfilePicture(id)
+    {
+        $.ajax({
+
+            type: "POST",
+            url: "<?php echo site_url('ProfileController/viewPicChange')?>",
+            data: {
+                id:id
+            },
+            dataType: 'html',
+            success: function (data) {
+                document.getElementById("myDetails").innerHTML = data;
+               // alert(data);
+            },
+            error: function (err) {
+                alert("error");
+            }
+        });
+
+    }
+</script>
 
 </body>
 </html>

@@ -9,6 +9,7 @@ class LoginController extends CI_Controller{
         $this->load->helper(array('form','url'));
     }
 
+    //
     public function register()
     {
         $this->load->helper('url');
@@ -32,6 +33,7 @@ class LoginController extends CI_Controller{
                 'user_name' => $_POST['name'],
                 'email' => $_POST['email'],
                 'password' => MD5($_POST['password']),
+                'user_type' => 'STUDENT'
             );
 
             //Transferring data to Model
@@ -63,7 +65,7 @@ class LoginController extends CI_Controller{
         $this->form_validation->set_rules('email_login', 'Email', 'trim|required',
                                             array
                                             (
-                                                'required'      => 'You have not provided %s.'
+                                                'required' => 'You have not provided %s.'
                                             ));
         $this->form_validation->set_rules('password_login','Password','trim|required',array('required'=> 'Enter your %s.'));
 
@@ -86,15 +88,10 @@ class LoginController extends CI_Controller{
                    );
                 $this->session->set_userdata('logged_in',$session_data);
 
-                if($result[0]->user_type == "ADMIN")
-                {
-                    $this->load->helper('url');
-                    $this->load->view('admin/home');
-                }
-                else {
-                    $profileDetails = $this->Users_Model->getProfileDetails($result[0]->user_id);
+                $profileDetails = $this->Users_Model->getProfileDetails($result[0]->user_id);
                     if ($profileDetails) {
                         $session_data_profile = array(
+                            'prof_user_id' => $profileDetails[0]->prof_user_id,
                             'fname' => $profileDetails[0]->fname,
                             'lname' => $profileDetails[0]->lname,
                             'dob' => $profileDetails[0]->dob,
@@ -107,21 +104,29 @@ class LoginController extends CI_Controller{
                             'eYear' => $profileDetails[0]->started_yr,
                             'course' => $profileDetails[0]->course,
                             'batch' => $profileDetails[0]->batch,
+                            'isProPic' => $profileDetails[0]->isProPic,
                         );
 
                         $this->session->set_userdata('profile_data', $session_data_profile);
                     }
 
-                    $this->load->helper('url');
+                    /*$this->load->helper('url');
                     $this->load->view('header/head1');
-                    $this->load->view('profile/profile');
-                }
+                    $this->load->view('profile/profile');*/
+
+                    $this->load->view('header/head1');
+                    $this->load->view('banner/banner1');
+                    $this->load->view('details/details');
+                    $this->load->view('footer/footer1');
+            }
+
+
 
                 /*echo "successful";
                   echo '<pre>'; print_r($profileDetails); echo '</pre>';;
                   echo $email_l;
                   echo $password_l;*/
-            }
+
             else
             {
                 $data['message'] = 'Invalid username password combination';
@@ -144,11 +149,22 @@ class LoginController extends CI_Controller{
 
     public function logout()
     {
+        $this->load->library('session');
+        $this->session->unset_userdata('profile_data');
+        $this->session->unset_userdata('logged_in');
         $this->load->helper('url');
         $this->load->view('header/head1');
         $this->load->view('banner/banner1');
         $this->load->view('details/details');
         $this->load->view('footer/footer1');
+    }
+
+    public function viewusers(){
+        $this->load->helper('url');
+        $this->load->model('Users_Model');
+        $data['users'] = $this->Users_Model->getusers();
+        $this->load->view('admin/viewusers',$data);
+
     }
 
 }
