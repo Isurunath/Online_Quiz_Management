@@ -361,7 +361,7 @@
             dataType: 'html',
             success: function (data) {
                 document.getElementById("myDetails").innerHTML = data;
-                // alert(data);
+                //alert(data);
             },
             error: function (err) {
                 alert("error");
@@ -394,19 +394,38 @@
     }
 
 
-    function updateBasic()
+    function updateBasic(e)
     {
-        alert("in ajax");
+        e.preventDefault();
+        //get the posted values
+        var first_name = document.getElementById('fname').value;
+        var last_name = document.getElementById('lname').value;
+
+        var g = document.getElementById("gender");
+        var gndr = g.options[g.selectedIndex].value;
+
+        var d = document.getElementById("day");
+        var date = d.options[d.selectedIndex].value;
+
+        var m = document.getElementById("month");
+        var month = m.options[m.selectedIndex].value;
+
+        var y = document.getElementById("year");
+        var year = y.options[y.selectedIndex].value;
+
+        //alert(first_name+" "+last_name+" "+gndr+" "+date+" "+" "+month+" "+year);
         $.ajax({
             type: "POST",
             url: "<?php echo site_url('ProfileController/updateBasic')?>",
+            async: true,
             data: {
-                //id:id
+                "first_name":first_name, "last_name":last_name, "gender":gndr, "date":date, "month":month, "year":year
             },
             dataType: 'html',
             success: function (data) {
+                location.reload();
+                alert("Successfully Updated.");
                 document.getElementById("myDetails").innerHTML = data;
-                //alert(data);
             },
             error: function (err) {
                 alert("error");

@@ -29,7 +29,7 @@
     <div class="panel panel-post-item">
         <h4>Basic Information</h4>
         <br>
-        <form method="post" onsubmit="updateBasic()">
+        <form method="post" onsubmit="updateBasic(event)">
         <table style="width: 100%;">
             <tr>
                 <td style="padding: 10px; width: 25%;"><i class="fa fa-info-circle"></i> Full Name</td>
