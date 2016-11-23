@@ -15,6 +15,7 @@ class LoginController extends CI_Controller{
         $this->load->helper('url');
         $this->load->library('form_validation');
         $this->load->model('Users_Model');
+        $this->load->library('session');
 
         $this->form_validation->set_rules('name', 'Name', 'trim|required');
         $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|is_unique[users.email]');
@@ -25,6 +26,7 @@ class LoginController extends CI_Controller{
         if ($this->form_validation->run() == FALSE)
         {
             $this->load->view('login/new_register');
+            echo "Failed";
         }
 
         else
@@ -38,8 +40,44 @@ class LoginController extends CI_Controller{
 
             //Transferring data to Model
             $result = $this->Users_Model->insert($data);
+            $insert_id = $this->db->insert_id();
             if($result)
             {
+                $session_data=array(
+                    'email'=>$_POST['email'],
+                    'username'=>$_POST['name'],
+                    'user_type' =>'STUDENT',
+                );
+                $this->session->set_userdata('logged_in',$session_data);
+
+                $profileDetails = $this->Users_Model->getProfileDetails($insert_id);
+                if ($profileDetails) {
+                    $session_data_profile = array(
+                        'prof_user_id' => $profileDetails[0]->prof_user_id,
+                        'fname' => $profileDetails[0]->fname,
+                        'lname' => $profileDetails[0]->lname,
+                        'dob' => $profileDetails[0]->dob,
+                        'add1' => $profileDetails[0]->address_l1,
+                        'add2' => $profileDetails[0]->address_l2,
+                        'city' => $profileDetails[0]->city,
+                        'gender' => $profileDetails[0]->gender,
+                        'phone' => $profileDetails[0]->phone,
+                        'sYear' => $profileDetails[0]->graduating_yr,
+                        'eYear' => $profileDetails[0]->started_yr,
+                        'course' => $profileDetails[0]->course,
+                        'batch' => $profileDetails[0]->batch,
+                        'isProPic' => $profileDetails[0]->isProPic,
+                        'about_me' => $profileDetails[0]->about_me,
+                        'email' => $profileDetails[0]->email,
+                        'date' => $profileDetails[0]->birthDate,
+                        'month' => $profileDetails[0]->birthMonth,
+                        'year' => $profileDetails[0]->birthYear,
+                        'bt' => $profileDetails[0]->batch_time
+                    );
+
+                    $this->session->set_userdata('profile_data', $session_data_profile);
+                }
+
                 $this->load->view('header/head1');
                 $this->load->view('banner/banner1');
                 $this->load->view('details/details');
@@ -111,6 +149,12 @@ class LoginController extends CI_Controller{
                             'course' => $profileDetails[0]->course,
                             'batch' => $profileDetails[0]->batch,
                             'isProPic' => $profileDetails[0]->isProPic,
+                            'about_me' => $profileDetails[0]->about_me,
+                            'email' => $profileDetails[0]->email,
+                            'date' => $profileDetails[0]->birthDate,
+                            'month' => $profileDetails[0]->birthMonth,
+                            'year' => $profileDetails[0]->birthYear,
+                            'bt' => $profileDetails[0]->batch_time
                         );
 
                         $this->session->set_userdata('profile_data', $session_data_profile);
