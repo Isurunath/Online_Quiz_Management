@@ -85,7 +85,7 @@
                             <input type="submit" value="Sign up"/>
                         </p>
                         <p class="change_link">
-                            Already a member ?
+                            Already registered ?
                             <a href="<?php echo site_url('hello/login'); ?>">Log in</a>
                         </p>
                     </form>

@@ -44,7 +44,7 @@
     </table>
 
 
-    <div style="margin-top:228px ">
+    <div style="margin-top:277px ">
         <?php
              $this->load->view('footer/footer1');
         ?>
