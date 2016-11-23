@@ -6,9 +6,22 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Quirk Responsive Admin Templates</title>
+    <title>Profile</title>
+
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+
+    <link href="<?php echo base_url(); ?>admin_css/font-awesome.css" rel="stylesheet">
+    <link rel="stylesheet" href="<?php echo base_url(); ?>admin_css/icon-font.min.css" type='text/css' />
+    <!-- Load jQuery JS -->
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <!-- Load jQuery UI Main JS  -->
+    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
 
 
+    <!--skycons-icons-->
+    <script src="<?php echo base_url(); ?>admin_js/skycons.js"></script>
+
+    <script src="<?php echo base_url(); ?>admin_js/jquery.easydropdown.js"></script>
 
     <link rel="stylesheet" href=<?php echo base_url(); ?>lib/fontawesome/css/font-awesome.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>lib/weather-icons/css/weather-icons.css">
@@ -48,6 +61,21 @@
                             $course = ($this->session->userdata['profile_data']['course']);
                             $user_id = ($this->session->userdata['profile_data']['prof_user_id']);
                             $pic = ($this->session->userdata['profile_data']['isProPic']);
+                            $dob = ($this->session->userdata['profile_data']['dob']);
+                            $about = ($this->session->userdata['profile_data']['about_me']);
+
+                            $address1 = ($this->session->userdata['profile_data']['add1']);
+                            $address2 = ($this->session->userdata['profile_data']['add2']);
+                            $city = ($this->session->userdata['profile_data']['city']);
+                            $gender = ($this->session->userdata['profile_data']['gender']);
+                            $phone = ($this->session->userdata['profile_data']['phone']);
+                            $email = ($this->session->userdata['profile_data']['email']);
+                            $gradating_yr = ($this->session->userdata['profile_data']['eYear']);
+                            $started_yr = ($this->session->userdata['profile_data']['sYear']);
+                            $batch = ($this->session->userdata['profile_data']['batch']);
+
+                            //calculate the age
+                            $age = date('Y-m-d') - $dob;
                         }
 
                         ?>
@@ -58,13 +86,13 @@
                         <?php if($pic == 0)
                             {
                         ?>
-                            <a href="" class="profile-photo"><img class="img-circle img-responsive" src="../Profile_Picture/default.png" alt=""></a>
+                            <a href="" class="profile-photo"><img class="img-circle img-responsive" src="../Profile_Pictures/default.png" alt=""></a>
                         <?php
                             }
                             else if($pic == 1)
                             {
                         ?>
-                            <a href="" class="profile-photo"><img class="img-circle img-responsive" src="../Profile_Picture/<?php echo $user_id ?>.jpg" alt="">
+                            <a href="" class="profile-photo"><img class="img-circle img-responsive" src="../Profile_Pictures/<?php echo $user_id ?>.jpg" alt="">
                         <?php
                         }
                         ?>
@@ -74,43 +102,32 @@
 
                         <ul class="list-group">
                             <li class="list-group-item"> <a href="timeline.html"></a></li>
-                            <li class="list-group-item">Following <a href="people-directory.html">541</a></li>
-                            <li class="list-group-item">Followers <a href="people-directory-grid.html">32,434</a></li>
+                            <li class="list-group-item">Name <a href="people-directory.html"><?php echo $fname ?></a></li>
+                            <li class="list-group-item">Age <a href="people-directory-grid.html"><?php echo $age ?></a></li>
                         </ul>
 
 
-                        <button class="btn btn-danger btn-quirk btn-block profile-btn-follow">Edit Profile</button>
+                        <button class="btn btn-danger btn-quirk btn-block profile-btn-follow" onclick="editProfile(<?php echo $user_id ?>)">Edit Profile</button>
                         <button class="btn btn-danger btn-quirk btn-block profile-btn-follow" onclick="changeProfilePicture(<?php echo $user_id ?>)">Change Profile Picture</button>
                     </div>
                     <div class="profile-left-body">
                         <h4 class="panel-title">About Me</h4>
-                        <p>Social media ninja. Pop culture enthusiast. Zombie fanatic. General tv evangelist.</p>
-                        <p>Alcohol fanatic. Explorer. Passionate reader. Entrepreneur. Lifelong coffee advocate. Avid bacon aficionado. Travel evangelist.</p>
+                        <p><?php echo $about ?></p>
 
                         <hr class="fadeout">
 
                         <h4 class="panel-title">Location</h4>
-                        <p><i class="glyphicon glyphicon-map-marker mr5"></i> San Francisco, CA, USA</p>
+                        <p><i class="glyphicon glyphicon-map-marker mr5"></i> <?php echo $city ?>, Sri Lanka</p>
 
                         <hr class="fadeout">
 
-                        <h4 class="panel-title">Company</h4>
-                        <p><i class="glyphicon glyphicon-briefcase mr5"></i> Awesome Company, Inc.</p>
+                        <h4 class="panel-title">Course</h4>
+                        <p><i class="glyphicon glyphicon-briefcase mr5"></i> <?php echo $course ?></p>
 
                         <hr class="fadeout">
 
                         <h4 class="panel-title">Contacts</h4>
-                        <p><i class="glyphicon glyphicon-phone mr5"></i> +1 010 123 5678</p>
-
-                        <hr class="fadeout">
-
-                        <h4 class="panel-title">Social</h4>
-                        <ul class="list-inline profile-social">
-                            <li><a href=""><i class="fa fa-facebook-official"></i></a></li>
-                            <li><a href=""><i class="fa fa-twitter"></i></a></li>
-                            <li><a href=""><i class="fa fa-dribbble"></i></a></li>
-                            <li><a href=""><i class="fa fa-linkedin"></i></a></li>
-                        </ul>
+                        <p><i class="glyphicon glyphicon-phone mr5"></i> <?php $phone ?></p>
 
                     </div>
                 </div>
@@ -344,13 +361,57 @@
             dataType: 'html',
             success: function (data) {
                 document.getElementById("myDetails").innerHTML = data;
-               // alert(data);
+                // alert(data);
             },
             error: function (err) {
                 alert("error");
             }
         });
 
+    }
+
+
+    /*Edit Profile Details*/
+    function editProfile(id)
+    {
+        $.ajax({
+
+            type: "POST",
+            url: "<?php echo site_url('ProfileController/viewEditProfile')?>",
+            data: {
+                id:id
+            },
+            dataType: 'html',
+            success: function (data) {
+                document.getElementById("myDetails").innerHTML = data;
+                // alert(data);
+            },
+            error: function (err) {
+                alert("error");
+            }
+        });
+
+    }
+
+
+    function updateBasic()
+    {
+        alert("in ajax");
+        $.ajax({
+            type: "POST",
+            url: "<?php echo site_url('ProfileController/updateBasic')?>",
+            data: {
+                //id:id
+            },
+            dataType: 'html',
+            success: function (data) {
+                document.getElementById("myDetails").innerHTML = data;
+                //alert(data);
+            },
+            error: function (err) {
+                alert("error");
+            }
+        });
     }
 </script>
 

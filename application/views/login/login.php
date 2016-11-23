@@ -54,7 +54,7 @@
         <input type="password" placeholder="Confirm password" name="con_password" id="con_password"/>
         <input type="text" placeholder="email address" name="email" id="email" value="<?php echo set_value("email")?>"/>
         <button type="submit" name="submit" id="submit">create</button>
-        <p class="message">Already registered? <a href="<?php echo base_url(); ?>#">Sign In</a></p>
+        <p class="message">Already registered? <a href="<?php echo base_url(); ?>">Sign In</a></p>
     </form>
 
     <form class="login-form" action="<?php echo base_url(); ?>LoginController/login" method="post">

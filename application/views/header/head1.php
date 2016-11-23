@@ -103,19 +103,19 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                 <li><a class="hvr-overline-from-center button2<?php if($_SERVER['REQUEST_URI']=="/Online_Quiz_Management/Upload/index") { ?>  active   <?php   }  ?>" href="<?php echo site_url('Upload/index'); ?>">Upload</a></li>
                                 <li><a class="hvr-overline-from-center button2<?php if($_SERVER['REQUEST_URI']=="/Online_Quiz_Management/exam_controller/upcoming_exams") { ?>  active   <?php   }  ?>" href="<?php echo site_url('exam_controller/upcoming_exams'); ?>">Upcoming Exams</a></li>
                                 <li><a class="hvr-overline-from-center button2<?php if($_SERVER['REQUEST_URI']=="/Online_Quiz_Management/Paper/downloadPage") { ?>  active   <?php   }  ?>" href="<?php echo site_url('Paper/downloadPage'); ?>">My Paper</a></li>
-    <!--                            <li><a class="hvr-overline-from-center button2" href="--><?php //echo site_url('hello/admin'); ?><!--">Admin</a></li>-->
+                                <!--<li><a class="hvr-overline-from-center button2" href="--><?php //echo site_url('hello/admin'); ?><!--">Admin</a></li>-->
                                 <li>
                                     <div class="dropdown">
                                         <?php if($Pic == 0)
                                               {
                                         ?>
-                                                    <img class="img-circle" src="../Profile_Picture/default.png" width="45px" height="45px">
+                                                    <img class="img-circle" src="../Profile_Pictures/default.png" width="45px" height="45px">
                                         <?php
                                               }
                                               else if($Pic == 1)
                                               {
                                         ?>
-                                                    <img class="img-circle" src="../Profile_Picture/<?php echo $id ?>.jpg" width="45px" height="45px">
+                                                    <img class="img-circle" src="../Profile_Pictures/<?php echo $id ?>.jpg" width="45px" height="45px">
                                         <?php
                                               }
                                         ?>
@@ -124,6 +124,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                             <a href="<?php echo site_url('hello/load_profile'); ?>"> <i class="glyphicon glyphicon-user"></i>  My Profile</a>
                                             <a href="<?php echo site_url('loginController/logout'); ?>"> <i class="glyphicon glyphicon-log-out"></i>  Log Out</a>
                                         </div>
+
                                     </div>
                                 </li>
                             </ul>
@@ -138,30 +139,33 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                 <li><a class="hvr-overline-from-center button2" href="<?php echo site_url('View_Lecturers/view_lecturers'); ?>">Admin Panel</a></li>
                                 <li>
                                     <div class="dropdown">
-                                        <img class="img-circle" src="../Profile_Picture/default.png" width="45px" height="45px">
+                                        <img class="img-circle" src="../Profile_Pictures/default.png" width="45px" height="45px">
                                         <button class="dropbtn"><?php echo $username ?></button>
                                         <div class="dropdown-content">
                                             <a href="<?php echo site_url('LoginController/logout'); ?>"><i class="glyphicon glyphicon-log-out"></i>Logout</a>
                                         </div>
                                     </div>
-                                </li>
-                            </ul>
-                        <?php
-                        }
-                        else if($type == 'LECTURER')
-                        {
-                        ?>
-                            <ul class="nav navbar-nav">
-                                <li style="margin-left: 350px"><a class="hvr-overline-from-center button2<?php if($_SERVER['REQUEST_URI']=="/Online_Quiz_Management/Hello") { ?>  active   <?php   }  ?>" href="<?php echo site_url('hello/index'); ?>">Home</a></li>
-                                <li><a class="hvr-overline-from-center button2<?php if($_SERVER['REQUEST_URI']=="/Online_Quiz_Management/hello/load_about") { ?>  active   <?php   }  ?>" href="<?php echo site_url('hello/load_about'); ?>">About Us</a></li>
-                                <li><a class="hvr-overline-from-center button2" href="<?php echo site_url('Layout_Controller/View_layout'); ?>">Lecturer Panel</a></li>
-                                <li>
-                                    <div class="dropdown">
-                                        <img class="img-circle" src="../images/vph.jpg" width="45px" height="45px">
-                                        <button class="dropbtn"><?php echo $username ?></button>
-                                        <div class="dropdown-content">
-                                            <a href="<?php echo site_url('LoginController/logout'); ?>"><i class="glyphicon glyphicon-log-out"></i>Logout</a>
-                                        </div>
+                                </div>
+                            </li>
+                        </ul>
+                    <?php
+                    }
+                    else if($type == 'LECTURER')
+                    {
+                    ?>
+                        <ul class="nav navbar-nav">
+                            <li><a class="hvr-overline-from-center button2<?php if($_SERVER['REQUEST_URI']=="/Online_Quiz_Management/Hello") { ?>  active   <?php   }  ?>" href="<?php echo site_url('hello/index'); ?>">Home</a></li>
+                            <li><a class="hvr-overline-from-center button2<?php if($_SERVER['REQUEST_URI']=="/Online_Quiz_Management/hello/load_about") { ?>  active   <?php   }  ?>" href="<?php echo site_url('hello/load_about'); ?>">About Us</a></li>
+                            <li><a class="hvr-overline-from-center button2<?php if($_SERVER['REQUEST_URI']=="/Online_Quiz_Management/Upload/index") { ?>  active   <?php   }  ?>"" href="<?php echo site_url('Upload/index'); ?>">Upload</a></li>
+                            <li><a class="hvr-overline-from-center button2<?php if($_SERVER['REQUEST_URI']=="/Online_Quiz_Management/Paper/downloadPage") { ?>  active   <?php   }  ?>" href="<?php echo site_url('Paper/downloadPage'); ?>">My Paper</a></li>
+                            <!--<li><a class="hvr-overline-from-center button2" href="<?php /*echo site_url('hello/admin'); */?>">Admin</a></li>-->
+                            <li>
+                                <div class="dropdown">
+                                    <img class="img-circle" src="../images/vph.jpg" width="45px" height="45px">
+                                    <button class="dropbtn"><?php echo $username ?></button>
+                                    <div class="dropdown-content">
+                                        <a href="<?php echo site_url('hello/admin'); ?>">My Profile</a>
+                                        <a href="<?php echo site_url('LoginController/logout'); ?>">Logout</a>
                                     </div>
                                 </li>
                             </ul>
