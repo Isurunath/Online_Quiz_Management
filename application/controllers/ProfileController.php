@@ -33,9 +33,11 @@ class ProfileController extends CI_Controller{
         $id = $this->session->userdata['profile_data']['prof_user_id'];
         $form_data = $this->input->post();
 
-        print_r($form_data);
+        //print_r($form_data);
+        //echo $form_data;
+        //echo '<script type="text/javascript">alert("It works.");</script>';
 
-        $this->form_validation->set_rules('fname', 'First Name', 'trim|required');
+        /*$this->form_validation->set_rules('fname', 'First Name', 'trim|required');
         $this->form_validation->set_rules('lname', 'Last Name', 'trim|required');
 
         if ($this->form_validation->run() == FALSE)
@@ -44,14 +46,15 @@ class ProfileController extends CI_Controller{
             //echo "validation failed";
         }
         else
-        {
-            $fname = $form_data['fname'];
-            $lname = $form_data['lname'];
+        {*/
+            $fname = $form_data['first_name'];
+            $lname = $form_data['last_name'];
             $gender = $form_data['gender'];
-            $date = $form_data['day'];
+            $date = $form_data['date'];
             $month = $form_data['month'];
             $year = $form_data['year'];
 
+            //echo $fname;
             $result  = $this->Profile_Model->updateBasic($id,$fname,$lname,$gender,$date,$month,$year);
             if($result) {
                 //unset the previous profile data session
@@ -85,13 +88,13 @@ class ProfileController extends CI_Controller{
                     $this->session->set_userdata('profile_data', $session_data_profile);
                 }
 
-                //$this->load->view('profile/editProfile');
-                echo "successfull";
+                $this->load->view('profile/editProfile');
+                //echo "successfull";
             }
             else{
                 echo "failed";
             }
-        }
+        /*}*/
     }
 
     public function do_upload()
