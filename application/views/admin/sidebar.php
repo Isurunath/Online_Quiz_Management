@@ -40,6 +40,12 @@
                     <li id="menu-academico-boletim" ><a href="<?php echo site_url('QuestionBank/viewQuestions'); ?>" style="text-decoration:none">View Questions</a></li>
                 </ul>
             </li>
+
+            <li id="menu-academico" ><a href="#" style="text-decoration:none"><i class="fa fa-file-text-o"></i> <span>Paper Marking</span> <span class="fa fa-angle-right" style="float: right"></span></a>
+                <ul id="menu-academico-sub" >
+                    <li id="menu-academico-avaliacoes" ><a href="<?php echo site_url('hello/load_papermarking'); ?>" style="text-decoration:none">Mark The Paper</a></li>
+                </ul>
+            </li>
         </ul>
     </div>
 </div>

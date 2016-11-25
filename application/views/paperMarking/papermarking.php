@@ -19,21 +19,9 @@
 
 </head>
 <body>
+
 <div class="page-container">
-    <!--/sidebar-menu-->
-    <div class="sidebar-menu">
-        <?php
-        $this->load->view("admin/sidebar");
-
-        function FileChecker($path)
-        {
-            if (!file_exists($path)) {
-                echo 'That file does not exists.';
-            }
-        }
-
-        ?>
-    </div>
+    <!--/content-inner-->
     <div class="left-content">
         <div class="inner-content">
             <!--//outer-wp-->
@@ -45,7 +33,9 @@
                         <li class="active">Paper Marking</li>
                     </ol>
                 </div>
+                <!--/sub-heard-part-->
 
+                <!--/forms-->
                 <div class="forms-main">
 
                     <!--/forms-inner-->
@@ -53,37 +43,73 @@
                         <!--/set-2-->
                         <div class="set-1">
                             <div class="graph-2 general">
-                                <h3 class="inner-tittle two">Paper Marking</h3>
+                                <h3 class="inner-tittle two">Paper Marking Process</h3>
+
                                 <div class="grid-1">
-                                    <!-- <div class="col-sm-12">   -->
-                                    <form class="form" action="<?php echo base_url(); ?>MarkingSchemecontroller/processPaperMarking" method="post">
+                                    <div class="form-body">
+                                        <form method="post" name="form_layout" action="<?php echo site_url ('MarkingSchemecontroller/processPaperMarking'); ?>" method="post"  class="form-horizontal">
+                                            <div class="form-group">
+                                                <label for="selector1" class="col-sm-3 control-label">Upload The Answer Sheet :</label>
+                                                <div class="col-sm-8">
+                                                    <input type="file" placeholder="Answer Sheet" class="btn btn-primary" name="anwersheet" id="answersheet" size = "10"/>
+                                                </div>
+                                            </div>
 
-                                        <label for="name" class="col-sm-2 control-label">Upload The Answer Sheet :</label>
-                                        <input type="file" placeholder="Answer Sheet" class="btn btn-primary" name="anwersheet" id="answersheet" size = "20"/>
-                                        <br>
-                                        <label for="name" class="col-sm-2 control-label">Search Compatible Marking Scheme :</label>
-                                        <input type="text" placeholder="Compatible Marking Scheme" name="mrknschmName" id="mrknschmName" value="<?php echo base_url()?>MarkingSchemecontroller/searchMarkingScheme()"/>
-                                        <button type="button"  name="searchMarkngSchm" id="searchMarkngSchm" formaction="<?php echo base_url()?>MarkingSchemecontroller/searchMarkingScheme()">Search Marking Scheme</button>
-                                        <br>
-                                        <button type="button" name="markPaper" id="markPaper" formaction="<?php echo base_url()?>MarkingSchemecontroller/processPaperMarking()">Mark Paper</button>
-                                        <button type="button" name="review" id="review" formaction="<?php echo base_url()?>MarkingSchemecontroller/createReview()">Review Of The Paper</button>
-                                        <br>
-                                        <label for="marks" class="col-sm-2 control-label">Total Marks :</label>
-                                        <input type="text" placeholder="Total Marks" name="totmarks" id="totmarks"/>
+                                            <div class="form-group">
+                                                <label for="selector1" class="col-sm-3 control-label">Search Compatible Marking Scheme :</label>
+                                                <div class="col-sm-8">
+                                                    <input type="text"  placeholder="   Marking Scheme" name="mrknschmName" id="mrknschmName" value=""/>
+                                                    <button type="button"  class="btn btn-default" style="margin-right: 300px" name="searchMarkngSchm" id="searchMarkngSchm" formaction="<?php echo site_url ('MarkingSchemecontroller/searchMarkingScheme'); ?>">Search Marking Scheme</button>
+                                                </div>
+                                            </div>
 
-                                    </form>
+                                            <div class="form-group">
+                                                <div class="col-sm-8">
+                                                    <button type="button" class="btn btn-default" style="margin-left: 300px" name="markPaper" id="markPaper" formaction="<?php echo site_url('MarkingSchemecontroller/processPaperMarking'); ?>">Click To Start The Paper Marking Process</button>
+                                                </div>
+                                            </div>
 
-                                    <!-- </div> -->
+                                            <div class="form-group">
+                                                <label for="marks" class="col-sm-3 control-label">Total Marks :</label>
+                                                <div class="col-sm-8">
+                                                    <input type="text" placeholder="   Total Marks" name="totmarks" id="totmarks"/>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <div class="col-sm-8">
+                                                <button type="button" class="btn btn-default" style="margin-left: 300px" name="review" id="review" formaction="<?php echo site_url('MarkingSchemecontroller/createReview'); ?>">Review Of The Paper</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>
+                        <!--//set-2-->
+
                     </div>
+                    <!--//forms-inner-->
                 </div>
+                <!--//forms-->
             </div>
+            <!--//outer-wp-->
+            <!--footer section start-->
+            <footer>
+                <p>&copy 2016 Tryit . All Rights Reserved | Design by SEP_WE_013</a></p>
+            </footer>
+            <!--footer section end-->
         </div>
     </div>
-</div>
+    <!--//content-inner-->
 
+    <?php
+    $this->load->View("admin/sidebar");
+    ?>
+
+    <div class="clearfix"></div>
+</div>
 
 </body>
 </html>

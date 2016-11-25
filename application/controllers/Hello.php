@@ -59,6 +59,20 @@ class Hello extends CI_Controller {
         }
     }
 
+    public function load_papermarking()
+    {
+        $this->load->helper('url');
+        $this->load->library('session');
+
+        if(isset($this->session->userdata['logged_in'])) {
+
+            $lecturer = ($this->session->userdata['logged_in']['username']);
+            $data['lecname']=$lecturer;
+
+            $this->load->view('paperMarking/papermarking',$data);
+        }
+    }
+
     public function load_profile()
     {
         $this->load->library('session');
