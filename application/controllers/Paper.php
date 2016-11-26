@@ -37,9 +37,10 @@ class Paper extends CI_Controller
                     $this->load->view('footer/footer1');
                 }
                 else {
-
-
                     if ($qpwd == $pwd_frompage) {
+
+
+
                         $this->load->helper('url');
                         $this->load->model('question_model');
                         $data['qestiontype_id'] = $this->question_model->getquestions(1);//result of your query is stored in this ($data['progcategoryid']) variable
