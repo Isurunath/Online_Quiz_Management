@@ -1,4 +1,4 @@
-<h1 style="text-align:center";> Sample Paper</h1>
+<h1 style="text-align:center";> Question Paper</h1>
 <?php
 
 
@@ -29,9 +29,11 @@ echo "<b>Choose the most suitable answer for next 1 - ".$single_choice." questio
 
 <?php
 echo "<b>Choose true/false for next ".($i+1)." - ".($i+$true_false)." questions</b>";
+$lno = $i+$true_false;
 echo "<table style='padding-left: 30px';>" ;
-
+        $j = 0;
         for($i=0;$i<$true_false;$i++){
+            $j++;
         ?>
         <tr>
             <td><?php echo ($single_choice+$i+1).") ".$gettruefalse["question"][$i]; ?></td>
@@ -48,7 +50,9 @@ echo "<table style='padding-left: 30px';>" ;
 
 <?php }
 echo"</table>" ;
-echo "<b>Choose suitable answers for next ".($i+$true_false+1)." - ".($i+$true_false+$multiple_choice)." questions</b>";
+
+echo "<b>Choose suitable answers for next ".($lno+1)." - ".($lno+$multiple_choice)." questions</b>";
+$lno = $lno+$multiple_choice;
 echo"<table style='padding-left: 30px';>" ;
         for($i=0;$i<$multiple_choice;$i++){
         ?>
@@ -73,6 +77,25 @@ echo"<table style='padding-left: 30px';>" ;
 <?php } ?>
 
 </table>
+<?php
+echo "<b>Write short answers for next ".($lno+1)." - ".($lno+$short_answer)." questions</b>";
+echo"<table style='padding-left: 30px';>" ;
+    for($i=0;$i<$short_answer;$i++){
+    ?>
+    <tr>
+        <td><?php echo ($true_false+$single_choice+$multiple_choice+$i+1).") ".$getshortanswer["question"][$i]; ?></td>
+    </tr>
+    <tr>
+<td><input style="width: 300px;" type="text" name=<?php echo "1".$getshortanswer["id"][$i]; ?> ></td>
+<!--       <td> --><?php //echo $getshortanswer["id"][$i]; ?><!--</td>-->
+    </tr>
+
+    <br><br><br>
+
+    <?php } ?>
+
+</table>
+
     <?php echo "<br>"; ?>
 
 

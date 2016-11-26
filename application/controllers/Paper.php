@@ -22,6 +22,7 @@ class Paper extends CI_Controller
                 $data['single_choice'] = $resPaperLayout->single_choice;
                 $data['true_false'] = $resPaperLayout->true_false;
                 $data['multiple_choice'] = $resPaperLayout->multiple_choice;
+                $data['short_answer'] = $resPaperLayout->short_answer;
                 $qpwd = $resPaperLayout->quiz_password;
                 $pwd_frompage = $this->input->get('quiz_pwd');
 
@@ -36,14 +37,7 @@ class Paper extends CI_Controller
                     $this->load->view('footer/footer1');
                 }
                 else {
-                    $downloadDetails = array(
-                        'layout_id' => $resPaperLayout->paper_id,
-                        'student_id' => $student_id,
-                        'batch_no' => $batch,
-                        'download_date' => date("Y-m-d"),
-                        'download_time' => date("h:i:sa"),
-                    );
-                    $this->question_model->insert_paperDownload($downloadDetails);
+
 
                     if ($qpwd == $pwd_frompage) {
                         $this->load->helper('url');
@@ -51,6 +45,7 @@ class Paper extends CI_Controller
                         $data['qestiontype_id'] = $this->question_model->getquestions(1);//result of your query is stored in this ($data['progcategoryid']) variable
                         $data['gettruefalse'] = $this->question_model->getquestions(2);
                         $data['getmultiple'] = $this->question_model->getquestions(3);
+                        $data['getshortanswer'] = $this->question_model->getquestions(4);
                         //$this->load->view('paper/paper', $data);
 
                         //convert to pdf
@@ -63,6 +58,15 @@ class Paper extends CI_Controller
                         $pdf->WriteHTML($html); // write the HTML into the PDF
                         $pdf->Output(); // save to file because we can
                         chmod($pdfFilePath, 0777);
+
+                        $downloadDetails = array(
+                            'layout_id' => $resPaperLayout->paper_id,
+                            'student_id' => $student_id,
+                            'batch_no' => $batch,
+                            'download_date' => date("Y-m-d"),
+                            'download_time' => date("h:i:sa"),
+                        );
+                        $this->question_model->insert_paperDownload($downloadDetails);
                     } else {
                         $data['message'] = 'Invalin Quiz Password';
                         $this->load->helper('url');
