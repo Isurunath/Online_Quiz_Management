@@ -18,7 +18,11 @@
         $email = ($this->session->userdata['profile_data']['email']);
         $graduating_yr = ($this->session->userdata['profile_data']['eYear']);
         $started_yr = ($this->session->userdata['profile_data']['sYear']);
+
         $batch = ($this->session->userdata['profile_data']['batch']);
+        //remove the "Batch"
+        $batch = str_replace("Batch ",'',$batch);
+
         $date = ($this->session->userdata['profile_data']['date']);
         $month = ($this->session->userdata['profile_data']['month']);
         $year = ($this->session->userdata['profile_data']['year']);
@@ -180,13 +184,15 @@
     <div class="panel panel-post-item">
         <h4>Contact Information</h4>
         <br>
-        <form id="basic" method="post" action="<?php echo site_url('ProfileController/updateContact')?>">
+        <form id="contact" method="post" onsubmit="updateContact(event)">
         <table style="width: 100%;">
             <tr>
                 <td style="padding: 10px; width: 25%;"><i class="fa fa-envelope"></i> Email</td>
                 <td style="padding: 10px;">
                 <div class="row">
-                    <div class="col-md-6"><?php echo $email ?></div>
+                    <div class="col-md-6">
+                        <label class="form-control"><?php echo $email; ?></label>
+                    </div>
                 </div>
                 </td>
             </tr>
@@ -234,13 +240,13 @@
     <div class="panel panel-post-item">
         <h4>Course Details</h4>
         <br>
-        <form id="basic" method="post" action="<?php echo site_url('ProfileController/updateCourse')?>">
+        <form id="basic" method="post" onsubmit="updateCourse(event)">
         <table style="width: 100%;">
             <tr>
                 <td style="padding: 10px; width: 25%;"><i class="fa fa-info-circle"></i> Course</td>
                 <td style="padding: 10px;">
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-7">
                         <select id="course" class="form-control">
                         <?php if($course != null){ ?>
                             <option value="<?php echo $course ?>"><?php echo $course ?></option>
@@ -279,7 +285,7 @@
                 <td style="padding: 10px;">
                    <div class="row">
                     <div class="col-md-6">
-                        <select id="course" class="form-control">
+                        <select id="grad_yr" class="form-control">
                         <?php if($graduating_yr != null){ ?>
                             <option value="<?php echo $graduating_yr ?>"><?php echo $graduating_yr ?></option>
                          <?php }?>
@@ -304,14 +310,20 @@
     <div class="panel panel-post-item">
         <h4><i class="fa fa-mortar-board"></i> About Me</h4>
         <br>
-        <form id="basic" method="post" action="<?php echo site_url('ProfileController/updateAboutMe')?>">
+        <form id="basic" method="post" onsubmit="updateAbout(event)">
         <table style="width: 100%;">
             <tr style="padding: 10px;">
-                <textarea rows="4" cols="90" id="education" class="form-control"><?php if($about != null){ echo $about; } ?></textarea>
+                <textarea rows="4" cols="90" id="about" class="form-control"><?php if($about != null){ echo $about; } ?></textarea>
             </tr>
         </table>
         <br>
         <input value="Update" type="submit" class="btn btn-danger" style="padding:10px; float: right;" />
+        </form>
+        <br>
+    </div>
+    <div class="panel panel-post-item">
+        <form id="done" method="post" onsubmit="<?php site_url('Hello/load_profile')?>">
+            <input value="Finish Editing" type="submit" class="btn btn-danger" style="padding:10px; float: right; margin-right: 200px;" />
         </form>
         <br>
     </div>
