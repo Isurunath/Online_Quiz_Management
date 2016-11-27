@@ -2,7 +2,7 @@
 /**
  * Created by PhpStorm.
  * User: Nipuni
- * Date: 10/20/2016
+ * Date: 09/20/2016
  * Time: 12:39 AM
  */
 include 'vendor/autoload.php';
@@ -126,7 +126,7 @@ class MarkingSchemecontroller extends CI_Controller{
                     $str = fgets($file);
 
                     //extract student answers from the text file
-                    if (preg_match('#^Answer/s#', $str) === 1) {
+                    if (preg_match('#^Answer-#', $str) === 1) {
                         $stuAns[$i] = $str;
                         $i++;
                     }
@@ -142,14 +142,16 @@ class MarkingSchemecontroller extends CI_Controller{
     //compare student answers with answers in the marking scheme
     private function compareAnswers(){
 
-            $markingScheme = array();
-            $studentAns = array();
-            $marksAndQus = array();
+            $markingScheme = array(
+                $this->getMarkingSchemeAnswers()
+            );
+            $studentAns = array(
+                $this->getStudenAnswers()
+            );
+            $marksAndQus = array(
+                $this->getMarkingScheme()
+            );
             $finalOutput = array();
-
-            $markingScheme = $this->getMarkingSchemeAnswers();
-            $studentAns = $this->getStudenAnswers();
-            $marksAndQus = $this->getMarkingScheme();
 
             for ($i = 0; $i < sizeof($markingScheme); $i++) {
                 if ($markingScheme[$i] === $studentAns[$i]) {

@@ -51,7 +51,7 @@
                                             <div class="form-group">
                                                 <label for="selector1" class="col-sm-3 control-label">Upload The Answer Sheet :</label>
                                                 <div class="col-sm-8">
-                                                    <input type="file" placeholder="Answer Sheet" class="btn btn-primary" name="anwersheet" id="answersheet" size = "10"/>
+                                                    <input type="file" placeholder="Answer Sheet" class="btn btn-primary" name="answersheet" id="answersheet" size = "10"/>
                                                 </div>
                                             </div>
 
@@ -59,13 +59,13 @@
                                                 <label for="selector1" class="col-sm-3 control-label">Search Compatible Marking Scheme :</label>
                                                 <div class="col-sm-8">
                                                     <input type="text"  placeholder="   Marking Scheme" name="mrknschmName" id="mrknschmName" value=""/>
-                                                    <button type="button"  class="btn btn-default" style="margin-right: 300px" name="searchMarkngSchm" id="searchMarkngSchm" formaction="<?php echo site_url ('MarkingSchemecontroller/searchMarkingScheme'); ?>">Search Marking Scheme</button>
+                                                    <button type="button"  class="btn btn-default" style="margin-right: 300px" name="searchMarkngSchm" id="searchMarkngSchm" onclick="<?php echo site_url ('MarkingSchemecontroller/searchMarkingScheme'); ?>">Search Marking Scheme</button>
                                                 </div>
                                             </div>
 
                                             <div class="form-group">
                                                 <div class="col-sm-8">
-                                                    <button type="button" class="btn btn-default" style="margin-left: 300px" name="markPaper" id="markPaper" formaction="<?php echo site_url('MarkingSchemecontroller/processPaperMarking'); ?>">Click To Start The Paper Marking Process</button>
+                                                    <button type="button" class="btn btn-default" style="margin-left: 300px" name="markPaper" id="markPaper" onclick="<?php echo site_url('MarkingSchemecontroller/processPaperMarking'); ?>">Click To Start The Paper Marking Process</button>
                                                 </div>
                                             </div>
 
@@ -78,7 +78,7 @@
 
                                             <div class="form-group">
                                                 <div class="col-sm-8">
-                                                <button type="button" class="btn btn-default" style="margin-left: 300px" name="review" id="review" formaction="<?php echo site_url('MarkingSchemecontroller/createReview'); ?>">Review Of The Paper</button>
+                                                <button type="button" class="btn btn-default" style="margin-left: 300px" name="review" id="review" onclick="<?php echo site_url('MarkingSchemecontroller/createReview'); ?>">Review Of The Paper</button>
                                                 </div>
                                             </div>
                                         </form>

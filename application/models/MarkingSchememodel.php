@@ -2,7 +2,7 @@
 /**
  * Created by PhpStorm.
  * User: Nipuni
- * Date: 10/19/2016
+ * Date: 09/11/2016
  * Time: 12:49 AM
  */
 
@@ -80,5 +80,6 @@ class MarkingSchememodel extends CI_Model{
 
         $this->db->replace('download',$data);
     }
+
 }
 
