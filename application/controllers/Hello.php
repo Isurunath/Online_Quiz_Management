@@ -103,4 +103,9 @@ class Hello extends CI_Controller {
         $this->load->helper('url');
         $this->load->view('admin/viewusers');
     }
+
+    public function forgot_password(){
+        $this->load->helper('url');
+        $this->load->view('login/resetPW');
+    }
 }

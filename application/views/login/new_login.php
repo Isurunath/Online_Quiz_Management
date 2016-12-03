@@ -79,6 +79,9 @@
                         <p class="login button">
                             <input type="submit" value="Login" />
                         </p>
+                        <p>
+                            <a href="<?php echo site_url('hello/forgot_password'); ?>" style="color: white;">Forgot Password?</a>
+                        </p>
                         <p class="change_link">
                             Don't have an account yet ?
                             <a href="<?php echo site_url('hello/load_register'); ?>">Join</a>
