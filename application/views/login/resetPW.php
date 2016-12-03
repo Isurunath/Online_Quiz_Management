@@ -1,78 +1,98 @@
 <!DOCTYPE html>
-<html >
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Tryit Login & Registration</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!--<link rel="shortcut icon" href="../images/favicon.png" type="image/png">-->
 
-    <link rel="stylesheet" href="<?php echo base_url(); ?>login_css/reset.css">
+    <title>Quirk Responsive Admin Templates</title>
 
-    <link rel='stylesheet prefetch' href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900'>
-    <link rel='stylesheet prefetch' href='http://fonts.googleapis.com/css?family=Montserrat:400,700'>
-    <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'>
+    <link rel="stylesheet" href="../lib/fontawesome/css/font-awesome.css">
 
-    <link rel="stylesheet" href="<?php echo base_url(); ?>login_css/style.css">
+    <link rel="stylesheet" href="../css/quirk.css">
 
-    <!--<link rel="stylesheet" href="<?php /*echo base_url(); */?>css/bootstrap.css">-->
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
+        function hideURLbar(){ window.scrollTo(0,1); } </script>
+
+    <script src="../lib/modernizr/modernizr.js"></script>
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="../lib/html5shiv/html5shiv.js"></script>
+    <script src="../lib/respond/respond.src.js"></script>
+    <![endif]-->
+
+
+
+    <script src="<?php echo base_url(); ?>js/jquery-1.11.1.min.js"></script>
+    <script src="<?php echo base_url(); ?>js/modernizr.custom.js"></script>
+
+    <script src="<?php echo base_url(); ?>js/jquery.min.js"></script>
+    <script src="<?php echo base_url(); ?>js/bootstrap.min.js"></script>
 
 </head>
 
-<body>
+<body class="signwrapper">
 
-<div class="form">
-    <div class="thumbnail"><img src="<?php echo base_url(); ?>images/hat.svg"/></div>
+<div class="sign-overlay"></div>
+<div class="signpanel"></div>
 
-    <div style="color:red; font-size: small;">
-        <?php
-        if(isset($message))
-        {
-            echo $message;
-            echo "<br/>";
-            echo "<br/>";
-        }
-
-        $CI =& get_instance();
-        $CI->load->library('form_validation');
-
-        if (validation_errors())
-        {
-            echo '<div id="validation_errors" title="Error:" align="left">';
-            echo '<div class="response-msgs errors ui-corner-all"><span>Errors:</span><br /><ul><li>';
-            echo validation_errors();
-            echo '</li></ul></div>';
-            echo '</div>';
-            echo "<br/>";
-            echo "<br/>";
-        }
-
-        ?>
+<div class="panel signin">
+    <div class="panel-heading">
+        <h1><i class="glyphicon glyphicon-education" aria-hidden="true"></i><span>Try</span>it</h1>
+        <h5 class="panel-title">You can access Tryit after these steps.</h5>
     </div>
+    <div id="pwChange">
 
-    <form class="register-form" action="<?php echo base_url(); ?>LoginController/register" method="post">
+        <form method="post" onsubmit="loadp(event)">
 
-        <input type="text" placeholder="name" name="name" id="name" value="<?php echo set_value("name")?>"/>
-        <input type="password" placeholder="password" name="password" id="password"/>
-        <input type="password" placeholder="Confirm password" name="con_password" id="con_password"/>
-        <input type="text" placeholder="email address" name="email" id="email" value="<?php echo set_value("email")?>"/>
-        <button type="submit" name="submit" id="submit">create</button>
-        <p class="message">Already registered? <a href="<?php echo base_url(); ?>">Sign In</a></p>
-    </form>
+            <div class="form-group mb10">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                    <input type="text" name="FP_email" id="FP_email" class="form-control" placeholder="Enter your Tryit email address">
+                </div>
+                <div><a href="" class="forgot"></a></div>
+                <div class="form-group">
+                    <input type="submit" class="btn btn-success btn-quirk btn-block" value="Next"/>
+                </div>
+            </div>
+        </form>
 
-    <form class="login-form" action="<?php echo base_url(); ?>LoginController/login" method="post">
-        <input type="text" placeholder="username" name="email_login" id="email_login" value="<?php echo set_value("email_login")?>"/>
-        <input type="password" placeholder="password" name="password_login" id="password_login"/>
-        <button type="submit" name="submit_login" id="submit_login">login</button>
-        <p><a href="<?php echo base_url(); ?>">
-        <p class="message">Not registered? <a href="#">Create an account</a></p>
-    </form>
-</div>
+    </div>
+        <hr class="invisible">
+        <div class="form-group">
 
-<video id="video" autoplay="autoplay" loop="loop" poster="polina.jpg">
-    <source src="http://andytran.me/A%20peaceful%20nature%20timelapse%20video.mp4" type="video/mp4"/>
-</video>
-<script src='<?php echo base_url(); ?>js/jquery.min.js'></script>
+        </div>
+    </div>
+</div><!-- panel -->
 
-<script src="<?php echo base_url(); ?>login_js/index.js"></script>
+
+<script type="text/javascript">
+    function loadp(e)
+    {
+        e.preventDefault();
+        //get the posted values
+        var email = document.getElementById('FP_email').value;
+        //alert(email);
+        $.ajax({
+            type: "POST",
+            url: "<?php echo site_url('LoginController/passwordResetLoad')?>",
+            data: {
+                "email":email
+            },
+            dataType: 'html',
+            success: function (data) {
+                //location.reload();
+                //alert("Successfully Updated.");
+                document.getElementById("pwChange").innerHTML = data;
+            },
+            error: function (err) {
+                alert("hi");
+            }
+        });
+    }
+</script>
 
 </body>
 </html>
-

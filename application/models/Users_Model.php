@@ -15,6 +15,16 @@ class Users_Model extends CI_Model
             return false;
     }
 
+    function updatePassword($pw,$id)
+    {
+        $sql = "UPDATE users SET password='$pw' WHERE user_id='$id' ";
+        $this->db->query($sql);
+        if($this->db->query($sql))
+            return true; // to the controller
+        else
+            return false;
+    }
+
     function login($email, $password)
     {
         $this -> db -> select('*');
@@ -58,9 +68,9 @@ class Users_Model extends CI_Model
         $this->db->where('email', $value);
         $query = $this->db->get();
         if ($query->num_rows() > 0) {
-            return false;
+            return $query->result();
         } else {
-            return true;
+            return false;
         }
     }
 
