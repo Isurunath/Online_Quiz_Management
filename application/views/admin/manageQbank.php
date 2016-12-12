@@ -423,7 +423,7 @@
             </div>
             <div class="modal-body">
             
-            <form method="post" name="form_layout" action="<?php echo site_url ('QuestionBank/AddQuestion'); ?>" class="form-horizontal">
+            <form method="post" name="form_layout" action="<?php echo site_url ('QuestionBank/EditQuestion'); ?>" class="form-horizontal">
 
                 <div class="form-group">
                     <label for="selector1" class="col-sm-2 control-label">Question</label>
