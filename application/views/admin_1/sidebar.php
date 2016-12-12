@@ -8,7 +8,7 @@
     <div style="border-top:1px solid rgba(69, 74, 84, 0.7)"></div>
     <!--/down-->
     <div class="down">
-        <img class="img-circle" src="<?php echo base_url(); ?>images/vph.jpg" width="70px" height="70px"></br></br>
+        <img class="img-circle" src="<?php echo base_url(); ?>Profile_Pictures/default.png" width="70px" height="70px"></br></br>
 
         <?php
             if(isset($lecname))

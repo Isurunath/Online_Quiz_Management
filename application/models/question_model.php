@@ -53,4 +53,11 @@ class question_model extends CI_Model
         return $query->row();//<---- returns you an array
     }
 
+    function getpaperDownloadforStudent($student) {
+        $this->db->select('*');
+        $this->db->where('student_id', $student);
+        $query = $this->db->get('paper_download');
+        return $query->row();//<---- returns you an array
+    }
+
 }

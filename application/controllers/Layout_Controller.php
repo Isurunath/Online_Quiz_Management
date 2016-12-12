@@ -35,33 +35,55 @@ class Layout_Controller extends CI_Controller
             $pwd = $_POST['qpwd'];
             $cpwd = $_POST['cpwd'];
 
+            $date1=strtotime($fromdate);
+            $date2=strtotime($todate);
+
             $tot = $single + $multiple + $short + $tf;
+            $interval = $date1-$date2;
 
             $result1 = $this->Paper_layout_model->check_date_availability($batch, $fromdate);
 
             //Check paper type is assignment and total no. of questions is 20
-            if ($type == 'Assignment' && ($tot < 20 || $tot > 20)) {
+            if ($type == 'Assignment' && ($tot < 20 || $tot > 20))
+            {
                 $data['message'] = 'Number of questions should be exactly 20 for an assignment';
                 $this->load->view('admin/paper_layout', $data);
-            } //Check paper type is question paper and total no.of questions is 30
-            elseif ($type == 'Question Paper' && ($tot < 30 || $tot > 30)) {
+            }
+            //Check paper type is question paper and total no.of questions is 30
+            elseif ($type == 'Question Paper' && ($tot < 30 || $tot > 30))
+            {
                 $data['message'] = 'Number of questions should be exactly 30 for a question paper';
                 $this->load->view('admin/paper_layout', $data);
-            } //check from date is greater than than the to date
-            elseif ($fromdate > $todate) {
+            }
+            //check from date is greater than than the to date
+            elseif ($fromdate > $todate)
+            {
                 $data['message'] = 'Dates should be compatible with each other';
                 $this->load->view('admin/paper_layout', $data);
-            } //check whether the from date is smaller than the current date
-            elseif ($fromdate < $CurDate) {
+            }
+            //check whether the from date is smaller than the current date
+            elseif ($fromdate < $CurDate)
+            {
                 $data['message'] = 'From date must exceed the current date';
                 $this->load->view('admin/paper_layout', $data);
-            } elseif ($pwd != $cpwd) {
+            }
+            elseif($interval>4)
+            {
+                $data['message'] = 'Date difference should be less than 4';
+                $this->load->view('admin/paper_layout', $data);
+            }
+            elseif ($pwd != $cpwd)
+            {
                 $data['message'] = 'Passwords do not match';
                 $this->load->view('admin/paper_layout', $data);
-            } elseif ($result1) {
+            }
+            elseif ($result1)
+            {
                 $data['message'] = $batch . ' already got a paper on ' . $fromdate;
                 $this->load->view('admin/paper_layout', $data);
-            } else {
+            }
+            else
+            {
                 $data = array(
                     'lec_name' => $lecturer,
                     'batch_no' => $_POST['batchNo'],

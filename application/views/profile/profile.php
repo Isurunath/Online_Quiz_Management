@@ -1,3 +1,38 @@
+<?php
+
+if(isset($this->session->userdata['profile_data'])) {
+    $id = ($this->session->userdata['profile_data']['prof_user_id']);
+    $fname = ($this->session->userdata['profile_data']['fname']);
+    $lname = ($this->session->userdata['profile_data']['lname']);
+    $course = ($this->session->userdata['profile_data']['course']);
+    $user_id = ($this->session->userdata['profile_data']['prof_user_id']);
+    $pic = ($this->session->userdata['profile_data']['isProPic']);
+    $dob = ($this->session->userdata['profile_data']['dob']);
+    $about = ($this->session->userdata['profile_data']['about_me']);
+
+    $address1 = ($this->session->userdata['profile_data']['add1']);
+    $address2 = ($this->session->userdata['profile_data']['add2']);
+    $city = ($this->session->userdata['profile_data']['city']);
+    $gender = ($this->session->userdata['profile_data']['gender']);
+    $phone = ($this->session->userdata['profile_data']['phone']);
+    $email = ($this->session->userdata['profile_data']['email']);
+    $graduating_yr = ($this->session->userdata['profile_data']['eYear']);
+    $started_yr = ($this->session->userdata['profile_data']['sYear']);
+
+    $batch = ($this->session->userdata['profile_data']['batch']);
+    //remove the "Batch"
+    $batch = str_replace("Batch ",'',$batch);
+
+    $date = ($this->session->userdata['profile_data']['date']);
+    $month = ($this->session->userdata['profile_data']['month']);
+    $year = ($this->session->userdata['profile_data']['year']);
+    $batch_time = ($this->session->userdata['profile_data']['bt']);
+
+    //calculate the age
+    $age = date('Y-m-d') - $dob;
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,9 +41,22 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Quirk Responsive Admin Templates</title>
+    <title>Profile</title>
+
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+
+    <link href="<?php echo base_url(); ?>admin_css/font-awesome.css" rel="stylesheet">
+    <link rel="stylesheet" href="<?php echo base_url(); ?>admin_css/icon-font.min.css" type='text/css' />
+    <!-- Load jQuery JS -->
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <!-- Load jQuery UI Main JS  -->
+    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
 
 
+    <!--skycons-icons-->
+    <script src="<?php echo base_url(); ?>admin_js/skycons.js"></script>
+
+    <script src="<?php echo base_url(); ?>admin_js/jquery.easydropdown.js"></script>
 
     <link rel="stylesheet" href=<?php echo base_url(); ?>lib/fontawesome/css/font-awesome.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>lib/weather-icons/css/weather-icons.css">
@@ -36,35 +84,21 @@
         <div class="contentpanel">
 
             <div class="row profile-wrapper">
-                <div class="col-xs-16 col-md-4 col-lg-3 profile-left">
+                <div class="col-xs-16 col-md-4 col-lg-3 profile-left" id="profile_sidePanel">
                     <div class="profile-left-heading">
-
-
-                        <?php
-
-                        if(isset($this->session->userdata['profile_data'])) {
-                            $fname = ($this->session->userdata['profile_data']['fname']);
-                            $lname = ($this->session->userdata['profile_data']['lname']);
-                            $course = ($this->session->userdata['profile_data']['course']);
-                            $user_id = ($this->session->userdata['profile_data']['prof_user_id']);
-                            $pic = ($this->session->userdata['profile_data']['isProPic']);
-                        }
-
-                        ?>
-
                         <ul class="panel-options">
                             <li><a><i class="glyphicon glyphicon-option-vertical"></i></a></li>
                         </ul>
                         <?php if($pic == 0)
                             {
                         ?>
-                            <a href="" class="profile-photo"><img class="img-circle img-responsive" src="../Profile_Picture/default.png" alt=""></a>
+                            <a href="" class="profile-photo"><img class="img-circle img-responsive" src="../Profile_Pictures/default.png" alt=""></a>
                         <?php
                             }
                             else if($pic == 1)
                             {
                         ?>
-                            <a href="" class="profile-photo"><img class="img-circle img-responsive" src="../Profile_Picture/<?php echo $user_id ?>.jpg" alt="">
+                            <a href="" class="profile-photo"><img class="img-circle img-responsive" src="../Profile_Pictures/<?php echo $user_id ?>.jpg" alt="">
                         <?php
                         }
                         ?>
@@ -74,53 +108,42 @@
 
                         <ul class="list-group">
                             <li class="list-group-item"> <a href="timeline.html"></a></li>
-                            <li class="list-group-item">Following <a href="people-directory.html">541</a></li>
-                            <li class="list-group-item">Followers <a href="people-directory-grid.html">32,434</a></li>
+                            <li class="list-group-item">Name <a href="people-directory.html"><?php echo $fname ?></a></li>
+                            <li class="list-group-item">Age <a href="people-directory-grid.html"><?php echo $age ?></a></li>
                         </ul>
 
 
-                        <button class="btn btn-danger btn-quirk btn-block profile-btn-follow">Edit Profile</button>
-                        <button class="btn btn-danger btn-quirk btn-block profile-btn-follow" onclick="changeProfilePicture(<?php echo $user_id ?>)">Change Profile Picture</button>
+                        <button class="btn btn-danger btn-quirk btn-block profile-btn-follow" onclick="editProfile(<?php echo $user_id ?>)"><a href="#myDetails" data-toggle="tab" style="text-decoration: none; color: white;">Edit Profile</a></button>
+                        <button class="btn btn-danger btn-quirk btn-block profile-btn-follow" onclick="changeProfilePicture(<?php echo $user_id ?>)"><a href="#myDetails" data-toggle="tab" style="text-decoration: none; color: white;">Change Profile Picture</a></button>
                     </div>
                     <div class="profile-left-body">
                         <h4 class="panel-title">About Me</h4>
-                        <p>Social media ninja. Pop culture enthusiast. Zombie fanatic. General tv evangelist.</p>
-                        <p>Alcohol fanatic. Explorer. Passionate reader. Entrepreneur. Lifelong coffee advocate. Avid bacon aficionado. Travel evangelist.</p>
+                        <p><?php echo $about ?></p>
 
                         <hr class="fadeout">
 
                         <h4 class="panel-title">Location</h4>
-                        <p><i class="glyphicon glyphicon-map-marker mr5"></i> San Francisco, CA, USA</p>
+                        <p><i class="glyphicon glyphicon-map-marker mr5"></i> <?php echo $city ?>, Sri Lanka</p>
 
                         <hr class="fadeout">
 
-                        <h4 class="panel-title">Company</h4>
-                        <p><i class="glyphicon glyphicon-briefcase mr5"></i> Awesome Company, Inc.</p>
+                        <h4 class="panel-title">Course</h4>
+                        <p><i class="glyphicon glyphicon-briefcase mr5"></i> <?php echo $course ?></p>
 
                         <hr class="fadeout">
 
                         <h4 class="panel-title">Contacts</h4>
-                        <p><i class="glyphicon glyphicon-phone mr5"></i> +1 010 123 5678</p>
-
-                        <hr class="fadeout">
-
-                        <h4 class="panel-title">Social</h4>
-                        <ul class="list-inline profile-social">
-                            <li><a href=""><i class="fa fa-facebook-official"></i></a></li>
-                            <li><a href=""><i class="fa fa-twitter"></i></a></li>
-                            <li><a href=""><i class="fa fa-dribbble"></i></a></li>
-                            <li><a href=""><i class="fa fa-linkedin"></i></a></li>
-                        </ul>
+                        <p><i class="glyphicon glyphicon-phone mr5"></i> <?php echo $phone ?></p>
 
                     </div>
                 </div>
-                <div class="col-md-6 col-lg-8 profile-right">
+                <div class="col-md-8 col-lg-8 profile-right">
                     <div class="profile-right-body">
                         <!-- Nav tabs -->
                         <ul class="nav nav-tabs nav-justified nav-line">
-                            <li class="active"><a href="#myDetails" data-toggle="tab"><strong>My Details</strong></a></li>
-                            <li><a href="#upcomingExams" data-toggle="tab"><strong>Upcoming Exams</strong></a></li>
-                            <li><a href="#results" data-toggle="tab"><strong>Exam Results</strong></a></li>
+                            <li class="active" id="Details_tab"><a href="#myDetails" data-toggle="tab"><strong>My Details</strong></a></li>
+                            <li id="Details_tab2"><a href="#upcomingExams" data-toggle="tab"><strong>Upcoming Exams</strong></a></li>
+                            <li id="Details_tab3"><a href="#Other" data-toggle="tab"><strong>Other</strong></a></li>
                         </ul>
 
                         <!-- Tab panes -->
@@ -128,47 +151,217 @@
                             <div class="tab-pane active" id="myDetails">
 
                                 <div class="panel panel-post-item">
-                                    <div class="panel-heading">
-                                        <div class="media">
-                                            <div class="media-left">
-                                                <a href="#">
-                                                    <img alt="" src="../images/photos/profilepic.png" class="media-object img-circle">
-                                                </a>
-                                            </div>
-                                            <div class="media-body">
-                                                <h4 class="media-heading">Barbara Balashova</h4>
-                                                <p class="media-usermeta">
-                                                    <span class="media-time">July 06, 2015 8:30am</span>
-                                                </p>
-                                            </div>
-                                        </div><!-- media -->
-                                    </div><!-- panel-heading -->
-                                    <div class="panel-body">
-                                        <p>As a web designer it’s your job to help users find their way to what they’re looking for. It can be easy to put the needs of your users to one side, but knowing your users, understanding their roles, goals, motives and behavior will confirm how you structure your navigation model. <a href="http://goo.gl/QTccRE" target="_blank">#information</a> <a href="http://goo.gl/QTccRE" target="_blank">#design</a></p>
-                                        <p>Source: <a href="http://goo.gl/QTccRE" target="_blank">http://goo.gl/QTccRE</a></p>
-
-                                    </div>
-                                    <div class="panel-footer">
-                                        <ul class="list-inline">
-                                            <li><a href=""><i class="glyphicon glyphicon-heart"></i> Like</a></li>
-                                            <li><a><i class="glyphicon glyphicon-comment"></i> Comments (0)</a></li>
-                                            <li class="pull-right">5 liked this</li>
-                                        </ul>
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" placeholder="Write some comments">
-                                    </div>
-                                </div><!-- panel panel-post -->
+                                    <h4>Basic Information</h4>
+                                    <br>
+                                    <form method="post">
+                                        <table style="width: 100%;">
+                                            <tr>
+                                                <td style="padding: 10px; width: 25%;"><i class="fa fa-info-circle"></i> Full Name</td>
+                                                <td style="padding: 10px">
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <label class="form-control"><?php echo $fname; ?></label>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <label class="form-control"><?php echo $lname; ?></label>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td style="padding: 10px;">
+                                                    <div id="errorName" class="alert alert-danger" style="display: none;">Cannot Contain Numbers.</div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding: 10px;"><i class="fa fa-info-circle"></i> Gender</td>
+                                                <td style="padding: 10px">
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <label class="form-control"><?php echo $gender; ?></label>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding: 10px;"><i class="fa fa-info-circle"></i> Birthday</td>
+                                                <td style="padding: 10px">
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <label class="form-control"><?php echo $dob; ?></label>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </form>
+                                </div>
+                                <div class="panel panel-post-item">
+                                    <h4>Contact Information</h4>
+                                    <br>
+                                    <form id="contact">
+                                        <table style="width: 100%;">
+                                            <tr>
+                                                <td style="padding: 10px; width: 25%;"><i class="fa fa-envelope"></i> Email</td>
+                                                <td style="padding: 10px;">
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <label class="form-control"><?php echo $email; ?></label>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding: 10px;"><i class="fa fa-list-alt"></i> Address</td>
+                                                <td style="padding: 10px;">
+                                                    <div class="row">
+                                                        <div class="col-md-9">
+                                                            <label class="form-control"><?php echo $address1." ".$address2; ?></label>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding: 10px;"><i class="fa fa-list-alt"></i> City</td>
+                                                <td style="padding: 10px;">
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <label class="form-control"><?php echo $city; ?></label>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding: 10px;"><i class="fa fa-phone"></i> Contact No</td>
+                                                <td style="padding: 10px;">
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <label class="form-control"><?php echo $phone; ?></label>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td style="padding: 10px;">
+                                                    <div id="errortel" class="alert alert-danger" style="display: none;">Invalid format.</div>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </form>
+                                </div>
+                                <div class="panel panel-post-item">
+                                    <h4>Course Details</h4>
+                                    <br>
+                                    <form id="basic">
+                                        <table style="width: 100%;">
+                                            <tr>
+                                                <td style="padding: 10px; width: 25%;"><i class="fa fa-info-circle"></i> Course</td>
+                                                <td style="padding: 10px;">
+                                                    <div class="row">
+                                                        <div class="col-md-7">
+                                                            <label class="form-control"><?php echo $course; ?></label>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding: 10px;"><i class="fa fa-info-circle"></i> Batch</td>
+                                                <td style="padding: 10px;">
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <label class="form-control"><?php echo $batch_time."-".$batch; ?></label>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding: 10px;"><i class="fa fa-info-circle"></i> Graduating in</td>
+                                                <td style="padding: 10px;">
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <label class="form-control"><?php echo $graduating_yr; ?></label>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </form>
+                                </div>
+                                <div class="panel panel-post-item">
+                                    <h4><i class="fa fa-mortar-board"></i> About Me</h4>
+                                    <br>
+                                    <form id="basic">
+                                        <table style="width: 100%;">
+                                            <tr style="padding: 10px;">
+                                                <label class="form-control"><?php echo $about; ?></label>
+                                            </tr>
+                                        </table>
+                                        <br>
+                                    </form>
+                                </div>
 
 
 
                             </div><!-- tab-pane -->
 
                             <div class="tab-pane" id="upcomingExams">
+                                <?php
+                                if(!empty($assignments))
+                                {
+                                foreach ($assignments as $assignment)
+                                {
+                                ?>
+
+                                <div class="panel-heading">
+                                    <div class="panel-body nopaddingbottom">
+                                        <div class="media">
+                                            <div class="media-left">
+                                                <a href="#">
+                                                    <?php if($assignment->paper_type == "Question Paper")
+                                                    {
+                                                        ?>
+                                                        <img class="media-object width80" src="../images/image.png" alt="">
+                                                        <?php
+                                                    }
+                                                    else
+                                                    {
+                                                        ?>
+                                                        <img class="media-object width80" src="../images/image.png" alt="">
+                                                        <?php
+                                                    }
+                                                    ?>
+                                                </a>
+                                            </div>
+                                            <div class="media-body">
+                                                <h4 class="media-heading"><?php echo $assignment->paper_type; ?></h4>
+                                                <?php
+                                                $fdate = date_create($assignment->from_date);
+                                                $tdate = date_create($assignment->to_date);
+
+                                                //change the format of dates
+                                                $from = date_format($fdate, 'l jS F Y');
+                                                $to = date_format($tdate, 'l jS F Y');
+
+                                                //calculate days to complete
+                                                $days = $assignment->to_date - date('Y-m-d');
+                                                ?>
+                                                <p><?php echo $from; ?> - <?php echo $to; ?> <br>
+                                                    <?php echo $days; ?> days more to due date.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- panel-heading -->
+
+                                    <?php
+                                    }
+                                    }
+                                    else
+                                    {
+                                        ?>
+                                        <p>You have no upcoming assignments or exams.</p>
+                                        <?php
+                                    }
+                                    ?>
+                                </div>
+                            <div class="tab-pane" id="Other">
                                 Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                            </div>
-                            <div class="tab-pane" id="results">
-                                Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae.
                             </div>
                         </div>
                     </div>
@@ -334,6 +527,16 @@
     /*Change the profile picture*/
     function changeProfilePicture(id)
     {
+        $('#Details_tab').css({
+            'color': '#259dab',
+            'border-bottom': '1px solid #259dab',
+            'background-color': 'transparent',
+            /*'border-top': '1px solid #dbdfe6',
+            'border-right': '1px solid #dbdfe6',
+            'border-left': '1px solid #dbdfe6'*/
+        });
+
+
         $.ajax({
 
             type: "POST",
@@ -344,7 +547,7 @@
             dataType: 'html',
             success: function (data) {
                 document.getElementById("myDetails").innerHTML = data;
-               // alert(data);
+                //alert(data);
             },
             error: function (err) {
                 alert("error");
@@ -352,6 +555,193 @@
         });
 
     }
+
+
+    /*Edit Profile Details*/
+    function editProfile(id)
+    {
+        $('#Details_tab').css({
+            'color': '#259dab',
+            'border-bottom': '1px solid #259dab',
+            'background-color': 'transparent',
+            /*'border-top': '1px solid #dbdfe6',
+            'border-right': '1px solid #dbdfe6',
+            'border-left': '1px solid #dbdfe6'*/
+        });
+
+
+        $.ajax({
+
+            type: "POST",
+            url: "<?php echo site_url('ProfileController/viewEditProfile')?>",
+            data: {
+                id:id
+            },
+            dataType: 'html',
+            success: function (data) {
+                document.getElementById("myDetails").innerHTML = data;
+                // alert(data);
+            },
+            error: function (err) {
+                alert("error");
+            }
+        });
+
+    }
+
+
+    function updateBasic(e)
+    {
+        e.preventDefault();
+        //get the posted values
+        var first_name = document.getElementById('fname').value;
+        var last_name = document.getElementById('lname').value;
+
+        var g = document.getElementById("gender");
+        var gndr = g.options[g.selectedIndex].value;
+
+        var d = document.getElementById("day");
+        var date = d.options[d.selectedIndex].value;
+
+        var m = document.getElementById("month");
+        var month = m.options[m.selectedIndex].value;
+
+        var y = document.getElementById("year");
+        var year = y.options[y.selectedIndex].value;
+
+        //alert(first_name+" "+last_name+" "+gndr+" "+date+" "+" "+month+" "+year);
+        $.ajax({
+            type: "POST",
+            url: "<?php echo site_url('ProfileController/updateBasic')?>",
+            async: true,
+            data: {
+                "first_name":first_name, "last_name":last_name, "gender":gndr, "date":date, "month":month, "year":year
+            },
+            dataType: 'html',
+            success: function (data) {
+                //location.reload();
+                alert("Successfully Updated.");
+                reloadSidePanel();
+                document.getElementById("myDetails").innerHTML = data;
+            },
+            error: function (err) {
+                alert("error");
+            }
+        });
+    }
+
+    function updateContact(e)
+    {
+        e.preventDefault();
+        //get the posted values
+        var address1 = document.getElementById('Address1').value;
+        var address2 = document.getElementById('Address2').value;
+        var city = document.getElementById('city').value;
+        var phone = document.getElementById('phone').value;
+
+
+        //alert(first_name+" "+last_name+" "+gndr+" "+date+" "+" "+month+" "+year);
+        $.ajax({
+            type: "POST",
+            url: "<?php echo site_url('ProfileController/updateContact')?>",
+            async: true,
+            data: {
+                "address1":address1, "address2":address2, "city":city, "phone":phone
+            },
+            dataType: 'html',
+            success: function (data) {
+                //location.reload();
+                alert("Successfully Updated.");
+                reloadSidePanel();
+                document.getElementById("myDetails").innerHTML = data;
+            },
+            error: function (err) {
+                alert("error");
+            }
+        });
+    }
+
+    function updateCourse(e)
+    {
+        e.preventDefault();
+        //get the posted values
+        var c = document.getElementById("course");
+        var course = c.options[c.selectedIndex].value;
+
+        var batch = document.getElementById('batch').value;
+
+        var t = document.getElementById("batch_time");
+        var batch_time = t.options[t.selectedIndex].value;
+
+        var g = document.getElementById("grad_yr");
+        var grad_yr = g.options[g.selectedIndex].value;
+
+        //alert(first_name+" "+last_name+" "+gndr+" "+date+" "+" "+month+" "+year);
+        $.ajax({
+            type: "POST",
+            url: "<?php echo site_url('ProfileController/updateCourse')?>",
+            async: true,
+            data: {
+                "course":course, "batch":batch, "batch_time":batch_time, "grad_yr":grad_yr
+            },
+            dataType: 'html',
+            success: function (data) {
+                //location.reload();
+                alert("Successfully Updated.");
+                reloadSidePanel();
+                document.getElementById("myDetails").innerHTML = data;
+            },
+            error: function (err) {
+                alert("error");
+            }
+        });
+    }
+
+    function updateAbout(e)
+    {
+        e.preventDefault();
+        //get the posted values
+        var about = document.getElementById('about').value;
+
+        //alert(about);
+        $.ajax({
+            type: "POST",
+            url: "<?php echo site_url('ProfileController/updateAbout')?>",
+            async: true,
+            data: {
+                "about":about
+            },
+            dataType: 'html',
+            success: function (data) {
+                //location.reload();
+                alert("Successfully Updated.");
+                reloadSidePanel();
+                document.getElementById("myDetails").innerHTML = data;
+            },
+            error: function (err) {
+                alert("error");
+            }
+        });
+    }
+
+    function reloadSidePanel()
+    {
+        $.ajax({
+            type: "POST",
+            url: "<?php echo site_url('ProfileController/loadSidePanel')?>",
+            data: {
+            },
+            dataType: 'html',
+            success: function (data) {
+                document.getElementById("profile_sidePanel").innerHTML = data;
+            },
+            error: function (err) {
+                alert("error");
+            }
+        });
+    }
+
+
 </script>
 
 </body>
