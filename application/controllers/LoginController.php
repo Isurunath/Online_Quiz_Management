@@ -126,7 +126,7 @@ class LoginController extends CI_Controller{
                    );
                 $this->session->set_userdata('logged_in',$session_data);
 
-                $profileDetails = $this->Users_Model->getProfileDetails($result[0]->user_id);
+                $profileDetails = $this->Users_Model->getProfileDetails($result[0]->prof_user_id);
                     if ($profileDetails) {
                         $session_data_profile = array(
                             'prof_user_id' => $profileDetails[0]->prof_user_id,
