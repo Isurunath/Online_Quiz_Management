@@ -256,5 +256,46 @@ class ProfileController extends CI_Controller{
             $this->load->view('profile/profile');
         }
     }
+
+    public function checkPassword()
+    {
+        $this->load->library('form_validation');
+        $this->load->model('Users_Model');
+        $this->load->library('session');
+
+        $id = $this->session->userdata['profile_data']['prof_user_id'];
+        $form_data = $this->input->post();
+        $cPassword = md5($form_data['cpw']);
+
+        $result  = $this->Users_Model->checkPassword($id,$cPassword);
+        //print_r($result);
+        if($result) {
+            echo "true";
+        }
+        else{
+            echo "false";
+        }
+    }
+
+    public function updatePassword()
+    {
+        $this->load->library('form_validation');
+        $this->load->model('Users_Model');
+        $this->load->library('session');
+
+        $id = $this->session->userdata['profile_data']['prof_user_id'];
+        $form_data = $this->input->post();
+        $nPassword = md5($form_data['npw']);
+
+        $result  = $this->Users_Model->updatePassword($nPassword,$id);
+        //print_r($result);
+        if($result) {
+            $this->sessionReset();
+            $this->load->view('profile/editProfile');
+        }
+        else{
+            echo "failed";
+        }
+    }
 }
 

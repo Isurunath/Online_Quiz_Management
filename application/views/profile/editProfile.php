@@ -190,7 +190,7 @@
                 <td style="padding: 10px; width: 25%;"><i class="fa fa-envelope"></i> Email</td>
                 <td style="padding: 10px;">
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-9">
                         <label class="form-control"><?php echo $email; ?></label>
                     </div>
                 </div>
@@ -226,6 +226,9 @@
                     <div class="col-md-6">
                         <input type="text" value="<?php echo $phone ?>" id="phone" class="form-control"/>
                     </div>
+                    <div class="col-md-6">
+                        <label class="form-control" id="errorPhone" style="color: red; display: none; font-size: smaller;"></label>
+                    </div>
                 </div>
                 </td>
                 <td style="padding: 10px;">
@@ -240,14 +243,14 @@
     <div class="panel panel-post-item">
         <h4>Course Details</h4>
         <br>
-        <form id="basic" method="post" onsubmit="updateCourse(event)">
+        <form method="post" onsubmit="updateCourse(event)">
         <table style="width: 100%;">
             <tr>
                 <td style="padding: 10px; width: 25%;"><i class="fa fa-info-circle"></i> Course</td>
                 <td style="padding: 10px;">
                 <div class="row">
-                    <div class="col-md-7">
-                        <select id="course" class="form-control">
+                    <div class="col-md-9">
+                    <select id="course" class="form-control">
                         <?php if($course != null){ ?>
                             <option value="<?php echo $course ?>"><?php echo $course ?></option>
                          <?php }?>
@@ -321,12 +324,65 @@
         </form>
         <br>
     </div>
+
+    <div class="panel panel-post-item">
+        <h4><i class="fa fa-mortar-board"></i> Change Password</h4>
+        <br>
+        <form id="changepw" method="post" onsubmit="changePassword(event)">
+            <table style="width: 100%;">
+                <tr>
+                    <td style="padding: 10px; width: 30%;"><i class="fa fa-info-circle"></i> Current Password</td>
+                    <td style="padding: 10px;">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <input type="text" id="currentPassword" class="form-control"/>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-control" id="errorCurrentPW" style="color: red; display: none; font-size: smaller;"></label>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px;"><i class="fa fa-info-circle"></i> New Password</td>
+                    <td style="padding: 10px;">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <input type="text" id="newPassword" class="form-control"/>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-control" id="errorNewPW" style="color: red; display: none; font-size: smaller;"></label>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px;"><i class="fa fa-info-circle"></i> Confirm Password</td>
+                    <td style="padding: 10px;">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <input type="text" id="confirmPassword" class="form-control"/>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-control" id="errorConfirmPW" style="color: red; display: none; font-size: smaller;"></label>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <br>
+            <input value="Update" type="submit" class="btn btn-danger" style="padding:10px; float: right;" />
+        </form>
+        <br>
+    </div>
+
     <div class="panel panel-post-item">
         <form id="done" method="post" onsubmit="<?php site_url('Hello/load_profile')?>">
             <input value="Finish Editing" type="submit" class="btn btn-danger" style="padding:10px; float: right; margin-right: 200px;" />
         </form>
         <br>
     </div>
+
 <?php
 }else
 {

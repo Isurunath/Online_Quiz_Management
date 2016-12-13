@@ -18,7 +18,7 @@ class LoginController extends CI_Controller{
         $this->load->library('session');
 
         $this->form_validation->set_rules('name', 'Name', 'trim|required');
-        $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|is_unique[users.email]');
+        $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|is_unique[profile.email]');
         $this->form_validation->set_rules('password', 'Password', 'trim|required',array('required' => 'You must provide a %s.'));
         $this->form_validation->set_rules('con_password', 'Password Confirmation', 'trim|required|matches[password]');
 
@@ -26,7 +26,7 @@ class LoginController extends CI_Controller{
         if ($this->form_validation->run() == FALSE)
         {
             $this->load->view('login/new_register');
-            echo "Failed";
+            //echo "Failed";
         }
 
         else
@@ -227,7 +227,7 @@ class LoginController extends CI_Controller{
             if($result) {
 
                 //generate a random password and update the database
-                $user_id = $result[0]->user_id;
+                $user_id = $result[0]->prof_user_id;
                 $e_mail = $result[0]->email;
                 $this->session->set_userdata('reset_userID',$e_mail);
                 $code = rand(1000,9999);
@@ -295,7 +295,7 @@ class LoginController extends CI_Controller{
                 );
                 $this->session->set_userdata('logged_in',$session_data);
 
-                $profileDetails = $this->Users_Model->getProfileDetails($result[0]->user_id);
+                $profileDetails = $this->Users_Model->getProfileDetails($result[0]->prof_user_id);
                 if ($profileDetails) {
                     $session_data_profile = array(
                         'prof_user_id' => $profileDetails[0]->prof_user_id,
