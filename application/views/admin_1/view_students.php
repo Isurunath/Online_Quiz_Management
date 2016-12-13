@@ -79,7 +79,7 @@
                 <!--/sub-heard-part-->
                 <div class="sub-heard-part">
                     <ol class="breadcrumb m-b-0">
-                        <li><a href="<?php echo site_url('hello/load_admin_panel'); ?>" style="text-decoration:none"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+                        <li><a href="<?php echo site_url('hello/index'); ?>" style="text-decoration:none"><span class="glyphicon glyphicon-home"></span> Home</a></li>
                         <li class="active">View Registered Students</li>
                     </ol>
                 </div>
@@ -122,12 +122,12 @@
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                            <h4 style="color:red;"><span class="glyphicon glyphicon-trash"></span> Delete Layout</h4>
+                                            <h4 style="color:red;"><span class="glyphicon glyphicon-trash"></span> Remove Student</h4>
                                         </div>
-                                        <form method="post" onSubmit="window.location.reload()" name="form_layout" action="<?php echo site_url ('Layout_Controller/deleteLayout'); ?>" class="form-horizontal">
+                                        <form method="post" onSubmit="window.location.reload()" name="form_layout" action="<?php echo site_url ('View_Students/delete_student'); ?>" class="form-horizontal">
 
                                             <div class="modal-body">
-                                                <p style="font-size: large">Are you sure you want to remove this layout?</p>
+                                                <p style="font-size: large">Are you sure you want to remove this student?</p>
                                                 <input style="width: 300px" type="hidden" class="form-control1 input-lg" name="test" id="test">
                                             </div>
 

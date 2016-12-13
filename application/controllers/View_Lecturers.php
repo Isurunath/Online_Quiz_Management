@@ -35,4 +35,20 @@ class View_Lecturers extends CI_Controller
             $this->load->view('admin_1/view_lecturers', $data);
         }
     }
+
+    public function delete_lecturer()
+    {
+        $this->load->helper('url');
+        $this->load->model('Users_Model');
+
+        $id=$_POST['test'];
+
+        $result = $this->Users_Model->delete_Lecturer($id);
+
+        if ($result) {
+            redirect('View_Lecturers/view_lecturers');
+        } else {
+            redirect('View_Lecturers/view_lecturers');
+        }
+    }
 }
