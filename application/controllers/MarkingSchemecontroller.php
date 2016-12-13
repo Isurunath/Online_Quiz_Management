@@ -5,10 +5,21 @@
  * Date: 09/20/2016
  * Time: 12:39 AM
  */
-include 'vendor/autoload.php';
-include 'libraries/fpdf.php';
+include 'vendor\autoload.php';
+include APPPATH . 'libraries\fpdf\fpdf.php';
+use Smalot\PdfParser\Parser;
+defined('BASEPATH') OR exit('No direct script access allowed');
 
 class MarkingSchemecontroller extends CI_Controller{
+
+    public function index(){
+        $this->load->helper(array('form','url'));
+        $this->load->library('form_validation');
+
+        if($this->form_validation->run()==FALSE){
+            $this->load->view('papermarking');
+        }
+    }
 
     public function __construct(){
         parent::__construct();
@@ -27,14 +38,15 @@ class MarkingSchemecontroller extends CI_Controller{
 
         if(isset($_POST['answersheet'])){
             $markngID=$this->MarkingSchememodel->searchMarkingSchemeID($paperID);
-            return $markngID;
-        }else{
+            $this->load->view('papermarking',$markngID);
+        }
+        else
+        {
             echo 'Error';
         }
-
-
-
     }
+
+
 
     //load the whole marking scheme according to the marking scheme id
     private function getMarkingScheme(){
@@ -48,9 +60,7 @@ class MarkingSchemecontroller extends CI_Controller{
             $markngID = $this->MarkingSchememodel->searchMarkingSchemeID($paperID);
         }
 
-        $data = array(
-            'results' => $this->MarkingSchememodel->getMarkingScheme($markngID)
-        );
+        $data = $this->MarkingSchememodel->getMarkingScheme($markngID);
 
         return $data;
 
@@ -66,11 +76,10 @@ class MarkingSchemecontroller extends CI_Controller{
 
         if(isset($_POST['answersheet'])) {
             $markngID = $this->MarkingSchememodel->searchMarkingSchemeID($paperID);
-        }
 
-        $data = array(
-            'results' => $this->MarkingSchememodel->getMarkingSchemeAnswers($markngID)
-        );
+
+            $data = $this->MarkingSchememodel->getMarkingSchemeAnswers($markngID);
+        }
 
         return $data;
 
@@ -78,11 +87,13 @@ class MarkingSchemecontroller extends CI_Controller{
 
     //convert the uploaded pdf into a text file(it is necessary in the procees of marking the answer sheet )
     private function convertAnswerSheet(){
+
         $fileName=$_POST['answersheet'];
 
         if(isset($_POST['answersheet'])) {
-            $pdfFile="$fileName.pdf";
-            $textFile="$fileName.txt";
+            $pdfFile="uploads/" . $fileName;//here
+            $fileName = explode(".",$fileName);
+            $textFile="$fileName[0]" . ".txt";
 
             // Parse pdf file and build necessary objects.
             $parser = new Parser();
@@ -99,13 +110,17 @@ class MarkingSchemecontroller extends CI_Controller{
                     $fh = fopen($textFile, 'w');
                 }
                 //write the output into a text file
-                fwrite($fh, $page->getText());
+                // Loop over each page to extract text.
+                foreach ($pages as $page) {
+                    fwrite($fh,$page->getText());
+                }
                 fclose($fh);
 
             }
             return $textFile;
+
         }else{
-            echo 'Error';
+            echo 'Cant open the file';
         }
 
 
@@ -127,46 +142,49 @@ class MarkingSchemecontroller extends CI_Controller{
 
                     //extract student answers from the text file
                     if (preg_match('#^Answer-#', $str) === 1) {
-                        $stuAns[$i] = $str;
+                        $str1=explode('-',$str);
+                        $stuAns[$i] = $str1[1];
                         $i++;
                     }
                 }
             }
 
-            fclose($txtFile);
+            fclose($file);
 
             return $stuAns;
 
     }
 
     //compare student answers with answers in the marking scheme
-    private function compareAnswers(){
+    public function compareAnswers(){
 
-            $markingScheme = array(
-                $this->getMarkingSchemeAnswers()
-            );
-            $studentAns = array(
-                $this->getStudenAnswers()
-            );
-            $marksAndQus = array(
-                $this->getMarkingScheme()
-            );
+            $markingScheme = $this->getMarkingSchemeAnswers();
+
+            $studentAns = $this->getStudenAnswers();
+
+            $marksAndQus = $this->getMarkingScheme();
+
             $finalOutput = array();
 
+
+        //return var_dump($marksAndQus);
+        //return var_dump($studentAns[0]);
+
             for ($i = 0; $i < sizeof($markingScheme); $i++) {
-                if ($markingScheme[$i] === $studentAns[$i]) {
-                    $finalOutput[$i]['question'] = $marksAndQus[$i][0];
-                    $finalOutput[$i]['stuAns'] = $studentAns[$i];
-                    $finalOutput[$i]['answer'] = $markingScheme[$i];
-                    $finalOutput[$i]['marks'] = $marksAndQus[$i][2];
-                    $finalOutput[$i]['status'] = true;
-                } else {
-                    $finalOutput[$i]['question'] = $marksAndQus[$i][0];
+                if (strcmp($markingScheme[$i],$studentAns[$i])> 0) {
+                    $finalOutput[$i]['question'] = $marksAndQus[$i];
                     $finalOutput[$i]['stuAns'] = $studentAns[$i];
                     $finalOutput[$i]['answer'] = $markingScheme[$i];
                     $finalOutput[$i]['marks'] = 0.0;
                     $finalOutput[$i]['status'] = false;
+                } else {
+                    $finalOutput[$i]['question'] = $marksAndQus[$i];
+                    $finalOutput[$i]['stuAns'] = $studentAns[$i];
+                    $finalOutput[$i]['answer'] = $markingScheme[$i];
+                    $finalOutput[$i]['marks'] = 1.0;
+                    $finalOutput[$i]['status'] = true;
                 }
+
             }
 
             return $finalOutput;
@@ -174,28 +192,75 @@ class MarkingSchemecontroller extends CI_Controller{
     }
 
     //calculate total marks
-    public function calcTotalMarks(){
+    private function calcTotalMarks(){
 
             $finalResults = $this->compareAnswers();
 
-            $total = 0;
+            $total=0;
 
             for ($i = 0; $i < sizeof($finalResults); $i++) {
-                $total = $total + $finalResults[$i]['marks'];
+                $marks=$finalResults[$i]['marks'];
+                //return var_dump($marks);
+                $total= $total + $marks;
             }
+            $data=array('total'=>$total);
+            $this->load->view('paperMarking/papermarking',$data);
 
-            return $total;
+    }
+
+    //process of paper marking
+    public  function processPaperMarking()
+    {
+
+        $file = $_FILES['answersheet'];
+
+        if(is_null($file)){
+
+            $message='File Doesnt Exists.Please Check Again.';
+            $this->load->view('paperMarking/papermarking',$message);
+
+        }else {
+
+            $fileName = $file['name'];
+            $_POST['answersheet'] = $fileName;
+            $_POST['pdfFile'] = $file;
+
+            move_uploaded_file($_FILES['answersheet']['tmp_name'], "uploads/" . $_FILES['answersheet']['name']);
+
+
+            $finalOutput = $this->compareAnswers();
+            unlink(explode('.', $fileName)[0] . ".txt");
+            return var_dump($finalOutput);
+        }
+
 
     }
 
     //Create a review of the paper and generate a pdf to show the review of the paper
     public function createReview(){
+        $this->load->library('fpdf');
+        $file = $_FILES['answersheet'];
 
-        $paperID=$_POST['answersheet'];
+        if(is_null($file)){
 
-        if(isset($_POST['answersheet'])) {
+            $message='File Doesnt Exists.Please Check Again.';
+            $this->load->view('paperMarking/paperReview',$message);
 
-            $finalResults = $this->compareAnswers();
+        }else {
+
+            $fileName = $file['name'];
+            $_POST['answersheet'] = $fileName;
+            $_POST['pdfFile'] = $file;
+
+            move_uploaded_file($_FILES['answersheet']['tmp_name'], "uploads/" . $_FILES['answersheet']['name']);
+
+            unlink(explode('.', $fileName)[0] . ".txt");
+        }
+
+            $finalResults= $this->compareAnswers();
+            $data=array('final_Results'=> $finalResults);
+            $this->load->view('paperMarking/paperReview',$data);
+
 
             //create a FPDF object
             $pdf = new FPDF();
@@ -217,8 +282,9 @@ class MarkingSchemecontroller extends CI_Controller{
             $pdf->Cell(90, 12, 'Correct Answer', 1);
             $pdf->Cell(90, 12, 'Marks', 1);
 
+
             //print the output in the pdf & printing all the keys and values one by one
-            for ($i = 0; $i < count($finalResults); $i++) {
+            for ($i = 0; $i < 10; $i++) {
                 $pdf->Ln();
 
                 if ($finalResults[$i]['status'] === true) {
@@ -241,28 +307,63 @@ class MarkingSchemecontroller extends CI_Controller{
 
             }
 
+            $pdf->Ln();
+            $pdf->Cell(90, 12, 'Total Marks ='.$this->calcTotalMarks(), 1);
+
+
+
             //Output the document
-            $review = $paperID . " " . 'Review' . 'pdf';
-            $pdf->Output($review, 'I');
-        }else{
-            echo 'Error';
+
+            $review = explode('.', $fileName)[0] . "Review.pdf";
+            $pdf->Output($review,'I');
+
+            //return var_dump($finalResults);
+        /*}else{
+            $message='Something went wrong.Please check again.';
+            $this->load->view('paperMarking/papermarking',$message);
+        }
+        */
+
+    }
+
+
+
+
+    public  function getFinalOutput()
+    {
+
+        $file = $_FILES['answersheet'];
+
+        if (is_null($file)) {
+
+            $message = 'File Doesnt Exists.Please Check Again.';
+            $this->load->view('paperMarking/papermarking', $message);
+
+        } else {
+
+            $fileName = $file['name'];
+            $_POST['answersheet'] = $fileName;
+            $_POST['pdfFile'] = $file;
+
+            move_uploaded_file($_FILES['answersheet']['tmp_name'], "uploads/" . $_FILES['answersheet']['name']);
+
+
+            $finalOutput = $this->compareAnswers();
+            unlink(explode('.', $fileName)[0] . ".txt");
+
+
+
+        }
+    }
+
+    public function loadReview()
+    {
+            $this->load->library('session');
+            $this->load->helper('url');
+            $this->load->view('paperMarking/paperReview');
         }
 
     }
 
 
-    //process of paper marking
-    public  function processPaperMarking(){
 
-        $finalOutput[] = $this->compareAnswers();
-
-        if(!empty($finalOutput)){
-            return true;
-        }else{
-            return false;
-        }
-
-    }
-
-
-}

@@ -68,10 +68,12 @@ class Hello extends CI_Controller {
 
             $lecturer = ($this->session->userdata['logged_in']['username']);
             $data['lecname']=$lecturer;
+            $total=0;
 
-            $this->load->view('paperMarking/papermarking',$data);
+            $this->load->view('paperMarking/papermarking',$total);
         }
     }
+
 
     public function load_profile()
     {

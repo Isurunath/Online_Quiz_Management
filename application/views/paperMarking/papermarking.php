@@ -19,6 +19,19 @@
 
 </head>
 <body>
+<?php
+
+function FileChecker($path)
+{
+    if (!file_exists($path)) {
+        echo 'That file does not exists.';
+    }
+}
+
+echo validation_errors();
+
+?>
+
 
 <div class="page-container">
     <!--/content-inner-->
@@ -47,41 +60,43 @@
 
                                 <div class="grid-1">
                                     <div class="form-body">
-                                        <form method="post" name="form_layout" action="<?php echo site_url ('MarkingSchemecontroller/processPaperMarking'); ?>" method="post"  class="form-horizontal">
+                                        <form method="post" onSubmit="window.location.reload()" name="form_layout" action="<?php echo site_url ('MarkingSchemecontroller/processPaperMarking'); ?>" method="post" enctype="multipart/form-data" class="form-horizontal">
                                             <div class="form-group">
-                                                <label for="selector1" class="col-sm-3 control-label">Upload The Answer Sheet :</label>
-                                                <div class="col-sm-8">
-                                                    <input type="file" placeholder="Answer Sheet" class="btn btn-primary" name="answersheet" id="answersheet" size = "10"/>
+                                                <label for="selector1" class="col-sm-2 control-label">Upload The Answer Sheet :</label>
+                                                <div class="col-sm-1">
+                                                    <input type="file" placeholder="Answer Sheet" class="btn btn-primary" style="margin-right: 300px" name="answersheet" id="answersheet" size = "10" title="Upload Anwer Sheet"/>
                                                 </div>
                                             </div>
 
-                                            <div class="form-group">
-                                                <label for="selector1" class="col-sm-3 control-label">Search Compatible Marking Scheme :</label>
-                                                <div class="col-sm-8">
-                                                    <input type="text"  placeholder="   Marking Scheme" name="mrknschmName" id="mrknschmName" value=""/>
-                                                    <button type="button"  class="btn btn-default" style="margin-right: 300px" name="searchMarkngSchm" id="searchMarkngSchm" onclick="<?php echo site_url ('MarkingSchemecontroller/searchMarkingScheme'); ?>">Search Marking Scheme</button>
-                                                </div>
-                                            </div>
 
                                             <div class="form-group">
                                                 <div class="col-sm-8">
-                                                    <button type="button" class="btn btn-default" style="margin-left: 300px" name="markPaper" id="markPaper" onclick="<?php echo site_url('MarkingSchemecontroller/processPaperMarking'); ?>">Click To Start The Paper Marking Process</button>
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label for="marks" class="col-sm-3 control-label">Total Marks :</label>
-                                                <div class="col-sm-8">
-                                                    <input type="text" placeholder="   Total Marks" name="totmarks" id="totmarks"/>
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <div class="col-sm-8">
-                                                <button type="button" class="btn btn-default" style="margin-left: 300px" name="review" id="review" onclick="<?php echo site_url('MarkingSchemecontroller/createReview'); ?>">Review Of The Paper</button>
+                                                    <br>
+                                                    <button type="submit" class="btn btn-default" style="margin-right: 300px" name="markPaper" id="markPaper" title="To Start The Paper Marking Process" onclick="<?php echo site_url('MarkingSchemecontroller/processPaperMarking');?>">Click To Start The Paper Marking Process</button>
                                                 </div>
                                             </div>
                                         </form>
+
+
+                                            <form method="post" onSubmit="window.location.reload()" name="form_layout" action="<?php echo site_url ('MarkingSchemecontroller/loadReview'); ?>" method="post" enctype="multipart/form-data" class="form-horizontal">
+                                                <div class="form-group">
+                                                    <div class="col-sm-8">
+                                                        <?php
+                                                        if(isset($_POST['answersheet'])){
+                                                            if(!isset($_FILES['answersheet']) || $_FILES['answersheet']['error']==UPLOAD_ERR_NO_FILE) {
+                                                                echo "Error No File Selected.Please Select A File";
+                                                            }
+                                                        }
+
+                                                        ?>
+                                                        <br>
+                                                        &nbsp;&nbsp;
+                                                        <button type="submit" class="btn btn-default" style="margin-right: 300px" name="review" id="review" title="To Review The Paper" onclick="<?php echo site_url('MarkingSchemecontroller/loadReview');?>">Review Of The Paper</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+
+
                                     </div>
 
                                 </div>

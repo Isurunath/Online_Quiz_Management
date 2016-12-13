@@ -19,7 +19,7 @@ class MarkingSchememodel extends CI_Model{
 
         $query=$this->db->get();
 
-        if($query==1){
+        if($query!=NULL){
             return $query->result();
         }else{
             return false;
@@ -30,10 +30,10 @@ class MarkingSchememodel extends CI_Model{
     function getMarkingScheme($mrkngschmID){
         $this->db->select('question,answer,marks');
         $this->db->from('answerbank');
-        $this->db->where('markingSchemeID',$mrkngschmID);
+        $this->db->where('markingSchemeID',1);
 
         $query=$this->db->get();
-        $data['results']=$query;
+        $data['results']=$query->result();
 
         $markingScheme=array();
         $i=0;
@@ -53,16 +53,16 @@ class MarkingSchememodel extends CI_Model{
     function getMarkingSchemeAnswers($mrkngschmID){
         $this->db->select('answer');
         $this->db->from('answerbank');
-        $this->db->where('markingSchemeID',$mrkngschmID);
+        $this->db->where('markingSchemeID',1);
 
         $query=$this->db->get();
-        $data['results']=$query;
+        $data['results']=$query->result();
 
         $markingSchemeAnswers=array();
         $i=0;
 
         foreach($data['results'] as $result){
-            $markingSchemeAnswers[$i]['answer'] =  $result->answer;
+            $markingSchemeAnswers[$i] =  $result->answer;
 
             $i++;
         }
