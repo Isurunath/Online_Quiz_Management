@@ -97,4 +97,26 @@ class Users_Model extends CI_Model
         $query = $this->db->get();
         return $query->result();
     }
+
+    function delete_Lecturer($id)
+    {
+        $this->db->where('prof_user_id', $id);
+        $this->db->delete('profile');
+
+        if($this->db->affected_rows() > 0)
+            return true; // to the controller
+        else
+            return false;
+    }
+
+    function delete_Student($id)
+    {
+        $this->db->where('prof_user_id', $id);
+        $this->db->delete('profile');
+
+        if($this->db->affected_rows() > 0)
+            return true; // to the controller
+        else
+            return false;
+    }
 }

@@ -113,7 +113,7 @@
                 <!--/sub-heard-part-->
                 <div class="sub-heard-part">
                     <ol class="breadcrumb m-b-0">
-                        <li><a href="<?php echo site_url('hello/admin'); ?>" style="text-decoration:none"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+                        <li><a href="<?php echo site_url('hello/index'); ?>" style="text-decoration:none"><span class="glyphicon glyphicon-home"></span> Home</a></li>
                         <li class="active">View added layouts</li>
                     </ol>
                 </div>
