@@ -35,4 +35,20 @@ class View_Students extends CI_Controller
             $this->load->view('admin_1/view_students', $data);
         }
     }
+
+    public function delete_student()
+    {
+        $this->load->helper('url');
+        $this->load->model('Users_Model');
+
+        $id=$_POST['test'];
+
+        $result = $this->Users_Model->delete_Student($id);
+
+        if ($result) {
+            redirect('View_Students/view_students');
+        } else {
+            redirect('View_Students/view_students');
+        }
+    }
 }

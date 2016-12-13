@@ -8,7 +8,7 @@ class Users_Model extends CI_Model
     }
 
     function insert($data){
-        $this->db->insert('users', $data);
+        $this->db->insert('profile', $data);
         if($this->db->affected_rows() > 0)
             return true; // to the controller
         else
@@ -17,7 +17,7 @@ class Users_Model extends CI_Model
 
     function updatePassword($pw,$id)
     {
-        $sql = "UPDATE users SET password='$pw' WHERE user_id='$id' ";
+        $sql = "UPDATE profile SET password='$pw' WHERE prof_user_id='$id' ";
         $this->db->query($sql);
         if($this->db->query($sql))
             return true; // to the controller
@@ -28,7 +28,7 @@ class Users_Model extends CI_Model
     function login($email, $password)
     {
         $this -> db -> select('*');
-        $this -> db -> from('users');
+        $this -> db -> from('profile');
         $this -> db -> where('email', $email);
         $this -> db -> where('password', $password);
         $this -> db -> limit(1);
@@ -64,7 +64,7 @@ class Users_Model extends CI_Model
     public function email_exists($value)
     {
         $this -> db -> select('*');
-        $this -> db -> from('users');
+        $this -> db -> from('profile');
         $this->db->where('email', $value);
         $query = $this->db->get();
         if ($query->num_rows() > 0) {
@@ -75,15 +75,15 @@ class Users_Model extends CI_Model
     }
 
     function getusers(){
-        $query = $this->db->get('users');
+        $query = $this->db->get('profile');
         $q_result = $query->result();
         return $q_result;
     }
     
     public function get_lecturers()
     {
-        $this->db->select("user_id,user_name,email");
-        $this->db->from('users');
+        $this->db->select("prof_user_id,fname,email");
+        $this->db->from('profile');
         $this->db->where('user_type', 'LECTURER');
         $query = $this->db->get();
         return $query->result();
@@ -91,10 +91,32 @@ class Users_Model extends CI_Model
 
     public function get_students()
     {
-        $this->db->select("user_id,user_name,email");
-        $this->db->from('users');
+        $this->db->select("prof_user_id,fname,email");
+        $this->db->from('profile');
         $this->db->where('user_type', 'STUDENT');
         $query = $this->db->get();
         return $query->result();
+    }
+
+    function delete_Lecturer($id)
+    {
+        $this->db->where('prof_user_id', $id);
+        $this->db->delete('profile');
+
+        if($this->db->affected_rows() > 0)
+            return true; // to the controller
+        else
+            return false;
+    }
+
+    function delete_Student($id)
+    {
+        $this->db->where('prof_user_id', $id);
+        $this->db->delete('profile');
+
+        if($this->db->affected_rows() > 0)
+            return true; // to the controller
+        else
+            return false;
     }
 }

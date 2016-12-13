@@ -32,7 +32,7 @@ class LoginController extends CI_Controller{
         else
         {
             $data = array(
-                'user_name' => $_POST['name'],
+                'fname' => $_POST['name'],
                 'email' => $_POST['email'],
                 'password' => MD5($_POST['password']),
                 'user_type' => 'STUDENT'
@@ -121,12 +121,12 @@ class LoginController extends CI_Controller{
             {
                 $session_data=array(
                         'email'=>$result[0]->email,
-                        'username'=>$result[0]->user_name,
+                        'username'=>$result[0]->fname,
                         'user_type' =>$result[0]->user_type,
                    );
                 $this->session->set_userdata('logged_in',$session_data);
 
-                $profileDetails = $this->Users_Model->getProfileDetails($result[0]->user_id);
+                $profileDetails = $this->Users_Model->getProfileDetails($result[0]->prof_user_id);
                     if ($profileDetails) {
                         $session_data_profile = array(
                             'prof_user_id' => $profileDetails[0]->prof_user_id,
@@ -290,7 +290,7 @@ class LoginController extends CI_Controller{
             {
                 $session_data=array(
                     'email'=>$result[0]->email,
-                    'username'=>$result[0]->user_name,
+                    'username'=>$result[0]->fname,
                     'user_type' =>$result[0]->user_type,
                 );
                 $this->session->set_userdata('logged_in',$session_data);
