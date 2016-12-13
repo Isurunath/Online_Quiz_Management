@@ -16,21 +16,21 @@ class Addlecturers extends CI_Controller{
         $this->load->model('Users_Model');
 
         $this->form_validation->set_rules('name', 'Name', 'trim|required');
-        $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|is_unique[users.email]');
+        $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|is_unique[profile.email]');
         $this->form_validation->set_rules('password', 'Password', 'trim|required',array('required' => 'You must provide a %s.'));
         $this->form_validation->set_rules('con_password', 'Password Confirmation', 'trim|required|matches[password]');
 
 
         if ($this->form_validation->run() == FALSE)
         {
-            $this->load->view('admin/addlecturers');
+            $this->load->view('admin_1/addlecturers');
         }
 
         else
         {
             $type = 'LECTURER';
             $data = array(
-                'user_name' => $_POST['name'],
+                'fname' => $_POST['name'],
                 'email' => $_POST['email'],
                 'password' => MD5($_POST['password']),
                 'user_type' => $type,

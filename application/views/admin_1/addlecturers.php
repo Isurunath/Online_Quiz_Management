@@ -69,10 +69,8 @@
 
                                             if (validation_errors())
                                             {
-                                                echo '<div id="validation_errors" title="Error:" align="left">';
-                                                echo '<div class="response-msgs errors ui-corner-all"><span>Errors:</span><br /><ul><li>';
+                                                echo '<div style="color:red;" id="validation_errors" title="Error:" align="left">';
                                                 echo validation_errors();
-                                                echo '</li></ul></div>';
                                                 echo '</div>';
                                                 echo "<br/>";
                                                 echo "<br/>";
@@ -96,13 +94,13 @@
                                                 <div class="form-group">
                                                     <label for="selector1" class="col-sm-2 control-label">Password</label>
                                                     <div class="col-sm-8">
-                                                    <textarea name="password" id="single" class="form-control1" required></textarea></div>
+                                                    <input type="password" name="password" id="single" class="form-control1" required></div>
                                                 </div>
 
                                                 <div class="form-group">
                                                     <label for="selector1" class="col-sm-2 control-label">Confirm password</label>
                                                     <div class="col-sm-8">
-                                                    <textarea name="con_password" id="single" class="form-control1" required></textarea></div>
+                                                    <input type="password" name="con_password" id="single" class="form-control1" required></div>
                                                 </div>
 
                                                 <button onclick="return doconfirm()" type="submit" class="btn btn-default" style="margin-left: 200px">Submit</button>
