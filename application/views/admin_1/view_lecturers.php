@@ -105,8 +105,8 @@
                     <tbody>
                         <?php foreach($posts as $post){?>
                             <tr class="warning">
-                                <td class="id"><?php echo $post->user_id;?></td>
-                                <td class="batch"><?php echo $post->user_name;?></td>
+                                <td class="id"><?php echo $post->prof_user_id;?></td>
+                                <td class="batch"><?php echo $post->fname;?></td>
                                 <td class="type"><?php echo $post->email;?></td>
                                 <td>
                                     <button data-toggle="modal" data-target="#Modal" id="button2" type="button" style="font-size:15px;color:red" >

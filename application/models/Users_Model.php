@@ -82,8 +82,8 @@ class Users_Model extends CI_Model
     
     public function get_lecturers()
     {
-        $this->db->select("user_id,user_name,email");
-        $this->db->from('users');
+        $this->db->select("prof_user_id,fname,email");
+        $this->db->from('profile');
         $this->db->where('user_type', 'LECTURER');
         $query = $this->db->get();
         return $query->result();
@@ -91,8 +91,8 @@ class Users_Model extends CI_Model
 
     public function get_students()
     {
-        $this->db->select("user_id,user_name,email");
-        $this->db->from('users');
+        $this->db->select("prof_user_id,fname,email");
+        $this->db->from('profile');
         $this->db->where('user_type', 'STUDENT');
         $query = $this->db->get();
         return $query->result();
