@@ -54,6 +54,16 @@ class Paper_layout_model extends CI_Model
         return $query->result();
     }
 
+    function get_examsProfile($batch)
+    {
+        $this->db->select('*');
+        $this->db->from('assignment_layout');
+        $this->db->where('batch_no',$batch);
+        $this->db->where('to_date >', date('Y-m-d'));
+        $query = $this->db->get();
+        return $query->result();
+    }
+
     function check_date_availability($batch,$fromdate)
     {
         $this -> db -> select('*');

@@ -63,8 +63,16 @@ class Hello extends CI_Controller {
     {
         $this->load->library('session');
         $this->load->helper('url');
+
+        $this->load->model('Paper_layout_model');
+
+        $batch = ($this->session->userdata['profile_data']['batch']);
+
+        $data['assignments'] = $this->Paper_layout_model->get_examsProfile($batch);
+        //print_r($data);
+
         $this->load->view('header/head1');
-        $this->load->view('profile/profile');
+        $this->load->view('profile/profile',$data);
     }
 
     public function load_about()

@@ -43,6 +43,25 @@ class Users_Model extends CI_Model
         }
     }
 
+    function checkPassword($id,$password)
+    {
+        $this -> db -> select('*');
+        $this -> db -> from('profile');
+        $this -> db -> where('prof_user_id', $id);
+        $this -> db -> where('password', $password);
+        $this -> db -> limit(1);
+        $query = $this -> db -> get();
+        if($query -> num_rows() == 1)
+        {
+            //return $query->result();
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
     function getProfileDetails($id)
     {
         $this -> db -> select('*');

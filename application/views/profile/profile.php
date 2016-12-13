@@ -29,7 +29,12 @@ if(isset($this->session->userdata['profile_data'])) {
     $batch_time = ($this->session->userdata['profile_data']['bt']);
 
     //calculate the age
-    $age = date('Y-m-d') - $dob;
+    if($dob != "") {
+        $age = date('Y-m-d') - $dob;
+    }else
+    {
+        $age = "";
+    }
 }
 
 ?>
@@ -143,7 +148,6 @@ if(isset($this->session->userdata['profile_data'])) {
                         <ul class="nav nav-tabs nav-justified nav-line">
                             <li class="active" id="Details_tab"><a href="#myDetails" data-toggle="tab"><strong>My Details</strong></a></li>
                             <li id="Details_tab2"><a href="#upcomingExams" data-toggle="tab"><strong>Upcoming Exams</strong></a></li>
-                            <li id="Details_tab3"><a href="#Other" data-toggle="tab"><strong>Other</strong></a></li>
                         </ul>
 
                         <!-- Tab panes -->
@@ -203,7 +207,7 @@ if(isset($this->session->userdata['profile_data'])) {
                                                 <td style="padding: 10px; width: 25%;"><i class="fa fa-envelope"></i> Email</td>
                                                 <td style="padding: 10px;">
                                                     <div class="row">
-                                                        <div class="col-md-6">
+                                                        <div class="col-md-9">
                                                             <label class="form-control"><?php echo $email; ?></label>
                                                         </div>
                                                     </div>
@@ -302,213 +306,49 @@ if(isset($this->session->userdata['profile_data'])) {
 
                             <div class="tab-pane" id="upcomingExams">
                                 <?php
+                                    //echo $assignments->paper_type;
                                 if(!empty($assignments))
                                 {
-                                foreach ($assignments as $assignment)
-                                {
-                                ?>
-
-                                <div class="panel-heading">
-                                    <div class="panel-body nopaddingbottom">
-                                        <div class="media">
-                                            <div class="media-left">
-                                                <a href="#">
-                                                    <?php if($assignment->paper_type == "Question Paper")
-                                                    {
-                                                        ?>
-                                                        <img class="media-object width80" src="../images/image.png" alt="">
-                                                        <?php
-                                                    }
-                                                    else
-                                                    {
-                                                        ?>
-                                                        <img class="media-object width80" src="../images/image.png" alt="">
-                                                        <?php
-                                                    }
-                                                    ?>
-                                                </a>
-                                            </div>
-                                            <div class="media-body">
-                                                <h4 class="media-heading"><?php echo $assignment->paper_type; ?></h4>
-                                                <?php
-                                                $fdate = date_create($assignment->from_date);
-                                                $tdate = date_create($assignment->to_date);
-
-                                                //change the format of dates
-                                                $from = date_format($fdate, 'l jS F Y');
-                                                $to = date_format($tdate, 'l jS F Y');
-
-                                                //calculate days to complete
-                                                $days = $assignment->to_date - date('Y-m-d');
-                                                ?>
-                                                <p><?php echo $from; ?> - <?php echo $to; ?> <br>
-                                                    <?php echo $days; ?> days more to due date.
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- panel-heading -->
-
-                                    <?php
-                                    }
-                                    }
-                                    else
-                                    {
-                                        ?>
-                                        <p>You have no upcoming assignments or exams.</p>
-                                        <?php
-                                    }
                                     ?>
+                                    <div class="panel panel-post-item">
+                                        <table class="table table-hover" id="thisTable">
+                                            <thead>
+                                            <tr style="font-size: 20px">
+                                                <th>Batch No</th>
+                                                <th>Paper Type</th>
+                                                <th>From date</th>
+                                                <th>To date</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <?php
+                                            foreach ($assignments as $assignment) {
+                                                ?>
+                                                <tr style="font-family: 'Arial';font-size: 15px" class="info">
+                                                    <td class="batch"><?php echo $assignment->batch_no; ?></td>
+                                                    <td class="type"><?php echo $assignment->paper_type; ?></td>
+                                                    <td class="from"><?php echo $assignment->from_date; ?></td>
+                                                    <td class="to"><?php echo $assignment->to_date; ?></td>
+                                                </tr>
+                                                <?php
+                                            }
+                                            ?>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <?php
+                                }
+                                else{
+                                ?>
+                                    <p>You have no upcoming assignments or exams.</p>
+                                <?php
+                                }
+                                ?>
                                 </div>
-                            <div class="tab-pane" id="Other">
-                                Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3 col-lg-3 profile-sidebar">
-                    <div class="row">
-                        <div class="col-sm-10 col-md-16">
-                            <div class="panel">
-                                <div class="panel-heading">
-                                    <h4 class="panel-title">People You May Know</h4>
-                                </div>
-                                <div class="panel-body">
-                                    <ul class="media-list user-list">
-                                        <li class="media">
-                                            <div class="media-left">
-                                                <a href="#">
-                                                    <img class="media-object img-circle" src="../images/photos/user9.png" alt="">
-                                                </a>
-                                            </div>
-                                            <div class="media-body">
-                                                <h4 class="media-heading"><a href="">Ashley T. Brewington</a></h4>
-                                                <span>5,323</span> Followers
-                                            </div>
-                                        </li>
-                                        <li class="media">
-                                            <div class="media-left">
-                                                <a href="#">
-                                                    <img class="media-object img-circle" src="../images/photos/user10.png" alt="">
-                                                </a>
-                                            </div>
-                                            <div class="media-body">
-                                                <h4 class="media-heading"><a href="">Roberta F. Horn</a></h4>
-                                                <span>4,100</span> Followers
-                                            </div>
-                                        </li>
-                                        <li class="media">
-                                            <div class="media-left">
-                                                <a href="#">
-                                                    <img class="media-object img-circle" src="../images/photos/user3.png" alt="">
-                                                </a>
-                                            </div>
-                                            <div class="media-body">
-                                                <h4 class="media-heading"><a href="">Jennie S. Gray</a></h4>
-                                                <span>3,508</span> Followers
-                                            </div>
-                                        </li>
-                                        <li class="media">
-                                            <div class="media-left">
-                                                <a href="#">
-                                                    <img class="media-object img-circle" src="../images/photos/user4.png" alt="">
-                                                </a>
-                                            </div>
-                                            <div class="media-body">
-                                                <h4 class="media-heading"><a href="">Alia J. Locher</a></h4>
-                                                <span>3,508</span> Followers
-                                            </div>
-                                        </li>
-                                        <li class="media">
-                                            <div class="media-left">
-                                                <a href="#">
-                                                    <img class="media-object img-circle" src="../images/photos/user6.png" alt="">
-                                                </a>
-                                            </div>
-                                            <div class="media-body">
-                                                <h4 class="media-heading"><a href="">Jamie W. Bradford</a></h4>
-                                                <span>2,001</span> Followers
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div><!-- panel -->
-                        </div>
-                        <div class="col-sm-6 col-md-12">
-                            <div class="panel">
-                                <div class="panel-heading">
-                                    <h4 class="panel-title">Following Activity</h4>
-                                </div>
-                                <div class="panel-body">
-                                    <ul class="media-list user-list">
-                                        <li class="media">
-                                            <div class="media-left">
-                                                <a href="#">
-                                                    <img class="media-object img-circle" src="../images/photos/user2.png" alt="">
-                                                </a>
-                                            </div>
-                                            <div class="media-body">
-                                                <h4 class="media-heading nomargin"><a href="">Floyd M. Romero</a></h4>
-                                                is now following <a href="">Christina R. Hill</a>
-                                                <small class="date"><i class="glyphicon glyphicon-time"></i> Just now</small>
-                                            </div>
-                                        </li>
-                                        <li class="media">
-                                            <div class="media-left">
-                                                <a href="#">
-                                                    <img class="media-object img-circle" src="../images/photos/user10.png" alt="">
-                                                </a>
-                                            </div>
-                                            <div class="media-body">
-                                                <h4 class="media-heading nomargin"><a href="">Roberta F. Horn</a></h4>
-                                                commented on <a href="">HTML5 Tutorial</a>
-                                                <small class="date"><i class="glyphicon glyphicon-time"></i> Yesterday</small>
-                                            </div>
-                                        </li>
-                                        <li class="media">
-                                            <div class="media-left">
-                                                <a href="#">
-                                                    <img class="media-object img-circle" src="../images/photos/user3.png" alt="">
-                                                </a>
-                                            </div>
-                                            <div class="media-body">
-                                                <h4 class="media-heading nomargin"><a href="">Jennie S. Gray</a></h4>
-                                                posted a video on <a href="">The Discovery</a>
-                                                <small class="date"><i class="glyphicon glyphicon-time"></i> June 25, 2015</small>
-                                            </div>
-                                        </li>
-                                        <li class="media">
-                                            <div class="media-left">
-                                                <a href="#">
-                                                    <img class="media-object img-circle" src="../images/photos/user5.png" alt="">
-                                                </a>
-                                            </div>
-                                            <div class="media-body">
-                                                <h4 class="media-heading nomargin"><a href="">Nicholas T. Hinkle</a></h4>
-                                                liked your video on <a href="">The Discovery</a>
-                                                <small class="date"><i class="glyphicon glyphicon-time"></i> June 24, 2015</small>
-                                            </div>
-                                        </li>
-                                        <li class="media">
-                                            <div class="media-left">
-                                                <a href="#">
-                                                    <img class="media-object img-circle" src="../images/photos/user2.png" alt="">
-                                                </a>
-                                            </div>
-                                            <div class="media-body">
-                                                <h4 class="media-heading nomargin"><a href="">Floyd M. Romero</a></h4>
-                                                liked your photo on <a href="">My Life Adventure</a>
-                                                <small class="date"><i class="glyphicon glyphicon-time"></i> June 24, 2015</small>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div><!-- panel -->
-                        </div>
-                    </div><!-- row -->
-
-                </div>
-            </div><!-- row -->
+             </div>
 
         </div><!-- contentpanel -->
     </div><!-- mainpanel -->
@@ -634,49 +474,62 @@ if(isset($this->session->userdata['profile_data'])) {
     {
         e.preventDefault();
         //get the posted values
-        var address1 = document.getElementById('Address1').value;
-        var address2 = document.getElementById('Address2').value;
-        var city = document.getElementById('city').value;
-        var phone = document.getElementById('phone').value;
-
-
+        var address1 = document.getElementById("Address1").value;
+        var address2 = document.getElementById("Address2").value;
+        var city = document.getElementById("city").value;
+        var phone = document.getElementById("phone").value;
         //alert(first_name+" "+last_name+" "+gndr+" "+date+" "+" "+month+" "+year);
-        $.ajax({
-            type: "POST",
-            url: "<?php echo site_url('ProfileController/updateContact')?>",
-            async: true,
-            data: {
-                "address1":address1, "address2":address2, "city":city, "phone":phone
-            },
-            dataType: 'html',
-            success: function (data) {
-                //location.reload();
-                alert("Successfully Updated.");
-                reloadSidePanel();
-                document.getElementById("myDetails").innerHTML = data;
-            },
-            error: function (err) {
-                alert("error");
-            }
-        });
+
+
+        var phoneCk = /^\d{10}$/;
+
+        if(phoneCk.test(phone)) {
+            document.getElementById("errorPhone").style.display = 'none';
+            $.ajax({
+
+                type: "POST",
+                url: "<?php echo site_url('ProfileController/updateContact')?>",
+                async: true,
+                data: {
+                    "address1": address1, "address2": address2, "city": city, "phone": phone
+                },
+                dataType: 'html',
+                success: function (data) {
+                    //location.reload();
+                    alert("Successfully Updated.");
+                    reloadSidePanel();
+                    document.getElementById("myDetails").innerHTML = data;
+                },
+                error: function (err) {
+                    alert("error");
+                }
+            });
+        }
+        else
+        {
+            //alert("kjsdjh");
+            document.getElementById("errorPhone").innerHTML  = '*Invalid Phone';
+            document.getElementById("errorPhone").style.display = 'inline';
+        }
     }
 
     function updateCourse(e)
     {
         e.preventDefault();
+
         //get the posted values
         var c = document.getElementById("course");
         var course = c.options[c.selectedIndex].value;
-
-        var batch = document.getElementById('batch').value;
-
+        //alert("Hellow2");
+        var batch = document.getElementById("batch").value;
+        //alert("Hellow3");
         var t = document.getElementById("batch_time");
         var batch_time = t.options[t.selectedIndex].value;
-
+        //alert("Hellow4");
         var g = document.getElementById("grad_yr");
         var grad_yr = g.options[g.selectedIndex].value;
 
-        //alert(first_name+" "+last_name+" "+gndr+" "+date+" "+" "+month+" "+year);
+        //alert("Hellow5");
         $.ajax({
             type: "POST",
             url: "<?php echo site_url('ProfileController/updateCourse')?>",
@@ -701,7 +554,7 @@ if(isset($this->session->userdata['profile_data'])) {
     {
         e.preventDefault();
         //get the posted values
-        var about = document.getElementById('about').value;
+        var about = document.getElementById("about").value;
 
         //alert(about);
         $.ajax({
@@ -724,6 +577,101 @@ if(isset($this->session->userdata['profile_data'])) {
         });
     }
 
+    function changePassword(e)
+    {
+        e.preventDefault();
+        //get the posted values
+        var currentPW = document.getElementById("currentPassword").value;
+        var newPW = document.getElementById("newPassword").value;
+        var conPw = document.getElementById("confirmPassword").value;
+
+        if(currentPW != "" && newPW != "" && conPw != "") {
+            document.getElementById("errorCurrentPW").style.display = 'none';
+            document.getElementById("errorNewPW").style.display = 'none';
+            document.getElementById("errorConfirmPW").style.display = 'none';
+
+            $.ajax({
+                type: "POST",
+                url: "<?php echo site_url('ProfileController/checkPassword')?>",
+                data: {
+                    "cpw":currentPW
+                },
+                dataType: 'html',
+                success: function (data) {
+                    //location.reload();
+                    if(data == "true")
+                    {
+                        //alert(data);
+                        document.getElementById("errorCurrentPW").style.display = 'none';
+                        if(newPW == conPw)
+                        {
+                            //alert(newPW);
+                            $.ajax({
+                                type: "POST",
+                                url: "<?php echo site_url('ProfileController/updatePassword')?>",
+                                data: {
+                                    "npw":newPW
+                                },
+                                dataType: 'html',
+                                success: function (data) {
+                                    alert("Successfully Updated.");
+                                    document.getElementById("myDetails").innerHTML = data;
+                                },
+                                error: function (err) {
+                                    alert("error");
+                                }
+                            });
+                        }
+                        else
+                        {
+                            document.getElementById("errorConfirmPW").innerHTML  = '*Not matching';
+                            document.getElementById("errorConfirmPW").style.display = 'inline';
+                        }
+                    }
+                    else
+                    {
+                        //alert(data);
+                        document.getElementById("errorCurrentPW").innerHTML  = '*Invalid Password';
+                        document.getElementById("errorCurrentPW").style.display = 'inline';
+                    }
+                },
+                error: function (err) {
+                    alert(err.message);
+                }
+            });
+        }else
+        {
+            if(currentPW == "") {
+                document.getElementById("errorCurrentPW").innerHTML = '*Empty Field';
+                document.getElementById("errorCurrentPW").style.display = 'inline';
+            }
+
+            if(newPW == "") {
+                document.getElementById("errorNewPW").innerHTML = '*Empty Field';
+                document.getElementById("errorNewPW").style.display = 'inline';
+            }
+
+            if(conPw == "") {
+                document.getElementById("errorConfirmPW").innerHTML = '*Empty Field';
+                document.getElementById("errorConfirmPW").style.display = 'inline';
+            }
+        }
+
+        /* $.ajax({
+         type: "POST",
+         url: "<?php /*echo site_url('ProfileController/loadSidePanel')*/?>",
+     data: {
+     },
+     dataType: 'html',
+     success: function (data) {
+     document.getElementById("profile_sidePanel").innerHTML = data;
+     },
+     error: function (err) {
+     alert("error");
+     }
+     });*/
+    }
+
     function reloadSidePanel()
     {
         $.ajax({
@@ -740,6 +688,7 @@ if(isset($this->session->userdata['profile_data'])) {
             }
         });
     }
+
 
 
 </script>
