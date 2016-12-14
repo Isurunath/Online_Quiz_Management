@@ -31,7 +31,6 @@ header,
 hgroup,
 main,
 menu,
-nav,
 section,
 summary {
   display: block;
@@ -7849,7 +7848,7 @@ fieldset[disabled] .btn-info.active {
   color: #259dab;
 }
 .navbar-nav > li > a {
-  text-transform: uppercase;
+  
   font-family: 'Open Sans', 'Helvetica Neue', Helvetica, sans-serif;
   font-weight: 700;
   color: #818da7;
