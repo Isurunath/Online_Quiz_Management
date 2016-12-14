@@ -59,6 +59,22 @@ class Hello extends CI_Controller {
         }
     }
 
+    public function load_papermarking()
+    {
+        $this->load->helper('url');
+        $this->load->library('session');
+
+        if(isset($this->session->userdata['logged_in'])) {
+
+            $lecturer = ($this->session->userdata['logged_in']['username']);
+            $data['lecname']=$lecturer;
+            $total=0;
+
+            $this->load->view('paperMarking/papermarking',$total);
+        }
+    }
+
+
     public function load_profile()
     {
         $this->load->library('session');
@@ -80,6 +96,7 @@ class Hello extends CI_Controller {
         $this->load->helper('url');
         $this->load->view('about_us/about');
     }
+
     public function load_addlecturers(){
         $this->load->helper('url');
         $this->load->library('session');
@@ -112,8 +129,13 @@ class Hello extends CI_Controller {
         $this->load->view('admin/viewusers');
     }
 
+
     public function forgot_password(){
         $this->load->helper('url');
         $this->load->view('login/resetPW');
     }
+
+
+
+
 }
