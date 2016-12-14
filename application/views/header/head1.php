@@ -158,7 +158,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <li><a class="hvr-overline-from-center button2" href="<?php echo site_url('Layout_Controller/View_layout'); ?>">Lecturer Panel</a></li>
                             <li>
                                 <div class="dropdown">
-                                    <img class="img-circle" src="../Profile_Pictures/default.png" width="45px" height="45px">
+                                    <img class="img-circle" src="../Profile_Pictures/default.png " width="45px" height="45px">
                                     <button class="dropbtn"><?php echo $username ?></button>
                                     <div class="dropdown-content">
                                         <a href="<?php echo site_url('LoginController/logout'); ?>"><i class="glyphicon glyphicon-log-out"></i>Logout</a>
