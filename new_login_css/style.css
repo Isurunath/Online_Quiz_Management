@@ -211,7 +211,7 @@ input {
     font-family: 'Raleway', sans-serif;
     padding: 10px 5px 10px 38px;
     border: 1px solid rgba(125, 0, 0, 0.19);
-    background: rgba(68, 0, 0, 0.33);
+	background: rgba(255, 255, 255, 0.33);
     -webkit-appearance: textfield;
     -webkit-box-sizing: content-box;
     -moz-box-sizing: content-box;
@@ -339,7 +339,7 @@ p.change_link{
     width: 88%;
     padding: 18px 6% 80px 6%;
     margin: 0 0 35px 0;
-    background: rgba(0, 0, 255, 0.3);
+	background: rgba(0, 0, 0, 0.6);
 	/*background: rgba(0, 255, 0, 0.3);*/
     border: 1px solid rgba(156, 112, 112, 0.15);
 }
